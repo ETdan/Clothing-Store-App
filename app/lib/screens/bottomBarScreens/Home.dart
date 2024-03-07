@@ -110,19 +110,66 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 10,
               ),
-              // ListView.builder(
-              //   shrinkWrap: true,
-              //   scrollDirection: Axis.horizontal,
-              //   itemCount: images.length,
-              //   itemBuilder: (context, index) {
-              //     return buildAdvertise(
-              //       image: images[index],
-              //       title: 'Watch',
-              //       price: '12',
-              //       index: index,
-              //     );
-              //   },
-              // ),
+              SizedBox(
+                height: 150,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: images.length,
+                  itemBuilder: (context, index) {
+                    return buildAdvertise(
+                      image: images[index],
+                      title: 'Watch',
+                      price: '12',
+                      index: index,
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      'Most Popular',
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'see all',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 150,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: images.length,
+                  itemBuilder: (context, index) {
+                    return buildAdvertise(
+                      image: images[index],
+                      title: 'Watch',
+                      price: '12',
+                      index: index,
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -146,41 +193,48 @@ class buildAdvertise extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      width: 200,
-      child: Column(
-        children: [
-          Container(
-            height: 70,
-            width: 100,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                image: AssetImage(
-                  image,
+    return Padding(
+      padding: const EdgeInsets.only(left: 10),
+      child: Container(
+        height: 100,
+        width: 150,
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          children: [
+            Container(
+              height: 90,
+              width: 150,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  image: AssetImage(
+                    image,
+                  ),
+                  fit: BoxFit.fill,
                 ),
-                fit: BoxFit.fill,
               ),
             ),
-          ),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
             ),
-          ),
-          Text(
-            ' ${price}',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
-          )
-        ],
+            Text(
+              ' ${price}',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
