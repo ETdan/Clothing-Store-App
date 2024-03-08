@@ -13,7 +13,7 @@ class _productScreenState extends State<productScreen> {
     return Scaffold(
       body: Center(
         child: Text(
-          "this is poduct screen",
+          "this is product screen",
         ),
       ),
     );
