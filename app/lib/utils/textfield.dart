@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 
 class textFields extends StatelessWidget {
-  const textFields({super.key});
+  final String hint;
+  Icon? prefix;
+  textFields({
+    super.key,
+    required this.hint,
+    this.prefix,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(25.0),
+      padding: const EdgeInsets.all(15.0),
       child: TextField(
         decoration: InputDecoration(
           label: Padding(
             padding: const EdgeInsets.only(left: 10),
-            child: Text('search here'),
+            child: Text(hint),
           ),
           prefixIcon: Padding(
             padding: const EdgeInsets.only(left: 10),
-            child: Icon(
-              Icons.search,
-              size: 30,
-            ),
+            child: prefix,
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),

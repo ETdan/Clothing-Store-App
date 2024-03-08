@@ -19,4 +19,9 @@ class collection {
     'shoes',
     'Jacket',
   ];
+  final welcomeim = [
+    'assets/we.jpg',
+    'assets/im3.jpg',
+    'assets/prof.jpg',
+  ];
 }

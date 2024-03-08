@@ -73,7 +73,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              textFields(),
+              textFields(
+                hint: 'search here',
+                prefix: Icon(
+                  Icons.search,
+                ),
+              ),
               CarouselSlider.builder(
                 itemCount: images.length,
                 itemBuilder: (context, index, realIndex) {

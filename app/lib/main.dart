@@ -1,6 +1,8 @@
+import 'package:app/prefs/loginPreference.dart';
 import 'package:app/screens/first-page.dart';
-import 'package:app/screens/otherScreens/filter.dart';
+import 'package:app/screens/welcome.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +13,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: first(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => defaultt(),
+        )
+      ],
+      builder: (context, child) {
+        return Consumer<defaultt>(
+          builder: (context, value, child) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: value.islogin ? first() : welcome(),
+            );
+          },
+        );
+      },
     );
   }
 }
