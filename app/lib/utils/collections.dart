@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class collection {
   final images = [
     'assets/im1.jpg',
@@ -18,5 +16,10 @@ class collection {
     'trouser',
     'shoes',
     'Jacket',
+  ];
+  final welcomeim = [
+    'assets/we.jpg',
+    'assets/im3.jpg',
+    'assets/prof.jpg',
   ];
 }
