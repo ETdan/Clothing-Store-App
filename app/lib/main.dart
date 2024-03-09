@@ -19,16 +19,14 @@ class MyApp extends StatelessWidget {
           create: (context) => defaultt(),
         )
       ],
-      builder: (context, child) {
-        return Consumer<defaultt>(
-          builder: (context, value, child) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              home: value.islogin ? first() : welcome(),
-            );
-          },
-        );
-      },
+      child: Consumer<defaultt>(
+        builder: (context, value, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: (value.islogin && value.isUser) ? first() : welcome(),
+          );
+        },
+      ),
     );
   }
 }

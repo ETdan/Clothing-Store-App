@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class collection {
   final images = [
     'assets/im1.jpg',

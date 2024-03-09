@@ -1,19 +1,17 @@
-import 'package:app/adminSide/adminLogin.dart';
+import 'package:app/adminSide/adminScreen/adminHome.dart';
 import 'package:app/prefs/loginPreference.dart';
-import 'package:app/screens/first-page.dart';
-import 'package:app/screens/signup.dart';
 import 'package:app/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class signin extends StatefulWidget {
-  const signin({super.key});
+class adminLogin extends StatefulWidget {
+  const adminLogin({super.key});
 
   @override
-  State<signin> createState() => _signinState();
+  State<adminLogin> createState() => _adminLoginState();
 }
 
-class _signinState extends State<signin> {
+class _adminLoginState extends State<adminLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,33 +19,6 @@ class _signinState extends State<signin> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 20,
-                right: 20,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => adminLogin(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      'Admin Login',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.only(
                 top: 100,
@@ -74,7 +45,7 @@ class _signinState extends State<signin> {
               ),
             ),
             textFields(
-              hint: 'Username or email',
+              hint: 'Adminname or email',
               prefix: Icon(
                 Icons.person_2_outlined,
               ),
@@ -103,13 +74,12 @@ class _signinState extends State<signin> {
                       ),
                       onPressed: () {
                         setState(() {
-                          value.toggle();
-                          value.isUserLogin();
+                          value.islogin = true;
                         });
 
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => first(),
+                            builder: (context) => adminHome(),
                           ),
                         );
                       },
@@ -139,24 +109,6 @@ class _signinState extends State<signin> {
             ),
             SizedBox(
               height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Don\'t have an account ? '),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => signup(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    'Sign Up',
-                  ),
-                ),
-              ],
             ),
             Flexible(
               child: Container(),
