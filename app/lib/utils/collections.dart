@@ -22,4 +22,9 @@ class collection {
     'assets/im3.jpg',
     'assets/prof.jpg',
   ];
+  final im = [
+    'assets/male.jpg',
+    'assets/women.jpg',
+    'assets/kids.jpg',
+  ];
 }
