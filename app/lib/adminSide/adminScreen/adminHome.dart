@@ -1,3 +1,8 @@
+import 'package:app/adminSide/adminScreen/catagories/catagories.dart';
+import 'package:app/adminSide/adminScreen/dashboard.dart';
+import 'package:app/adminSide/adminScreen/order/orders.dart';
+import 'package:app/adminSide/adminScreen/products/products.dart';
+import 'package:app/adminSide/adminScreen/settings.dart';
 import 'package:flutter/material.dart';
 
 class adminHome extends StatefulWidget {
@@ -11,7 +16,7 @@ class _adminHomeState extends State<adminHome> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 5,
       initialIndex: 0,
       child: Scaffold(
         appBar: AppBar(
@@ -41,24 +46,43 @@ class _adminHomeState extends State<adminHome> {
           bottom: TabBar(
             tabs: [
               Tab(
-                icon: Icon(
-                  Icons.home,
-                  size: 20,
-                  color: Colors.grey,
+                icon: Text(
+                  'Dashboard',
+                  style: TextStyle(
+                    color: Colors.black87,
+                  ),
                 ),
               ),
               Tab(
-                icon: Icon(
-                  Icons.shopping_bag_outlined,
-                  size: 20,
-                  color: Colors.grey,
+                icon: Text(
+                  'Catagories',
+                  style: TextStyle(
+                    color: Colors.black87,
+                  ),
                 ),
               ),
               Tab(
-                icon: Icon(
-                  Icons.person_2_outlined,
-                  size: 20,
-                  color: Colors.grey,
+                icon: Text(
+                  'Products',
+                  style: TextStyle(
+                    color: Colors.black87,
+                  ),
+                ),
+              ),
+              Tab(
+                icon: Text(
+                  'Orders',
+                  style: TextStyle(
+                    color: Colors.black87,
+                  ),
+                ),
+              ),
+              Tab(
+                icon: Text(
+                  'Settings',
+                  style: TextStyle(
+                    color: Colors.black87,
+                  ),
                 ),
               )
             ],
@@ -66,21 +90,11 @@ class _adminHomeState extends State<adminHome> {
         ),
         body: TabBarView(
           children: [
-            Center(
-              child: Text(
-                'this is Admin home page',
-              ),
-            ),
-            Center(
-              child: Text(
-                'this is Admin controll page',
-              ),
-            ),
-            Center(
-              child: Text(
-                'this is Admin profile page',
-              ),
-            ),
+            dashBoard(),
+            catagories(),
+            products(),
+            orders(),
+            setting(),
           ],
         ),
       ),
