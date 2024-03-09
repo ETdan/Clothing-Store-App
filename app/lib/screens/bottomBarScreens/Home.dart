@@ -1,3 +1,6 @@
+import 'package:app/screens/otherScreens/pro.dart';
+import 'package:app/screens/otherScreens/showdetails.dart';
+import 'package:app/utils/collections.dart';
 import 'package:app/utils/textfield.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +21,18 @@ class _HomeScreenState extends State<HomeScreen> {
     'assets/im2.jpg',
     'assets/im3.jpg',
     'assets/prof.jpg',
+  ];
+  final Featuredtitle = [
+    'watch',
+    'trouser',
+    'shoes',
+    'Jacket',
+  ];
+  final poptitle = [
+    'watch',
+    'trouser',
+    'shoes',
+    'Jacket',
   ];
 
   @override
@@ -58,7 +73,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              textFields(),
+              textFields(
+                hint: 'search here',
+                prefix: Icon(
+                  Icons.search,
+                ),
+              ),
               CarouselSlider.builder(
                 itemCount: images.length,
                 itemBuilder: (context, index, realIndex) {
@@ -99,7 +119,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => Pro(),
+                          ),
+                        );
+                      },
                       child: Text(
                         'see all',
                       ),
@@ -118,8 +144,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: images.length,
                   itemBuilder: (context, index) {
                     return buildAdvertise(
-                      image: images[index],
-                      title: 'Watch',
+                      image: collection().images[index],
+                      title: collection().Featuredtitle[index],
                       price: '12',
                       index: index,
                     );
@@ -146,7 +172,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => Pro(),
+                          ),
+                        );
+                      },
                       child: Text(
                         'see all',
                       ),
@@ -162,8 +194,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: images.length,
                   itemBuilder: (context, index) {
                     return buildAdvertise(
-                      image: images[index],
-                      title: 'Watch',
+                      image: collection().images[index],
+                      title: collection().poptitle[index],
                       price: '12',
                       index: index,
                     );
@@ -193,47 +225,72 @@ class buildAdvertise extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10),
-      child: Container(
-        height: 100,
-        width: 150,
-        decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          children: [
-            Container(
-              height: 90,
-              width: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  image: AssetImage(
-                    image,
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => showDetails(
+              indexs: index,
+            ),
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10),
+        child: Container(
+          height: 100,
+          width: 150,
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    height: 90,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: AssetImage(
+                          image,
+                        ),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                   ),
-                  fit: BoxFit.fill,
+                  Positioned(
+                    left: 120,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.favorite_border_outlined,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
               ),
-            ),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            ),
-            Text(
-              ' ${price}',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            )
-          ],
+              Text(
+                '\$ ${price}',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

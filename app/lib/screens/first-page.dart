@@ -48,7 +48,7 @@ class _firstState extends State<first> {
             text: 'search',
           ),
           GButton(
-            icon: Icons.sell,
+            icon: Icons.shopping_bag,
             iconSize: 30,
             text: 'product',
           ),
