@@ -78,7 +78,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           width: 10,
                         ),
                         styledText(
-                            title: '\$${widget.item.rating}',
+                            title: '\${widget.item.rating}',
                             color: Colors.black,
                             size: 16,
                             isBold: true),
