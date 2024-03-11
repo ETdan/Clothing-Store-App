@@ -1,5 +1,7 @@
 import 'package:app/adminSide/adminScreen/adminHome.dart';
+import 'package:app/database/auth.dart';
 import 'package:app/prefs/loginPreference.dart';
+import 'package:app/utils/snackBar.dart';
 import 'package:app/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +14,9 @@ class adminLogin extends StatefulWidget {
 }
 
 class _adminLoginState extends State<adminLogin> {
+  TextEditingController adminpasswordController = TextEditingController();
+  TextEditingController adminemailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,12 +50,14 @@ class _adminLoginState extends State<adminLogin> {
               ),
             ),
             textFields(
+              controller: adminemailController,
               hint: 'Adminname or email',
               prefix: Icon(
                 Icons.person_2_outlined,
               ),
             ),
             textFields(
+              controller: adminpasswordController,
               hint: 'Password',
               prefix: Icon(
                 Icons.shopping_bag_rounded,
@@ -73,15 +80,25 @@ class _adminLoginState extends State<adminLogin> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       onPressed: () {
+                        if (adminemailController.text ==
+                                authMethod().tojson()['adminEmail'] &&
+                            adminpasswordController.text ==
+                                authMethod().tojson()['adminpassword']) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => adminHome(),
+                            ),
+                          );
+                        } else {
+                          showSnack(
+                            'please,enter correct information or register first!',
+                            context,
+                          );
+                        }
+
                         setState(() {
                           value.islogin = true;
                         });
-
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => adminHome(),
-                          ),
-                        );
                       },
                       child: Container(
                         width: 400,

@@ -1,11 +1,18 @@
-import 'package:app/utils/collections.dart';
 import 'package:flutter/material.dart';
 
 class showDetails extends StatelessWidget {
   final int indexs;
+  final price;
+  final title;
+  final images;
+  final discription;
   const showDetails({
     super.key,
     required this.indexs,
+    required this.title,
+    required this.price,
+    required this.images,
+    required this.discription,
   });
 
   @override
@@ -22,9 +29,7 @@ class showDetails extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                    image: AssetImage(
-                      collection().images[indexs],
-                    ),
+                    image: NetworkImage(images),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -72,7 +77,7 @@ class showDetails extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 5),
                     child: Text(
-                      collection().Featuredtitle[indexs],
+                      title,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
@@ -109,7 +114,7 @@ class showDetails extends StatelessWidget {
                   right: 20,
                 ),
                 child: Text(
-                  '\$ 430',
+                  '\$ ${price}',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.purple[200],
@@ -139,7 +144,7 @@ class showDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(
-              'this is some description about the cloths',
+              discription,
               style: TextStyle(
                 fontSize: 15,
               ),
