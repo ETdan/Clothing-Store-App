@@ -17,7 +17,7 @@ class _firstState extends State<first> {
   final pages = [
     HomeScreen(),
     SearchScreen(),
-    productScreen(),
+    ProductScreen(),
     profileScreen(),
   ];
   @override
