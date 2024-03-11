@@ -1,4 +1,13 @@
+import 'package:app/screens/bottomBarScreens/Home.dart';
+import 'package:app/screens/otherScreens/pro.dart';
+import 'package:app/screens/otherScreens/showdetails.dart';
+import 'package:app/utils/collections.dart';
+import 'package:app/utils/textfield.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OrdersPage extends StatefulWidget {
   const OrdersPage({super.key});
