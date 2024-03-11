@@ -16,7 +16,7 @@ class _firstState extends State<first> {
   int page = 0;
   final pages = [
     HomeScreen(),
-    searchScreen(),
+    SearchScreen(),
     productScreen(),
     profileScreen(),
   ];
