@@ -1,5 +1,5 @@
-import 'package:app/adminSide/adminScreen/catagories/catagories.dart';
-import 'package:app/adminSide/adminScreen/products/products.dart';
+import '/adminSide/adminScreen/catagories/catagories.dart';
+import '/adminSide/adminScreen/products/products.dart';
 import 'package:flutter/material.dart';
 
 class dashBoard extends StatefulWidget {

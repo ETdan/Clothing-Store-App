@@ -1,6 +1,6 @@
-import 'package:app/adminSide/adminScreen/products/addingProduct.dart';
-import 'package:app/adminSide/adminScreen/products/editPro.dart';
-import 'package:app/adminSide/adminScreen/products/bottomsheet.dart';
+import '/adminSide/adminScreen/products/addingProduct.dart';
+import '/adminSide/adminScreen/products/editPro.dart';
+import '/adminSide/adminScreen/products/bottomsheet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

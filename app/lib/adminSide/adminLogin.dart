@@ -1,8 +1,8 @@
-import 'package:app/adminSide/adminScreen/adminHome.dart';
-import 'package:app/database/auth.dart';
-import 'package:app/prefs/loginPreference.dart';
-import 'package:app/utils/snackBar.dart';
-import 'package:app/utils/textfield.dart';
+import 'package:shega_cloth_store_app/adminSide/adminScreen/adminHome.dart';
+import 'package:shega_cloth_store_app/database/auth.dart';
+import 'package:shega_cloth_store_app/prefs/loginPreference.dart';
+import 'package:shega_cloth_store_app/utils/snackBar.dart';
+import 'package:shega_cloth_store_app/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

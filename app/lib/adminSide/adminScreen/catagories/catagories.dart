@@ -1,5 +1,5 @@
-import 'package:app/adminSide/adminScreen/products/products.dart';
-import 'package:app/utils/collections.dart';
+import '/adminSide/adminScreen/products/products.dart';
+import '/utils/collections.dart';
 import 'package:flutter/material.dart';
 
 class catagories extends StatelessWidget {

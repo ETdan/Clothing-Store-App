@@ -1,5 +1,7 @@
+import '/utils/likeanimation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Pro extends StatefulWidget {
   //final int indexes;
@@ -13,17 +15,6 @@ class Pro extends StatefulWidget {
 }
 
 class _ProState extends State<Pro> {
-  final images = [
-    'assets/im1.jpg',
-    'assets/im2.jpg',
-    'assets/im3.jpg',
-    'assets/prof.jpg',
-    'assets/im1.jpg',
-    'assets/im2.jpg',
-    'assets/im3.jpg',
-    'assets/prof.jpg',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,11 +90,9 @@ class _ProState extends State<Pro> {
                             ),
                             Positioned(
                               left: 150,
-                              child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.favorite_border_outlined,
-                                ),
+                              child: likeAnimation(
+                                product: snapshot.data!.docs[index],
+                                snap: FirebaseAuth.instance.currentUser!,
                               ),
                             ),
                           ],
