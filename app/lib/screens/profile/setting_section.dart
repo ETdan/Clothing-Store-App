@@ -1,60 +1,56 @@
-import 'package:app/screens/profile/contact_section.dart';
-import 'package:app/screens/profile/help_section.dart';
-import 'package:app/screens/profile/profile_section.dart';
-import 'package:app/screens/profile/setting_section.dart';
-import 'package:app/screens/profile/shareapp_section.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-class ProfilePage extends StatelessWidget {
-  final Map<String, dynamic> userData;
+class SettingPage extends StatelessWidget {
+final Map<String, dynamic> userData;
 
-  ProfilePage({required this.userData});
+  SettingPage({required this.userData});
 
   @override
   Widget build(BuildContext context) {
     String name = userData['name'] ?? 'Default Name';
     String email = userData['email'] ?? 'Default Email';
     String avatarUrl = userData['avatarUrl'] ?? 'Default Avatar URL';
-
-    return Scaffold(
+  
+    return  Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
+
           child: Column(
             children: [
-              SizedBox(height: 60),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundImage: NetworkImage(avatarUrl),
-                    ),
-                  ]),
-                  SizedBox(height: 16),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Text(
-                      name,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ]),
-                  SizedBox(height: 8),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Text(
-                      email,
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
-                  ]),
-                  GestureDetector(
+              SizedBox(height: 60,),
+             Row(
+  children: [ 
+    IconButton(
+      onPressed: null , // need to adjust later on
+      icon: Icon(Icons.arrow_back),
+      style: ButtonStyle(iconSize: MaterialStatePropertyAll(30)),
+    ),
+
+    SizedBox(width: 150),
+
+    Text('Settings', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),)
+  ],
+),
+
+Column(
+  children: [
+    Row(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          
+          children:[ Text('Account', style: TextStyle(fontWeight: FontWeight.bold),)])
+
+      ],
+    ),
+    GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      /*Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) =>  ProfileSection(name: '', email: '', avatarUrl: '',)),
-    );
+      MaterialPageRoute(builder: (context) =>  null),
+    );*/
                     },
                     child: Card(
                       child: Container(
@@ -63,22 +59,76 @@ class ProfilePage extends StatelessWidget {
                           right: 16,
                         ),
                         width: 350,
-                        height: 40,
-                        child: const Row(
+                        height: 60,
+                        child:  Row(
                           children: [
-                            Icon(Icons.person),
-                            SizedBox(width: 7),
-                            Text('Profiel'),
+                          CircleAvatar(
+                      radius: 50,
+                      backgroundImage: NetworkImage(avatarUrl),
+                    ),
+                            SizedBox(width: 10),
+                    Column(
+                      children: [
+                        Text(name, style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(
+                          email,
+                           style: TextStyle(fontSize: 16, color: Colors.grey),
+                        )
+                      ],
+                    ),
                             Spacer(),
                             Icon(Icons.arrow_forward_ios)
                           ],
                         ),
                       ),
                     ),
+                    
+    ),
+    SizedBox(height: 10,),
+
+    Divider(
+      thickness: 1,
+      color: Colors.grey,
+      height: 3, 
+    ),
+
+    Text('Setting', style: TextStyle(fontWeight: FontWeight.bold),),
+
+
+     GestureDetector(
+                    onTap: () {
+                      /*Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) =>  null),
+    );*/
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16, right: 16),
+                      child: Card(
+                        child: Container(
+                          padding: EdgeInsets.only(
+                            left: 16,
+                            right: 16,
+                          ),
+                          width: 350,
+                          height: 40,
+                          child: const Row(
+                            children: [
+                              Icon(Icons.notifications, color: Colors.black, ),
+                              
+                              SizedBox(width: 10),
+                              Text('Notification', style: TextStyle(fontWeight: FontWeight.bold),),
+                              Spacer(),
+                              Icon(Icons.arrow_forward_ios)
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                    /*  Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => SettingPage(userData: {
           'name': 'John Doe',
@@ -86,7 +136,7 @@ class ProfilePage extends StatelessWidget {
           'avatarUrl':
               'https://example.com/avatar.jpg', // Replace with the actual URL
         },)),
-                      );
+                      );*/
                     },
                     child: Card(
                       child: Container(
@@ -98,9 +148,37 @@ class ProfilePage extends StatelessWidget {
                         height: 40,
                         child: const Row(
                           children: [
-                            Icon(Icons.settings),
+                            Icon(Icons.language, color: Colors.black,),
                             SizedBox(width: 7),
-                            Text('Setting'),
+                            Text('Setting', style: TextStyle(fontWeight: FontWeight.bold)),
+                            Spacer(),
+                            Text('English'),
+                            Icon(Icons.arrow_forward_ios)
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      /*Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) =>  null),
+    );*/
+                    },
+                    child: Card(
+                      child: Container(
+                        padding: EdgeInsets.only(
+                          left: 16,
+                          right: 16,
+                        ),
+                        width: 350,
+                        height: 40,
+                        child: const Row(
+                          children: [
+                            Icon(Icons.gpp_maybe, color: Colors.black,),
+                            SizedBox(width: 7),
+                            Text('Privacy', style: TextStyle(fontWeight: FontWeight.bold)),
                             Spacer(),
                             Icon(Icons.arrow_forward_ios)
                           ],
@@ -110,10 +188,10 @@ class ProfilePage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      /*Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) =>  ContactSection()),
-    );
+      MaterialPageRoute(builder: (context) =>  null),
+    );*/
                     },
                     child: Card(
                       child: Container(
@@ -125,9 +203,9 @@ class ProfilePage extends StatelessWidget {
                         height: 40,
                         child: const Row(
                           children: [
-                            Icon(Icons.mail),
+                            Icon(Icons.help, color: Colors.black,),
                             SizedBox(width: 7),
-                            Text('contact'),
+                            Text('Help Center', style: TextStyle(fontWeight: FontWeight.bold)),
                             Spacer(),
                             Icon(Icons.arrow_forward_ios)
                           ],
@@ -135,12 +213,13 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  GestureDetector(
+
+                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      /*Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) =>  ShareAppSection()),
-    );
+      MaterialPageRoute(builder: (context) =>  null),
+    );*/
                     },
                     child: Card(
                       child: Container(
@@ -152,9 +231,9 @@ class ProfilePage extends StatelessWidget {
                         height: 40,
                         child: const Row(
                           children: [
-                            Icon(Icons.share),
+                            Icon(Icons.info, color: Colors.black,),
                             SizedBox(width: 7),
-                            Text('Share App'),
+                            Text('About Us', style: TextStyle(fontWeight: FontWeight.bold)),
                             Spacer(),
                             Icon(Icons.arrow_forward_ios)
                           ],
@@ -162,40 +241,13 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                 
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) =>  HelpSection()),
-    );
-                    },
-                    child: Card(
-                      child: Container(
-                        padding: EdgeInsets.only(
-                          left: 16,
-                          right: 16,
-                        ),
-                        width: 350,
-                        height: 40,
-                        child: const Row(
-                          children: [
-                            Icon(Icons.help),
-                            SizedBox(width: 7),
-                            Text('Help'),
-                            Spacer(),
-                            Icon(Icons.arrow_forward_ios)
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+  ],
+),
+
             ],
           ),
-        ),
-      ),
+
+        )),
     );
   }
 }

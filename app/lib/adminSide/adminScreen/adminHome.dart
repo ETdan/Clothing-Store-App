@@ -91,7 +91,7 @@ class _adminHomeState extends State<adminHome> {
         body: TabBarView(
           children: [
             dashBoard(),
-            catagories(),
+            Categories(),
             products(),
             orders(),
             setting(),

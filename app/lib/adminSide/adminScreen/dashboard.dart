@@ -19,7 +19,7 @@ class _dashBoardState extends State<dashBoard> {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => catagories(),
+                builder: (context) => Categories(),
               ),
             );
           },
