@@ -1,6 +1,10 @@
+import 'package:app/database/auth.dart';
+import 'package:app/prefs/loginPreference.dart';
 import 'package:app/screens/first-page.dart';
+import 'package:app/utils/snackBar.dart';
 import 'package:app/utils/textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class signup extends StatefulWidget {
   const signup({super.key});
@@ -11,6 +15,10 @@ class signup extends StatefulWidget {
 
 class _signupState extends State<signup> {
   bool isCheak = false;
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController userEmailController = TextEditingController();
+  TextEditingController userpasswordController = TextEditingController();
+  bool isFinishedLogin = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,18 +52,21 @@ class _signupState extends State<signup> {
               ),
             ),
             textFields(
+              controller: userEmailController,
               hint: ' email',
               prefix: Icon(
                 Icons.email_outlined,
               ),
             ),
             textFields(
+              controller: usernameController,
               hint: 'username',
               prefix: Icon(
                 Icons.person_2_outlined,
               ),
             ),
             textFields(
+              controller: userpasswordController,
               hint: 'Password',
               prefix: Icon(
                 Icons.password_outlined,
@@ -92,39 +103,72 @@ class _signupState extends State<signup> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                MaterialButton(
-                  height: 60,
-                  minWidth: 400,
-                  color: Color.fromARGB(255, 128, 140, 220),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => first(),
+                Consumer<defaultt>(
+                  builder: (context, value, child) {
+                    return MaterialButton(
+                      height: 60,
+                      minWidth: 400,
+                      color: Color.fromARGB(255, 128, 140, 220),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
+                      onPressed: () async {
+                        setState(() {
+                          isFinishedLogin = true;
+                        });
+                        String result = await authMethod().UserSignUp(
+                          userName: usernameController.text,
+                          email: userEmailController.text,
+                          password: userpasswordController.text,
+                        );
+                        setState(() {
+                          isFinishedLogin = false;
+                        });
+                        if (result == 'success') {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => first(),
+                            ),
+                          );
+                          setState(() {
+                            value.toggle();
+                            value.isUserLogin();
+                          });
+                        } else {
+                          showSnack(
+                            'please,enter correct information or register first!',
+                            context,
+                          );
+                        }
+                      },
+                      child: isFinishedLogin
+                          ? Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            )
+                          : Container(
+                              width: 400,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    'Sign up',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.login_outlined,
+                                  ),
+                                ],
+                              ),
+                            ),
                     );
                   },
-                  child: Container(
-                    width: 400,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          'Sign up',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black87,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Icon(
-                          Icons.login_outlined,
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
               ],
             ),

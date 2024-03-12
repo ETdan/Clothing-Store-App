@@ -1,7 +1,9 @@
 import 'package:app/adminSide/adminLogin.dart';
+import 'package:app/database/auth.dart';
 import 'package:app/prefs/loginPreference.dart';
 import 'package:app/screens/first-page.dart';
 import 'package:app/screens/signup.dart';
+import 'package:app/utils/snackBar.dart';
 import 'package:app/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +16,9 @@ class signin extends StatefulWidget {
 }
 
 class _signinState extends State<signin> {
+  TextEditingController userpasswordController = TextEditingController();
+  TextEditingController userEmailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,12 +79,14 @@ class _signinState extends State<signin> {
               ),
             ),
             textFields(
+              controller: userEmailController,
               hint: 'Username or email',
               prefix: Icon(
                 Icons.person_2_outlined,
               ),
             ),
             textFields(
+              controller: userpasswordController,
               hint: 'Password',
               prefix: Icon(
                 Icons.shopping_bag_rounded,
@@ -101,17 +108,27 @@ class _signinState extends State<signin> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      onPressed: () {
-                        setState(() {
-                          value.toggle();
-                          value.isUserLogin();
-                        });
-
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => first(),
-                          ),
+                      onPressed: () async {
+                        String result = await authMethod().UserSignin(
+                          email: userEmailController.text,
+                          password: userpasswordController.text,
                         );
+                        if (result == 'success') {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => first(),
+                            ),
+                          );
+                          setState(() {
+                            value.toggle();
+                            value.isUserLogin();
+                          });
+                        } else {
+                          showSnack(
+                            'please,enter correct information or register first!',
+                            context,
+                          );
+                        }
                       },
                       child: Container(
                         width: 400,

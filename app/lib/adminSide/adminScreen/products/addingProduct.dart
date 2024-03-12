@@ -1,5 +1,11 @@
+import 'dart:typed_data';
+
+import 'package:app/database/auth.dart';
+import 'package:app/utils/pickImages.dart';
+import 'package:app/utils/snackBar.dart';
 import 'package:app/utils/textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class addPro extends StatefulWidget {
   const addPro({super.key});
@@ -9,6 +15,39 @@ class addPro extends StatefulWidget {
 }
 
 class _addProState extends State<addPro> {
+  TextEditingController discriptionController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
+  Uint8List? image;
+
+  void selectedImages() async {
+    Uint8List im = await pickedImages(ImageSource.gallery);
+    setState(() {
+      image = im;
+    });
+  }
+
+  void posted() async {
+    String result = await authMethod().addProduct(
+      priceController.text,
+      discriptionController.text,
+      titleController.text,
+      image!,
+    );
+
+    if (result == 'success') {
+      showSnack(
+        'successfully added',
+        context,
+      );
+    } else {
+      showSnack(
+        result,
+        context,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,12 +76,15 @@ class _addProState extends State<addPro> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           textFields(
+            controller: titleController,
             hint: 'Title',
           ),
           textFields(
+            controller: priceController,
             hint: 'Price',
           ),
           textFields(
+            controller: discriptionController,
             hint: 'Description',
           ),
           Padding(
@@ -56,25 +98,32 @@ class _addProState extends State<addPro> {
                     border: Border.all(color: Colors.black54),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.upload,
-                      size: 30,
-                      color: Colors.black87,
-                    ),
-                  ),
+                  child: image != null
+                      ? Image(
+                          image: MemoryImage(image!),
+                          fit: BoxFit.fill,
+                        )
+                      : Center(
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.upload,
+                              size: 30,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ),
                 ),
                 Positioned(
                   bottom: -3,
                   right: -3,
                   child: IconButton(
-                    onPressed: () {},
                     icon: Icon(
                       Icons.add_a_photo_outlined,
                     ),
+                    onPressed: () => selectedImages(),
                   ),
-                ),
+                )
               ],
             ),
           ),
@@ -88,7 +137,7 @@ class _addProState extends State<addPro> {
               shape: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              onPressed: () {},
+              onPressed: () => posted(),
               height: 60,
               minWidth: 300,
               child: Center(
