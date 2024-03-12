@@ -20,8 +20,7 @@ class CheckoutPage extends StatelessWidget {
               width: 40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color.fromARGB(
-                    255, 227, 227, 227),
+                color: Color.fromARGB(255, 227, 227, 227),
               ),
               child: Icon(
                 Icons.arrow_back,
