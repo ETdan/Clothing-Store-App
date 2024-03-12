@@ -17,13 +17,14 @@ class _firstState extends State<first> {
   final pages = [
     HomeScreen(),
     SearchScreen(),
-    ProductScreen(),
+    OrdersPage(),
     ProfilePage(userData: {
           'name': 'John Doe',
           'email': 'john.doe@example.com',
           'avatarUrl':
               'https://example.com/avatar.jpg', // Replace with the actual URL
         },),
+    
   ];
   @override
   Widget build(BuildContext context) {

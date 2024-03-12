@@ -9,156 +9,154 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class ProductScreen extends StatefulWidget {
-  const ProductScreen({Key? key}) : super(key: key);
+class OrdersPage extends StatefulWidget {
+  const OrdersPage({super.key});
 
   @override
-  _ProductScreenState createState() => _ProductScreenState();
+  State<OrdersPage> createState() => _OrdersPageState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
-  
-   TextEditingController _ProductController = TextEditingController();
- final images = [
-    'assets/im1.jpg',
-    'assets/im2.jpg',
-    'assets/im3.jpg',
-    'assets/prof.jpg',
-    'assets/im1.jpg',
-    'assets/im2.jpg',
-    'assets/im3.jpg',
-    'assets/prof.jpg',
-  ];
-  
+class _OrdersPageState extends State<OrdersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child:  SingleChildScrollView(
-        
-          child: Column(
-            
-            children: [
-               SizedBox(height: 30,),
-              Row(
-               
+        appBar: AppBar(
+            backgroundColor: Colors.white,
+            title: Container(
+              margin: EdgeInsets.only(top: 16, bottom: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                 
-                
-
                   IconButton(
-                    onPressed: (){}, icon: Icon(Icons.arrow_back, ), style: ButtonStyle(iconSize:MaterialStatePropertyAll(30)),),
-
-                    const SizedBox(width: 160),
-
-                    Text("Products",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize:20 ),)
-
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  Text(
+                    "Orders",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    width: 50,
+                  ),
                 ],
               ),
-
-              SizedBox(height: 10),
-                
-              Padding(
-                padding: EdgeInsets.all( 16),
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 20,
-                    children: List.generate(8, (index) {
-                      return Container(
-                        height: 100,
-                        width: 100,
-                    
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+            )),
+        body: Container(
+          padding: EdgeInsets.only(left: 16, right: 16),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    "Active",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text("Completed"),
+                  Text("Canceled")
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    children: [
+                      Card(
+                          child: Container(
+                        padding: EdgeInsets.only(left: 16, right: 16, top: 15),
+                        width: 350,
+                        height: 150,
+                        child: Row(
                           children: [
-                            Stack(
+                            Column(
                               children: [
                                 Container(
-                                  height: 150,
-                                  width: 200,
-                                   
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(18),
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                        'images[index]',
-                                      ),
-                                      fit: BoxFit.fill,
-                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.red,
                                   ),
-                                ),
-                                Positioned(
-                                  left: 170,
-                                  child: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.favorite_border_outlined,
-                                    ),
-                                  ),
+                                  height: 120,
+                                  width: 120,
                                 ),
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Text(
-                                        'watch',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
-                                        ),
-                                      ),
-                                      Text(
-                                        '\$12',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  ClipOval(
-                                    clipBehavior: Clip.antiAlias,
-                                    child: Material(
-                                      color: Color.fromARGB(214, 117, 73, 220),
-                                      child: IconButton(
-                                        onPressed: () {},
-                                        icon: Center(
-                                          child: Icon(
-                                            Icons.add,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            SizedBox(
+                              width: 20,
                             ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Watch",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Rolex",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black54,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "\$40",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.deepPurple,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: 60,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    "Track Order",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                        Colors.deepPurple),
+                                    padding: MaterialStatePropertyAll(
+                                        EdgeInsets.all(10)),
+                                    fixedSize:
+                                        MaterialStatePropertyAll(Size(100, 20)),
+                                  ),
+                                )
+                              ],
+                            )
                           ],
                         ),
-                      );
-                    }),
-                  ),
-                ),
-              ),
+                      )),
+                    ],
+                  )),
             ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
