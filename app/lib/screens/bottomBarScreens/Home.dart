@@ -1,9 +1,13 @@
+import 'dart:typed_data';
+
 import 'package:app/screens/otherScreens/pro.dart';
 import 'package:app/screens/otherScreens/showdetails.dart';
-import 'package:app/utils/collections.dart';
+import 'package:app/utils/pickImages.dart';
 import 'package:app/utils/textfield.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 int active_index = 0;
@@ -17,23 +21,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final images = [
-    'assets/im1.jpg',
-    'assets/im2.jpg',
-    'assets/im3.jpg',
-    'assets/prof.jpg',
+    'assets/sh1.jpg',
+    'assets/sh2.jpg',
+    'assets/sh3.jpg',
+    'assets/sh4.jpg',
   ];
-  final Featuredtitle = [
-    'watch',
-    'trouser',
-    'shoes',
-    'Jacket',
-  ];
-  final poptitle = [
-    'watch',
-    'trouser',
-    'shoes',
-    'Jacket',
-  ];
+
+  TextEditingController userSearchController = TextEditingController();
+  Uint8List? file;
+  String username = '';
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +45,24 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: AssetImage('assets/prof.jpg'),
+                leading: InkWell(
+                  onTap: () async {
+                    Uint8List im = await pickedImages(ImageSource.gallery);
+                    setState(() {
+                      file = im;
+                    });
+                  },
+                  child: file != null
+                      ? CircleAvatar(
+                          radius: 40,
+                          backgroundImage: MemoryImage(file!),
+                        )
+                      : CircleAvatar(
+                          radius: 40,
+                          backgroundImage: AssetImage(
+                            "assets/im2.jpg",
+                          ),
+                        ),
                 ),
                 title: Text(
                   'Hello!',
@@ -74,6 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               textFields(
+                controller: userSearchController,
                 hint: 'search here',
                 prefix: Icon(
                   Icons.search,
@@ -136,21 +154,40 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                height: 150,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: images.length,
-                  itemBuilder: (context, index) {
-                    return buildAdvertise(
-                      image: collection().images[index],
-                      title: collection().Featuredtitle[index],
-                      price: '12',
-                      index: index,
+              StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('products')
+                    .snapshots(),
+                builder: (
+                  context,
+                  AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
+                ) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.green,
+                      ),
                     );
-                  },
-                ),
+                  }
+                  return SizedBox(
+                    height: 150,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        return buildAdvertise(
+                          image: snapshot.data!.docs[index]['photourl'],
+                          title: snapshot.data!.docs[index]['title'],
+                          price: snapshot.data!.docs[index]['price'],
+                          discription: snapshot.data!.docs[index]
+                              ['description'],
+                          index: index,
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
               SizedBox(
                 height: 10,
@@ -186,21 +223,40 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 150,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: images.length,
-                  itemBuilder: (context, index) {
-                    return buildAdvertise(
-                      image: collection().images[index],
-                      title: collection().poptitle[index],
-                      price: '12',
-                      index: index,
+              StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('products')
+                    .snapshots(),
+                builder: (
+                  context,
+                  AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
+                ) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.green,
+                      ),
                     );
-                  },
-                ),
+                  }
+                  return SizedBox(
+                    height: 150,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        return buildAdvertise(
+                          image: snapshot.data!.docs[index]['photourl'],
+                          title: snapshot.data!.docs[index]['title'],
+                          price: snapshot.data!.docs[index]['price'],
+                          discription: snapshot.data!.docs[index]
+                              ['description'],
+                          index: index,
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -214,13 +270,15 @@ class buildAdvertise extends StatelessWidget {
   final int index;
   final String title;
   final String price;
-  final String image;
+  final discription;
+  final image;
   const buildAdvertise({
     super.key,
     required this.index,
     required this.price,
     required this.title,
     required this.image,
+    required this.discription,
   });
 
   @override
@@ -230,6 +288,10 @@ class buildAdvertise extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => showDetails(
+              title: title,
+              discription: discription,
+              price: price,
+              images: image,
               indexs: index,
             ),
           ),
@@ -244,51 +306,53 @@ class buildAdvertise extends StatelessWidget {
             color: Colors.grey[200],
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
-              Stack(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    height: 90,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        image: AssetImage(
-                          image,
+                  Stack(
+                    children: [
+                      Container(
+                        height: 90,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: NetworkImage(image),
+                            fit: BoxFit.fill,
+                          ),
                         ),
-                        fit: BoxFit.fill,
                       ),
+                      Positioned(
+                        left: 120,
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.favorite_border_outlined,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
                     ),
                   ),
-                  Positioned(
-                    left: 120,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.favorite_border_outlined,
-                      ),
+                  Text(
+                    '\$ ${price}',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
                     ),
-                  ),
+                  )
                 ],
               ),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-              ),
-              Text(
-                '\$ ${price}',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-              )
             ],
           ),
         ),
