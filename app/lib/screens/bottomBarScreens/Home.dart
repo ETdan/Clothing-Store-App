@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen>
                   child: IconButton(
                     onPressed: () {},
                     icon: Icon(
-                      Icons.notification_add_outlined,
+                      Icons.notifications,
                     ),
                   ),
                 ),
