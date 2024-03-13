@@ -1,11 +1,13 @@
 import 'dart:typed_data';
 
-import 'package:app/screens/otherScreens/pro.dart';
-import 'package:app/screens/otherScreens/showdetails.dart';
-import 'package:app/utils/pickImages.dart';
-import 'package:app/utils/textfield.dart';
+import '/screens/otherScreens/pro.dart';
+import '/screens/otherScreens/showdetails.dart';
+import '/utils/likeanimation.dart';
+import '/utils/pickImages.dart';
+import '/utils/textfield.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -19,7 +21,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   final images = [
     'assets/sh1.jpg',
     'assets/sh2.jpg',
@@ -30,10 +33,35 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController userSearchController = TextEditingController();
   Uint8List? file;
   String username = '';
+  late AnimationController _controller;
+  late Animation _coloranimation;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(
+        milliseconds: 200,
+      ),
+    );
+    _coloranimation = ColorTween(begin: Colors.grey[400], end: Colors.red)
+        .animate(_controller);
+    _controller.forward();
+    _controller.addListener(() {
+      setState(() {});
+    });
+  }
+
+  addData() async {
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    setState(() {
+      username = (snap.data() as Map<String, dynamic>)['username'];
+    });
+    print(username);
   }
 
   @override
@@ -71,12 +99,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 subtitle: Text(
-                  'John William',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Colors.black87,
-                  ),
+                  'admin',
+                  // style: TextStyle(
+                  //   fontWeight: FontWeight.bold,
+                  //   fontSize: 18,
+                  //   color: Colors.black87,
+                  // ),
                 ),
                 trailing: Padding(
                   padding: const EdgeInsets.only(
@@ -85,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: IconButton(
                     onPressed: () {},
                     icon: Icon(
-                      Icons.notifications,
+                      Icons.notification_add_outlined,
                     ),
                   ),
                 ),
@@ -106,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   enlargeCenterPage: true,
                   viewportFraction: 1.0,
                   autoPlayAnimationDuration: Duration(microseconds: 50),
-                  autoPlay: true,
+                  autoPlay: false,
                   reverse: true,
                   height: 200,
                   onPageChanged: (index, reason) {
@@ -182,6 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           price: snapshot.data!.docs[index]['price'],
                           discription: snapshot.data!.docs[index]
                               ['description'],
+                          like: snapshot.data!.docs[index],
                           index: index,
                         );
                       },
@@ -251,6 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           price: snapshot.data!.docs[index]['price'],
                           discription: snapshot.data!.docs[index]
                               ['description'],
+                          like: snapshot.data!.docs[index],
                           index: index,
                         );
                       },
@@ -266,12 +296,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class buildAdvertise extends StatelessWidget {
+class buildAdvertise extends StatefulWidget {
   final int index;
   final String title;
   final String price;
   final discription;
   final image;
+  final like;
   const buildAdvertise({
     super.key,
     required this.index,
@@ -279,8 +310,14 @@ class buildAdvertise extends StatelessWidget {
     required this.title,
     required this.image,
     required this.discription,
+    required this.like,
   });
 
+  @override
+  State<buildAdvertise> createState() => _buildAdvertiseState();
+}
+
+class _buildAdvertiseState extends State<buildAdvertise> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -288,11 +325,12 @@ class buildAdvertise extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => showDetails(
-              title: title,
-              discription: discription,
-              price: price,
-              images: image,
-              indexs: index,
+              title: widget.title,
+              discription: widget.discription,
+              price: widget.price,
+              images: widget.image,
+              indexs: widget.index,
+              like: widget.like,
             ),
           ),
         );
@@ -316,27 +354,22 @@ class buildAdvertise extends StatelessWidget {
                       Container(
                         height: 90,
                         width: 150,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            image: NetworkImage(image),
-                            fit: BoxFit.fill,
-                          ),
+                        child: Image.network(
+                          widget.image,
+                          fit: BoxFit.fill,
                         ),
                       ),
                       Positioned(
                         left: 120,
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.favorite_border_outlined,
-                          ),
+                        child: likeAnimation(
+                          snap: FirebaseAuth.instance.currentUser!,
+                          product: widget.like,
                         ),
                       ),
                     ],
                   ),
                   Text(
-                    title,
+                    widget.title,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -344,9 +377,9 @@ class buildAdvertise extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '\$ ${price}',
+                    '\$ ${widget.price}',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),

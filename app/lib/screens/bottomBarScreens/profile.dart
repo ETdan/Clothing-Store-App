@@ -1,8 +1,8 @@
-import 'package:app/screens/profile/contact_section.dart';
-import 'package:app/screens/profile/help_section.dart';
-import 'package:app/screens/profile/profile_section.dart';
-import 'package:app/screens/profile/setting_section.dart';
-import 'package:app/screens/profile/shareapp_section.dart';
+import '/screens/profile/contact_section.dart';
+import '/screens/profile/help_section.dart';
+import '/screens/profile/profile_section.dart';
+import '/screens/profile/setting_section.dart';
+import '/screens/profile/shareapp_section.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -52,9 +52,14 @@ class ProfilePage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) =>  ProfileSection(name: '', email: '', avatarUrl: '',)),
-    );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileSection(
+                                  name: '',
+                                  email: '',
+                                  avatarUrl: '',
+                                )),
+                      );
                     },
                     child: Card(
                       child: Container(
@@ -80,12 +85,15 @@ class ProfilePage extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SettingPage(userData: {
-          'name': 'John Doe',
-          'email': 'john.doe@example.com',
-          'avatarUrl':
-              'https://example.com/avatar.jpg', // Replace with the actual URL
-        },)),
+                        MaterialPageRoute(
+                            builder: (context) => SettingPage(
+                                  userData: {
+                                    'name': 'John Doe',
+                                    'email': 'john.doe@example.com',
+                                    'avatarUrl':
+                                        'https://example.com/avatar.jpg', // Replace with the actual URL
+                                  },
+                                )),
                       );
                     },
                     child: Card(
@@ -111,9 +119,10 @@ class ProfilePage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) =>  ContactSection()),
-    );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ContactSection()),
+                      );
                     },
                     child: Card(
                       child: Container(
@@ -138,9 +147,10 @@ class ProfilePage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) =>  ShareAppSection()),
-    );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ShareAppSection()),
+                      );
                     },
                     child: Card(
                       child: Container(
@@ -162,13 +172,12 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                 
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) =>  HelpSection()),
-    );
+                        context,
+                        MaterialPageRoute(builder: (context) => HelpSection()),
+                      );
                     },
                     child: Card(
                       child: Container(

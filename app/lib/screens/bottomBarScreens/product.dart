@@ -70,7 +70,6 @@ class _OrdersPageState extends State<OrdersPage> {
                       "Active",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                       
                       ),
                     ),
                   ),
@@ -99,7 +98,6 @@ class _OrdersPageState extends State<OrdersPage> {
                       "Completed",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        
                       ),
                     ),
                   ),
@@ -128,7 +126,6 @@ class _OrdersPageState extends State<OrdersPage> {
                       "Cancelled",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                       
                       ),
                     ),
                   ),
@@ -218,14 +215,12 @@ class _OrdersPageState extends State<OrdersPage> {
                                   ),
                                 ),
                                 style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(
-                                          Colors.deepPurple),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Colors.deepPurple),
                                   padding: MaterialStateProperty.all(
                                     EdgeInsets.all(10),
                                   ),
-                                  fixedSize:
-                                      MaterialStateProperty.all(
+                                  fixedSize: MaterialStateProperty.all(
                                     Size(100, 20),
                                   ),
                                 ),
@@ -245,4 +240,3 @@ class _OrdersPageState extends State<OrdersPage> {
     );
   }
 }
-

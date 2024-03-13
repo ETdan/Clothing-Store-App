@@ -1,6 +1,6 @@
-import 'package:app/screens/bottomBarScreens/Home.dart';
-import 'package:app/screens/login.dart';
-import 'package:app/utils/collections.dart';
+import '/screens/bottomBarScreens/Home.dart';
+import '/screens/login.dart';
+import '/utils/collections.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 

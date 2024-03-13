@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:app/database/storage.dart';
+import '/database/storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
@@ -8,7 +8,6 @@ import 'package:uuid/uuid.dart';
 class authMethod {
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
-//sign up the user
 
   Future<String> UserSignUp({
     required String userName,
@@ -39,8 +38,6 @@ class authMethod {
     return res;
   }
 
-  //sign in the user
-
   Future<String> UserSignin({
     required String email,
     required String password,
@@ -60,12 +57,13 @@ class authMethod {
 
   //add products to the page
 
-  Future<String> addProduct(
-    String price,
-    String description,
-    String title,
-    Uint8List photourl,
-  ) async {
+  Future<String> addProduct({
+    required String price,
+    required String description,
+    required String title,
+    required Uint8List photourl,
+    required List like,
+  }) async {
     String res = 'some error occured';
     try {
       String url = await uploadingimage('product', photourl);
@@ -74,13 +72,15 @@ class authMethod {
           description.isNotEmpty &&
           price.isNotEmpty &&
           photourl != null) {
-        String postId = const Uuid().v1();
+        String userID = const Uuid().v1();
 
-        await _firestore.collection('products').doc(postId).set({
+        await _firestore.collection('products').doc(userID).set({
           'title': title,
           'price': price,
           'description': description,
           'photourl': url,
+          'like': like,
+          'userID': userID,
         });
         res = 'success';
       }
@@ -89,6 +89,24 @@ class authMethod {
     }
 
     return res;
+  }
+
+  //like post code
+
+  Future<void> likepost(String prodID, String userID, List like) async {
+    try {
+      if (like.contains(userID)) {
+        await _firestore.collection('products').doc(prodID).update({
+          'like': FieldValue.arrayRemove([userID])
+        });
+      } else {
+        await _firestore.collection('products').doc(prodID).update({
+          'like': FieldValue.arrayUnion([userID])
+        });
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   //sign in admin

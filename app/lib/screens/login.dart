@@ -1,10 +1,10 @@
-import 'package:app/adminSide/adminLogin.dart';
-import 'package:app/database/auth.dart';
-import 'package:app/prefs/loginPreference.dart';
-import 'package:app/screens/first-page.dart';
-import 'package:app/screens/signup.dart';
-import 'package:app/utils/snackBar.dart';
-import 'package:app/utils/textfield.dart';
+import '/adminSide/adminLogin.dart';
+import '/database/auth.dart';
+import '/prefs/loginPreference.dart';
+import '/screens/first-page.dart';
+import '/screens/signup.dart';
+import '/utils/snackBar.dart';
+import '/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:app/utils/pickImages.dart';
-import 'package:app/utils/textfield.dart';
+import '/utils/pickImages.dart';
+import '/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 

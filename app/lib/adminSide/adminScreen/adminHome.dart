@@ -1,8 +1,8 @@
-import 'package:app/adminSide/adminScreen/catagories/catagories.dart';
-import 'package:app/adminSide/adminScreen/dashboard.dart';
-import 'package:app/adminSide/adminScreen/order/orders.dart';
-import 'package:app/adminSide/adminScreen/products/products.dart';
-import 'package:app/adminSide/adminScreen/settings.dart';
+import '/adminSide/adminScreen/catagories/catagories.dart';
+import '/adminSide/adminScreen/dashboard.dart';
+import '/adminSide/adminScreen/order/orders.dart';
+import '/adminSide/adminScreen/products/products.dart';
+import '/adminSide/adminScreen/settings.dart';
 import 'package:flutter/material.dart';
 
 class adminHome extends StatefulWidget {
@@ -94,7 +94,7 @@ class _adminHomeState extends State<adminHome> {
             Categories(),
             products(),
             orders(),
-            setting(),
+            Setting(),
           ],
         ),
       ),

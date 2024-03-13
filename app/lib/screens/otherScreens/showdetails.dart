@@ -1,11 +1,14 @@
+import '/utils/likeanimation.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class showDetails extends StatelessWidget {
+class showDetails extends StatefulWidget {
   final int indexs;
   final price;
   final title;
   final images;
   final discription;
+  final like;
   const showDetails({
     super.key,
     required this.indexs,
@@ -13,8 +16,14 @@ class showDetails extends StatelessWidget {
     required this.price,
     required this.images,
     required this.discription,
+    required this.like,
   });
 
+  @override
+  State<showDetails> createState() => _showDetailsState();
+}
+
+class _showDetailsState extends State<showDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +38,7 @@ class showDetails extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                    image: NetworkImage(images),
+                    image: NetworkImage(widget.images),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -42,7 +51,7 @@ class showDetails extends StatelessWidget {
                   children: [
                     ClipOval(
                       child: Material(
-                        color: Colors.grey,
+                        color: Colors.grey[300],
                         child: IconButton(
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -55,12 +64,10 @@ class showDetails extends StatelessWidget {
                     ),
                     ClipOval(
                       child: Material(
-                        color: Colors.grey,
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.favorite,
-                          ),
+                        color: Colors.grey[300],
+                        child: likeAnimation(
+                          snap: FirebaseAuth.instance.currentUser!,
+                          product: widget.like,
                         ),
                       ),
                     ),
@@ -77,7 +84,7 @@ class showDetails extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 5),
                     child: Text(
-                      title,
+                      widget.title,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
@@ -101,7 +108,7 @@ class showDetails extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          '4.5 ( 20 reviews ) ',
+                          '${widget.like['like'].length}',
                         ),
                       ],
                     ),
@@ -114,7 +121,7 @@ class showDetails extends StatelessWidget {
                   right: 20,
                 ),
                 child: Text(
-                  '\$ ${price}',
+                  '\$ ${widget.price}',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.purple[200],
@@ -144,7 +151,7 @@ class showDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(
-              discription,
+              widget.discription,
               style: TextStyle(
                 fontSize: 15,
               ),

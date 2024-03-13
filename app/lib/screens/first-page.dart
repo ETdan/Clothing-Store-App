@@ -1,8 +1,10 @@
-import 'package:app/screens/bottomBarScreens/Home.dart';
-import 'package:app/screens/bottomBarScreens/product.dart';
-import 'package:app/screens/bottomBarScreens/profile.dart';
-import 'package:app/screens/bottomBarScreens/search.dart';
+import '/screens/bottomBarScreens/Home.dart';
+import '/screens/bottomBarScreens/product.dart';
+import '/screens/bottomBarScreens/profile.dart';
+import '/screens/bottomBarScreens/search.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class first extends StatefulWidget {
@@ -13,18 +15,14 @@ class first extends StatefulWidget {
 }
 
 class _firstState extends State<first> {
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  String uid = FirebaseAuth.instance.currentUser!.uid;
   int page = 0;
   final pages = [
     HomeScreen(),
     SearchScreen(),
     OrdersPage(),
-    ProfilePage(userData: {
-          'name': 'John Doe',
-          'email': 'john.doe@example.com',
-          'avatarUrl':
-              'https://example.com/avatar.jpg', // Replace with the actual URL
-        },),
-    
+    ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:app/database/auth.dart';
-import 'package:app/utils/pickImages.dart';
-import 'package:app/utils/snackBar.dart';
-import 'package:app/utils/textfield.dart';
+import '/database/auth.dart';
+import '/utils/pickImages.dart';
+import '/utils/snackBar.dart';
+import '/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -29,10 +29,11 @@ class _addProState extends State<addPro> {
 
   void posted() async {
     String result = await authMethod().addProduct(
-      priceController.text,
-      discriptionController.text,
-      titleController.text,
-      image!,
+      price: priceController.text,
+      description: discriptionController.text,
+      title: titleController.text,
+      photourl: image!,
+      like: [],
     );
 
     if (result == 'success') {

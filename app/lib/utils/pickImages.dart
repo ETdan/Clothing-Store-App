@@ -9,7 +9,5 @@ pickedImages(ImageSource source) async {
   );
   if (photoshot != null) {
     return photoshot.readAsBytes();
-  } else {
-    print('the image is null');
   }
 }

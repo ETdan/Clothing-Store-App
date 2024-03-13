@@ -1,8 +1,8 @@
-import 'package:app/screens/bottomBarScreens/Home.dart';
-import 'package:app/screens/otherScreens/pro.dart';
-import 'package:app/screens/otherScreens/showdetails.dart';
-import 'package:app/utils/collections.dart';
-import 'package:app/utils/textfield.dart';
+import '/screens/bottomBarScreens/Home.dart';
+import '/screens/otherScreens/pro.dart';
+import '/screens/otherScreens/showdetails.dart';
+import '/utils/collections.dart';
+import '/utils/textfield.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +17,8 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  
-   TextEditingController _searchController = TextEditingController();
- final images = [
+  TextEditingController _searchController = TextEditingController();
+  final images = [
     'assets/im1.jpg',
     'assets/im2.jpg',
     'assets/im3.jpg',
@@ -29,28 +28,25 @@ class _SearchScreenState extends State<SearchScreen> {
     'assets/im3.jpg',
     'assets/prof.jpg',
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child:  SingleChildScrollView(
-        
+        child: SingleChildScrollView(
           child: Column(
-            
             children: [
               SizedBox(height: 10),
-
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 8),
-               decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(20),
-    border: Border.all(
-      color: Colors.black, // Set the border color to black
-      width: 2.0,          // Set the border width
-    ),
-    color: Colors.transparent,
-  ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.black, // Set the border color to black
+                    width: 2.0, // Set the border width
+                  ),
+                  color: Colors.transparent,
+                ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Row(
@@ -80,8 +76,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
               ),
-                SizedBox(height: 10),
-                Container(
+              SizedBox(height: 10),
+              Container(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,9 +99,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
               SizedBox(height: 10),
-                
               Padding(
-                padding: EdgeInsets.all( 16),
+                padding: EdgeInsets.all(16),
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height,
                   child: GridView.count(
@@ -116,7 +111,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       return Container(
                         height: 100,
                         width: 100,
-                    
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(10),
@@ -129,7 +123,6 @@ class _SearchScreenState extends State<SearchScreen> {
                                 Container(
                                   height: 150,
                                   width: 200,
-                                   
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(18),
                                     image: DecorationImage(
@@ -154,7 +147,8 @@ class _SearchScreenState extends State<SearchScreen> {
                             Padding(
                               padding: const EdgeInsets.only(right: 10),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     children: [
