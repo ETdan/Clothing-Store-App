@@ -38,7 +38,7 @@ class _signinState extends State<signin> {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => adminLogin(),
+                          builder: (context) => AdminLogin(),
                         ),
                       );
                     },

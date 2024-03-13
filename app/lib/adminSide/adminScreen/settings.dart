@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class setting extends StatelessWidget {
-  const setting({super.key});
+class Setting extends StatelessWidget {
+  const Setting({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Access the current user from FirebaseAuth
+    User? currentUser = FirebaseAuth.instance.currentUser;
+
     return Padding(
       padding: const EdgeInsets.only(
         top: 20,
@@ -16,7 +21,8 @@ class setting extends StatelessWidget {
           CircleAvatar(
             radius: 40,
             child: Center(
-              child: Text('G'),
+              // Display the first character of the user's display name or 'G' if not available
+              child: Text(currentUser?.displayName?.substring(0, 1) ?? 'G'),
             ),
           ),
           SizedBox(
@@ -24,11 +30,30 @@ class setting extends StatelessWidget {
           ),
           Text('Name'),
           Card(
-            child: Text('gdsc team1 '),
+            child: FutureBuilder<DocumentSnapshot>(
+              future: FirebaseFirestore.instance
+                  .collection('admins')
+                  .doc(currentUser?.uid)
+                  .get(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  Map<String, dynamic>? data =
+                      snapshot.data?.data() as Map<String, dynamic>?;
+
+                  // Use the adminName variable from Firestore if available, else use display name
+                  String displayName =
+                      data?['adminName'] ?? currentUser?.displayName ?? 'No Name';
+
+                  return Text(displayName);
+                }
+
+                return CircularProgressIndicator();
+              },
+            ),
           ),
-          Text('email'),
+          Text('Email'),
           Card(
-            child: Text('gdscTeam1@gmail.com '),
+            child: Text(currentUser?.email ?? 'No Email'),
           ),
         ],
       ),

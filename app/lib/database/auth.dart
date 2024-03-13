@@ -110,7 +110,7 @@ class authMethod {
   }
 
   //sign in admin
-
+/*
   String AdminName = 'GDSCGROUPONE';
   String AdminEmail = 'GDSCGROUPEmail@gmail.com';
 
@@ -119,5 +119,57 @@ class authMethod {
       'adminpassword': AdminName,
       'adminEmail': AdminEmail,
     };
+  }*/
+Future<String> adminSignUp({
+    required String adminName,
+    required String adminEmail,
+    required String adminPassword,
+  }) async {
+    String res = 'some error occurred';
+    try {
+      UserCredential cred = await _auth.createUserWithEmailAndPassword(
+        email: adminEmail,
+        password: adminPassword,
+      );
+      await _firestore
+          .collection('admins')
+          .doc(_auth.currentUser!.uid)
+          .set({
+        'adminName': adminName,
+        'adminEmail': adminEmail,
+        'adminPassword': adminPassword,
+        'uid': _auth.currentUser!.uid,
+      });
+      res = 'success';
+    } catch (e) {
+      res = e.toString();
+    }
+    return res;
   }
+
+  Future<String> adminSignIn({
+    required String adminEmail,
+    required String adminPassword,
+  }) async {
+    String res = 'some error occurred';
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: adminEmail,
+        password: adminPassword,
+      );
+      res = 'success';
+    } catch (e) {
+      res = e.toString();
+    }
+    return res;
+  }
+
+  Map<String, dynamic> getAdminCredentials() {
+    return {
+      'adminEmail': 'GDSCGROUPEmail@gmail.com',
+      'adminPassword': 'GDSCGROUPONE',
+    };
+  }
+
+
 }

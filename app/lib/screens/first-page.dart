@@ -22,7 +22,15 @@ class _firstState extends State<first> {
     HomeScreen(),
     SearchScreen(),
     OrdersPage(),
-    ProfilePage(),
+   ProfilePage(
+  userData: {
+    'name': 'John Doe',
+    'email': 'john.doe@example.com',
+    'avatarUrl': 'https://example.com/avatar.jpg',
+    // Add other user data as needed
+  },
+)
+
   ];
   @override
   Widget build(BuildContext context) {
