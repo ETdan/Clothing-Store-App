@@ -5,18 +5,22 @@ import '/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class editProduct extends StatefulWidget {
-  const editProduct({Key? key}) : super(key: key);
+class EditProduct extends StatefulWidget {
+  const EditProduct({Key? key}) : super(key: key);
 
   @override
-  State<editProduct> createState() => _editProductState();
+  State<EditProduct> createState() => _EditProductState();
 }
 
-class _editProductState extends State<editProduct> {
+class _EditProductState extends State<EditProduct> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   Uint8List? file;
+
+  String selectedGender = 'male';
+  String selectedColor = 'blue';
+  String selectedBrand = 'nike';
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +44,33 @@ class _editProductState extends State<editProduct> {
               color: Colors.black87,
             ),
           ),
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            ListTile(
+              title: Text('Gender'),
+              subtitle: Text(selectedGender),
+              onTap: () {
+                // Similar to addPro widget, implement a dialog or navigation to select gender
+              },
+            ),
+            ListTile(
+              title: Text('Color'),
+              subtitle: Text(selectedColor),
+              onTap: () {
+                // Similar to addPro widget, implement a dialog or navigation to select color
+              },
+            ),
+            ListTile(
+              title: Text('Brand'),
+              subtitle: Text(selectedBrand),
+              onTap: () {
+                // Similar to addPro widget, implement a dialog or navigation to select brand
+              },
+            ),
+          ],
         ),
       ),
       body: Column(

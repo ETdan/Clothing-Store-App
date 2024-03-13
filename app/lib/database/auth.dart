@@ -1,5 +1,8 @@
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
+import 'package:shega_cloth_store_app/screens/first-page.dart';
+
 import '/database/storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -56,40 +59,47 @@ class authMethod {
   }
 
   //add products to the page
+Future<String> addProduct({
+  required String price,
+  required String description,
+  required String title,
+  required Uint8List photourl,
+  required List like,
+  required String gender,
+  required String color,
+  required String brand,
+  required String category, // Add category field
+}) async {
+  String res = 'some error occurred';
+  try {
+    String url = await uploadingimage('product', photourl);
 
-  Future<String> addProduct({
-    required String price,
-    required String description,
-    required String title,
-    required Uint8List photourl,
-    required List like,
-  }) async {
-    String res = 'some error occured';
-    try {
-      String url = await uploadingimage('product', photourl);
+    if (title.isNotEmpty &&
+        description.isNotEmpty &&
+        price.isNotEmpty &&
+        photourl != null) {
+      String userID = const Uuid().v1();
 
-      if (title.isNotEmpty &&
-          description.isNotEmpty &&
-          price.isNotEmpty &&
-          photourl != null) {
-        String userID = const Uuid().v1();
-
-        await _firestore.collection('products').doc(userID).set({
-          'title': title,
-          'price': price,
-          'description': description,
-          'photourl': url,
-          'like': like,
-          'userID': userID,
-        });
-        res = 'success';
-      }
-    } catch (e) {
-      res = e.toString();
+      await _firestore.collection('products').doc(userID).set({
+        'title': title,
+        'price': price,
+        'description': description,
+        'photourl': url,
+        'like': like,
+        'userID': userID,
+        'gender': gender,
+        'color': color,
+        'brand': brand,
+        
+      });
+      res = 'success';
     }
-
-    return res;
+  } catch (e) {
+    res = e.toString();
   }
+
+  return res;
+}
 
   //like post code
 
@@ -109,6 +119,18 @@ class authMethod {
     }
   }
 
+  Future<void> UserSignOut(BuildContext context) async {
+    try {
+      await _auth.signOut();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => first()), // Replace with your first screen widget
+      );
+    } catch (e) {
+      print('Error signing out: $e');
+    }
+  }
+
   //sign in admin
 /*
   String AdminName = 'GDSCGROUPONE';
@@ -121,31 +143,30 @@ class authMethod {
     };
   }*/
 Future<String> adminSignUp({
-    required String adminName,
-    required String adminEmail,
-    required String adminPassword,
-  }) async {
-    String res = 'some error occurred';
-    try {
-      UserCredential cred = await _auth.createUserWithEmailAndPassword(
-        email: adminEmail,
-        password: adminPassword,
-      );
-      await _firestore
-          .collection('admins')
-          .doc(_auth.currentUser!.uid)
-          .set({
-        'adminName': adminName,
-        'adminEmail': adminEmail,
-        'adminPassword': adminPassword,
-        'uid': _auth.currentUser!.uid,
-      });
-      res = 'success';
-    } catch (e) {
-      res = e.toString();
-    }
-    return res;
+  required String adminName,
+  required String adminEmail,
+  required String adminPassword,
+}) async {
+  try {
+    UserCredential cred = await _auth.createUserWithEmailAndPassword(
+      email: adminEmail,
+      password: adminPassword,
+    );
+
+    await _firestore.collection('admins').doc(_auth.currentUser!.uid).set({
+      'adminName': adminName,
+      'adminEmail': adminEmail,
+      'adminPassword': adminPassword,
+      'uid': _auth.currentUser!.uid,
+    });
+
+    return 'success';
+  } catch (e) {
+    print('Error during admin signup: $e');
+    return 'Signup failed. Please try again!';
   }
+}
+
 
   Future<String> adminSignIn({
     required String adminEmail,
@@ -164,12 +185,7 @@ Future<String> adminSignUp({
     return res;
   }
 
-  Map<String, dynamic> getAdminCredentials() {
-    return {
-      'adminEmail': 'GDSCGROUPEmail@gmail.com',
-      'adminPassword': 'GDSCGROUPONE',
-    };
-  }
+ 
 
 
 }

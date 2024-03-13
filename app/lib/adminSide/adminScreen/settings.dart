@@ -21,7 +21,7 @@ class Setting extends StatelessWidget {
           CircleAvatar(
             radius: 40,
             child: Center(
-              // Display the first character of the user's display name or 'G' if not available
+           
               child: Text(currentUser?.displayName?.substring(0, 1) ?? 'G'),
             ),
           ),
@@ -47,7 +47,7 @@ class Setting extends StatelessWidget {
                   return Text(displayName);
                 }
 
-                return CircularProgressIndicator();
+                return CircularProgressIndicator();//we will remove it later
               },
             ),
           ),

@@ -1,3 +1,5 @@
+import 'package:shega_cloth_store_app/database/auth.dart';
+
 import '/screens/profile/contact_section.dart';
 import '/screens/profile/help_section.dart';
 import '/screens/profile/profile_section.dart';
@@ -201,6 +203,14 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height: 20),
+              ElevatedButton(
+  onPressed: () async {
+    await authMethod().UserSignOut(context);;
+  },
+  child: Text('Log Out'),
+)
+
             ],
           ),
         ),

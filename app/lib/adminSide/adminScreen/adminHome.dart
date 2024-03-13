@@ -92,6 +92,7 @@ class _adminHomeState extends State<adminHome> {
           children: [
             dashBoard(),
             Categories(),
+
             products(),
             orders(),
             Setting(),
