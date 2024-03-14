@@ -159,6 +159,7 @@ class authMethod {
       'adminEmail': AdminEmail,
     };
   }*/
+  
   Future<String> adminSignUp({
     required String adminName,
     required String adminEmail,
@@ -186,7 +187,7 @@ class authMethod {
 
   Future<String> adminSignIn({
     required String adminEmail,
-    required String adminPassword,
+    required String adminPassword, 
   }) async {
     String res = 'some error occurred';
     try {
