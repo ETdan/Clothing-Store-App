@@ -1,39 +1,47 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:shega_cloth_store_app/database/models/user.dart';
+import 'package:shega_cloth_store_app/database/provider.dart';
+
 import 'package:shega_cloth_store_app/screens/first-page.dart';
 
 import '/database/storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
+import 'package:provider/provider.dart';
 
 class authMethod {
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Map<String, dynamic> userData = {};
 
-  Future<String> UserSignUp({
-    required String userName,
-    required String email,
-    required String password,
-  }) async {
+  Future<String> UserSignUp(
+      {required String userName,
+      required String email,
+      required String password,
+      required context}) async {
     String res = 'some error occured';
     try {
       UserCredential cred = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      Users user = Users(
+        username: userName,
+        email: email,
+        uid: _auth.currentUser!.uid,
+        password: password,
+      );
+
       await _firestore
           .collection('users')
           .doc(
             FirebaseAuth.instance.currentUser!.uid,
           )
-          .set({
-        'userName': userName,
-        'email': email,
-        'password': password,
-        'uid': _auth.currentUser!.uid,
-      });
+          .set(user.tojson());
+      Provider.of<UserProvider>(context).userSignIn(user);
       res = 'success';
     } catch (e) {
       res = e.toString();
@@ -41,16 +49,37 @@ class authMethod {
     return res;
   }
 
-  Future<String> UserSignin({
-    required String email,
-    required String password,
-  }) async {
+  signOut(context) async {
+    await _auth.signOut();
+    Provider.of<UserProvider>(context).userSignOut();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => first()));
+  }
+
+  Future<String> UserSignin(
+      {required String email,
+      required String password,
+      required context}) async {
     String res = 'some error occured';
     try {
       await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      userData = (await _firestore
+          .collection('users')
+          .doc(
+            FirebaseAuth.instance.currentUser!.uid,
+          )
+          .get()) as Map<String, dynamic>;
+
+      Users user = Users(
+          username: userData["username"],
+          email: userData["email"],
+          uid: userData["uid"],
+          password: userData["password"]);
+      Provider.of<UserProvider>(context).userSignIn(user);
       res = 'success';
     } catch (e) {
       res = e.toString();
