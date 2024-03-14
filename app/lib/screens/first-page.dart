@@ -20,20 +20,7 @@ class _firstState extends State<first> {
   String uid = FirebaseAuth.instance.currentUser!.uid;
   int page = 0;
 
-  final pages = [
-    HomeScreen(),
-    SearchScreen(),
-    OrdersPage(),
-   ProfilePage(
-  userData: {
-    'name': 'John Doe',
-    'email': 'john.doe@example.com',
-    'avatarUrl': 'https://example.com/avatar.jpg',
-    // Add other user data as needed
-  },
-)
-
-  ];
+  final pages = [HomeScreen(), SearchScreen(), OrdersPage(), ProfilePage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
