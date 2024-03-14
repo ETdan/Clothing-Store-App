@@ -42,4 +42,10 @@ class defaultt with ChangeNotifier {
     _savingPrefs();
     notifyListeners();
   }
+
+   void isAdminLogin() async {
+    isUser = !isUser;
+    _savingPrefs();
+    notifyListeners();
+  }
 }

@@ -78,15 +78,15 @@ class _EditProductState extends State<EditProduct> {
         children: [
           textFields(
             controller: titleController,
-            hint: 'Title',
+            hint: 'Title', maxLines: 3,
           ),
           textFields(
             controller: priceController,
-            hint: 'Price',
+            hint: 'Price', maxLines: 1,
           ),
           textFields(
             controller: descriptionController,
-            hint: 'Description',
+            hint: 'Description', maxLines: 1,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20),

@@ -1,147 +1,208 @@
-import 'package:flutter/material.dart';
 import 'package:shega_cloth_store_app/adminSide/adminScreen/adminHome.dart';
-import 'package:shega_cloth_store_app/database/auth.dart';
-import 'package:shega_cloth_store_app/utils/snackBar.dart';
+import 'package:shega_cloth_store_app/database/provider.dart';
+
+import '/database/auth.dart';
+import '/prefs/loginPreference.dart';
+import '/screens/first-page.dart';
+import '/utils/snackBar.dart';
+import '/utils/textfield.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
+import 'package:provider/provider.dart';
 
 class AdminSignup extends StatefulWidget {
-  const AdminSignup({Key? key}) : super(key: key);
+  const AdminSignup({super.key});
 
   @override
   State<AdminSignup> createState() => _AdminSignupState();
 }
 
 class _AdminSignupState extends State<AdminSignup> {
-  TextEditingController adminUserNameController = TextEditingController();
+  bool isCheak = false;
+  TextEditingController adminnameController = TextEditingController();
   TextEditingController adminEmailController = TextEditingController();
-  TextEditingController adminPasswordController = TextEditingController();
-
-  bool isUserNameValid = true;
-  bool isEmailValid = true;
-
+  TextEditingController adminpasswordController = TextEditingController();
+  bool isFinishedLogin = false;
   @override
   Widget build(BuildContext context) {
+    DocumentSnapshot<Map<String, dynamic>> UserData;
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Admin Signup',
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 100,
+                left: 30,
+              ),
+              child: Text(
+                'Getting Started',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
-              TextField(
-                controller: adminUserNameController,
-                onChanged: (value) {
-                  setState(() {
-                    isUserNameValid = validateUserName(value);
-                  });
-                },
-                decoration: InputDecoration(
-                  hintText: 'Admin Username',
-                  prefixIcon: Icon(Icons.person),
-                  errorText: isUserNameValid
-                      ? null
-                      : 'Username must be between 3 and 20 characters and unique.',
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 30),
+              child: Text(
+                'create an account to continue,',
+                style: TextStyle(
+                  fontSize: 20,
                 ),
               ),
-              SizedBox(height: 10),
-              TextField(
-                controller: adminEmailController,
-                onChanged: (value) {
-                  setState(() {
-                    isEmailValid = validateEmail(value);
-                  });
-                },
-                decoration: InputDecoration(
-                  hintText: 'Admin Email',
-                  prefixIcon: Icon(Icons.email),
-                  errorText: isEmailValid
-                      ? null
-                      : 'Invalid email format or already in use.',
-                ),
-              ),
-              SizedBox(height: 10),
-              TextField(
-                controller: adminPasswordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  hintText: 'Password',
-                  prefixIcon: Icon(Icons.lock),
-                ),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () async {
-                  if (isUserNameValid && isEmailValid) {
-                    String result = await authMethod().adminSignUp(
-                      adminName: adminUserNameController.text,
-                      adminEmail: adminEmailController.text,
-                      adminPassword: adminPasswordController.text,
-                    );
-
-                    if (result == 'success') {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => adminHome(),
-                        ),
-                      );
-                    } else {
-                      showSnack(
-                        'Signup failed. Please try again!',
-                        context,
-                      );
-                    }
-                  } else {
-                    showSnack(
-                      'Please fix the validation errors!',
-                      context,
-                    );
-                  }
-                },
-                child: Text('Sign up'),
-              ),
-              SizedBox(height: 10),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text(
-                  'Already have an account? Sign in',
-                  style: TextStyle(
-                    color: Colors.blue,
+            ),
+            textFields(
+              controller: adminEmailController,
+              hint: ' email',
+              prefix: Icon(
+                Icons.email_outlined,
+              ), maxLines: 1,
+            ),
+            textFields(
+              controller: adminnameController,
+              hint: 'username',
+              prefix: Icon(
+                Icons.person_2_outlined,
+              ), maxLines: 1,
+            ),
+            textFields(
+              controller: adminpasswordController,
+              hint: 'Password',
+              prefix: Icon(
+                Icons.password_outlined,
+              ), maxLines: 1,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Row(
+                children: [
+                  Checkbox(
+                    value: isCheak,
+                    onChanged: (value) {
+                      if (value != null) {
+                        setState(() {
+                          isCheak = value;
+                        });
+                      }
+                    },
+                    visualDensity: VisualDensity(
+                      horizontal: -3.0,
+                      vertical: -3.0,
+                    ),
                   ),
-                ),
+                  Text(
+                    'By creating an account, you agree to our\n Term and Condition',
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Flexible(
+              child: Container(),
+              flex: 1,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Consumer<defaultt>(
+                  builder: (context, value, child) {
+                    return MaterialButton(
+                      height: 60,
+                      minWidth: 400,
+                      color: Color.fromARGB(255, 128, 140, 220),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      onPressed: () async {
+                        setState(() {
+                          isFinishedLogin = true;
+                        });
+                        String result = await authMethod().adminSignUp(
+                          adminName: adminnameController.text,
+                          adminEmail: adminEmailController.text,
+                          adminPassword: adminpasswordController.text,
+                        );
+                        setState(() {
+                          isFinishedLogin = false;
+                        });
+                        if (result == 'success') {
+                          UserData = await _firestore
+                              .collection('admins')
+                              .doc(
+                                FirebaseAuth.instance.currentUser!.uid,
+                              )
+                              .get();
+
+                          print(UserData.data());
+                          Provider.of<UserProvider>(context, listen: false)
+                              .adminSignInMap(UserData.data()!);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => adminHome(),
+                            ),
+                          );
+                          setState(() {
+                            value.toggle();
+                            value.isAdminLogin();
+                          });
+                        } else {
+                          showSnack(
+                            'please,enter correct information or register first!',
+                            context,
+                          );
+                        }
+                      },
+                      child: isFinishedLogin
+                          ? Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            )
+                          : Container(
+                              width: 400,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    'Sign up',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.login_outlined,
+                                  ),
+                                ],
+                              ),
+                            ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Flexible(
+              child: Container(),
+              flex: 1,
+            ),
+          ],
         ),
       ),
     );
-  }
-
-  bool validateUserName(String value) {
-    if (value.length >= 3 && value.length <= 20) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  bool validateEmail(String value) {
-    // Perform email format check
-    if (value.isNotEmpty && value.contains('@')) {
-      // Perform uniqueness check (replace with your actual logic)
-      // If the email is unique, return true; otherwise, return false.
-      return true;
-    } else {
-      return false;
-    }
   }
 }

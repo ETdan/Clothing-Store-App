@@ -7,8 +7,8 @@ class UserProvider extends ChangeNotifier {
     'password': "n/a",
     'email': "n/a",
     'uid': "n/a",
+    'profileImageUrl': null, 
   };
-  Map<String, dynamic> adminModel = {};
 
   void userSignIn(Users user) {
     userModel = user.tojson();
@@ -25,13 +25,38 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Map<String, dynamic> adminModel = {
+    'username': "n/a",
+    'password': "n/a",
+    'email': "n/a",
+    'uid': "n/a",
+    'profileImageUrl': null, 
+  };
+
   void adminSignIn(Users admin) {
     adminModel = admin.tojson();
     notifyListeners();
   }
 
+  void adminSignInMap(Map<String, dynamic> admin) {
+    adminModel = admin;
+    notifyListeners();
+  }
+
   void adminSignOut() {
     adminModel.clear();
+    notifyListeners();
+  }
+
+  // Method to update admin name
+  void updateAdminName(String newName) {
+    userModel['username'] = newName;
+    notifyListeners();
+  }
+
+  // Method to update default profile image for admin
+  void updateDefaultProfileImage(String newImageUrl) {
+    userModel['profileImageUrl'] = newImageUrl;
     notifyListeners();
   }
 }

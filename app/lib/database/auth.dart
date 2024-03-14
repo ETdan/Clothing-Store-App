@@ -5,6 +5,8 @@ import 'package:shega_cloth_store_app/database/models/user.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 
 import 'package:shega_cloth_store_app/screens/first-page.dart';
+import 'package:shega_cloth_store_app/screens/login.dart';
+import 'package:shega_cloth_store_app/screens/signup.dart';
 
 import '/database/storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -32,6 +34,7 @@ class authMethod {
         email: email,
         uid: _auth.currentUser!.uid,
         password: password,
+        profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/e-commerse-40160.appspot.com/o/profile%2FPngItem_2652659.png?alt=media&token=b9ddf946-bbcc-43f4-a883-2cf496d6c269",
       );
 
       await _firestore
@@ -138,7 +141,7 @@ class authMethod {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                first()), // Replace with your first screen widget
+                signin()), 
       );
     } catch (e) {
       print('Error signing out: $e');
@@ -156,6 +159,7 @@ class authMethod {
       'adminEmail': AdminEmail,
     };
   }*/
+  
   Future<String> adminSignUp({
     required String adminName,
     required String adminEmail,
@@ -183,7 +187,7 @@ class authMethod {
 
   Future<String> adminSignIn({
     required String adminEmail,
-    required String adminPassword,
+    required String adminPassword, 
   }) async {
     String res = 'some error occurred';
     try {
