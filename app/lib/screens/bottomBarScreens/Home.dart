@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen>
                 hint: 'search here',
                 prefix: Icon(
                   Icons.search,
-                ),
+                ), maxLines: 1,
               ),
               CarouselSlider.builder(
                 itemCount: images.length,

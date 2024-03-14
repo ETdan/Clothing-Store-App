@@ -71,8 +71,7 @@ class _addProState extends State<addPro> {
 }
 
 String getCategory(String gender, String color, String brand) {
-  // You can customize the logic to determine the category based on gender, color, and brand
-  return '$gender $color $brand'; // Example logic, you can modify this based on your actual categories
+  return '$gender $color $brand';
 }
 
 
@@ -100,120 +99,168 @@ String getCategory(String gender, String color, String brand) {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            textFields(
-              controller: titleController,
-              hint: 'Title',
-            ),
-            textFields(
-              controller: priceController,
-              hint: 'Price',
-            ),
-            textFields(
-              controller: discriptionController,
-              hint: 'Description',
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Stack(
-                children: [
-                  Container(
-                    height: 200,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black54),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: image != null
-                        ? Image(
-                            image: MemoryImage(image!),
-                            fit: BoxFit.fill,
-                          )
-                        : Center(
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.upload,
-                                size: 30,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ),
-                  ),
-                  Positioned(
-                    bottom: -3,
-                    right: -3,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.add_a_photo_outlined,
-                      ),
-                      onPressed: () => selectedImages(),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            // Category Selection
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color.fromARGB(255, 196, 156, 199), Color.fromARGB(255, 227, 145, 248)], // Example gradient colors
+          ),
+        ),
+        child: SafeArea(
+          
+          child: SingleChildScrollView(
+            child: Column(
+              
+            
               children: [
-                categorySelector(
-                  title: 'Gender',
-                  selectedCategory: selectedGender,
-                  options: ['male', 'female'],
-                  onSelect: (value) {
-                    setState(() {
-                      selectedGender = value;
-                    });
-                  },
-                ),
-                categorySelector(
-                  title: 'Color',
-                  selectedCategory: selectedColor,
-                  options: ['blue', 'red', 'green', 'white', 'black', 'grey'],
-                  onSelect: (value) {
-                    setState(() {
-                      selectedColor = value;
-                    });
-                  },
-                ),
-                categorySelector(
-                  title: 'Brand',
-                  selectedCategory: selectedBrand,
-                  options: ['nike', 'adidas', 'puma', 'CR7'],
-                  onSelect: (value) {
-                    setState(() {
-                      selectedBrand = value;
-                    });
-                  },
+                SizedBox(height: 50),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment:CrossAxisAlignment.center ,
+                  children: [
+                    Card(
+                    
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                        padding: EdgeInsets.only(left: 16, right: 16),
+                        width: 350,
+                        height: 800,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color.fromARGB(255, 208, 209, 211),
+                              Color.fromARGB(255, 179, 179, 179),
+                            ],
+                          ),
+                        ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              textFields(
+                                controller: titleController,
+                                hint: 'Title', maxLines: 1,
+                              ),
+                              textFields(
+                                controller: priceController,
+                                hint: 'Price',
+                                maxLines: 1
+                              ),
+                              textFields(
+                                controller: discriptionController,
+                                hint: 'Description',
+                                maxLines: 1
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      height: 200,
+                                      width: 200,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.black54),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: image != null
+                                          ? Image(
+                                              image: MemoryImage(image!),
+                                              fit: BoxFit.fill,
+                                            )
+                                          : Center(
+                                              child: IconButton(
+                                                onPressed: () {},
+                                                icon: Icon(
+                                                  Icons.upload,
+                                                  size: 30,
+                                                  color: Colors.black87,
+                                                ),
+                                              ),
+                                            ),
+                                    ),
+                                    Positioned(
+                                      bottom: -3,
+                                      right: -3,
+                                      child: IconButton(
+                                        icon: Icon(
+                                          Icons.add_a_photo_outlined,
+                                        ),
+                                        onPressed: () => selectedImages(),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              // Category Selection
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  categorySelector(
+                                    title: 'Gender',
+                                    selectedCategory: selectedGender,
+                                    options: ['male', 'female'],
+                                    onSelect: (value) {
+                                      setState(() {
+                                        selectedGender = value;
+                                      });
+                                    },
+                                  ),
+                                  categorySelector(
+                                    title: 'Color',
+                                    selectedCategory: selectedColor,
+                                    options: ['blue', 'red', 'green', 'white', 'black', 'grey'],
+                                    onSelect: (value) {
+                                      setState(() {
+                                        selectedColor = value;
+                                      });
+                                    },
+                                  ),
+                                  categorySelector(
+                                    title: 'Brand',
+                                    selectedCategory: selectedBrand,
+                                    options: ['nike', 'adidas', 'puma', 'CR7'],
+                                    onSelect: (value) {
+                                      setState(() {
+                                        selectedBrand = value;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 20),
+                              // Upload New Product Button
+                              Padding(
+                                padding: const EdgeInsets.only(left: 30, right: 30),
+                                child: MaterialButton(
+                                  color: Color.fromARGB(255, 112, 101, 185),
+                                  shape: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  onPressed: () => posted(),
+                                  height: 60,
+                                  minWidth: 300,
+                                  child: Center(
+                                    child: Text(
+                                      'Upload New Product',
+                                      style: TextStyle(color: Colors.black87),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            // Upload New Product Button
-            Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30),
-              child: MaterialButton(
-                color: Color.fromARGB(255, 112, 101, 185),
-                shape: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                onPressed: () => posted(),
-                height: 60,
-                minWidth: 300,
-                child: Center(
-                  child: Text(
-                    'Upload New Product',
-                    style: TextStyle(color: Colors.black87),
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

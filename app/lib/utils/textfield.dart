@@ -5,7 +5,7 @@ class textFields extends StatelessWidget {
   Icon? prefix;
   final TextEditingController controller;
   textFields(
-      {super.key, required this.hint, this.prefix, required this.controller});
+      {super.key, required this.hint, this.prefix, required this.controller, required int maxLines});
 
   @override
   Widget build(BuildContext context) {

@@ -56,21 +56,21 @@ class _signupState extends State<signup> {
               hint: ' email',
               prefix: Icon(
                 Icons.email_outlined,
-              ),
+              ), maxLines: 1,
             ),
             textFields(
               controller: usernameController,
               hint: 'username',
               prefix: Icon(
                 Icons.person_2_outlined,
-              ),
+              ), maxLines: 1,
             ),
             textFields(
               controller: userpasswordController,
               hint: 'Password',
               prefix: Icon(
                 Icons.password_outlined,
-              ),
+              ), maxLines: 1,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20),

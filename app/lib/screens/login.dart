@@ -83,14 +83,14 @@ class _signinState extends State<signin> {
               hint: 'Username or email',
               prefix: Icon(
                 Icons.person_2_outlined,
-              ),
+              ), maxLines: 1,
             ),
             textFields(
               controller: userpasswordController,
               hint: 'Password',
               prefix: Icon(
                 Icons.shopping_bag_rounded,
-              ),
+              ), maxLines: 1,
             ),
             Flexible(
               child: Container(),
