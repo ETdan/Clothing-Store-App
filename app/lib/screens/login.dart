@@ -110,9 +110,9 @@ class _signinState extends State<signin> {
                       ),
                       onPressed: () async {
                         String result = await authMethod().UserSignin(
-                          email: userEmailController.text,
-                          password: userpasswordController.text,
-                        );
+                            email: userEmailController.text,
+                            password: userpasswordController.text,
+                            context: context);
                         if (result == 'success') {
                           Navigator.of(context).push(
                             MaterialPageRoute(

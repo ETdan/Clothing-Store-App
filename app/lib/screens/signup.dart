@@ -117,6 +117,7 @@ class _signupState extends State<signup> {
                           isFinishedLogin = true;
                         });
                         String result = await authMethod().UserSignUp(
+                          context: context,
                           userName: usernameController.text,
                           email: userEmailController.text,
                           password: userpasswordController.text,
