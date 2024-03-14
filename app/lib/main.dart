@@ -1,3 +1,4 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 
 import '/firebase_options.dart';

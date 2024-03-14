@@ -1,4 +1,4 @@
-import 'package:shega_cloth_store_app/database/auth.dart'
+import 'package:shega_cloth_store_app/database/auth.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 
 import '/screens/profile/contact_section.dart';
@@ -27,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final userData = Provider.of<UserProvider>(context).userModel;
-    String name = userData['name'] ?? 'Default Name';
+    String name = userData['username'] ?? 'Default Name';
     String email = userData['email'] ?? 'Default Email';
     String avatarUrl = userData['avatarUrl'] ??
         'https://images.mubicdn.net/images/cast_member/286407/cache-139299-1463178721/image-w856.jpg?size=256x';
@@ -217,12 +217,12 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-  onPressed: () async {
-    await authMethod().UserSignOut(context);;
-  },
-  child: Text('Log Out'),
-)
-
+                onPressed: () async {
+                  await authMethod().UserSignOut(context);
+                  ;
+                },
+                child: Text('Log Out'),
+              )
             ],
           ),
         ),
