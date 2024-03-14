@@ -7,6 +7,7 @@ class UserProvider extends ChangeNotifier {
     'password': "n/a",
     'email': "n/a",
     'uid': "n/a",
+    'profileImageUrl': null, 
   };
   Map<String, dynamic> adminModel = {};
 

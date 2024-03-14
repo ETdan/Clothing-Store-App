@@ -29,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
     final userData = Provider.of<UserProvider>(context).userModel;
     String name = userData['username'] ?? 'Default Name';
     String email = userData['email'] ?? 'Default Email';
-    String avatarUrl = userData['avatarUrl'] ??
+    String avatarUrl = userData['profileImageUrl'] ??
         'https://images.mubicdn.net/images/cast_member/286407/cache-139299-1463178721/image-w856.jpg?size=256x';
 
     return Scaffold(
@@ -66,13 +66,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfileSection(
-                                  name: '',
-                                  email: '',
-                                  avatarUrl: '',
-                                )),
+      context,
+      MaterialPageRoute(
+        builder: (context) => edit_profile(),
+      ),
                       );
                     },
                     child: Card(
@@ -217,12 +214,12 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () async {
-                  await authMethod().UserSignOut(context);
-                  ;
-                },
-                child: Text('Log Out'),
-              )
+  onPressed: () async {
+    await authMethod().UserSignOut(context);;
+  },
+  child: Text('Log Out'),
+)
+
             ],
           ),
         ),
