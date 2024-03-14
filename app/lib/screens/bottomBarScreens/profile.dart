@@ -1,3 +1,4 @@
+import 'package:shega_cloth_store_app/database/auth.dart'
 import 'package:shega_cloth_store_app/database/provider.dart';
 
 import '/screens/profile/contact_section.dart';
@@ -214,6 +215,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ],
               ),
+              SizedBox(height: 20),
+              ElevatedButton(
+  onPressed: () async {
+    await authMethod().UserSignOut(context);;
+  },
+  child: Text('Log Out'),
+)
+
             ],
           ),
         ),

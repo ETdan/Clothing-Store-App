@@ -1,137 +1,100 @@
+import 'package:flutter/material.dart';
 import 'package:shega_cloth_store_app/adminSide/adminScreen/adminHome.dart';
+import 'package:shega_cloth_store_app/adminSide/adminSignuo.dart';
+
 import 'package:shega_cloth_store_app/database/auth.dart';
 import 'package:shega_cloth_store_app/prefs/loginPreference.dart';
+import 'package:shega_cloth_store_app/screens/signup.dart';
 import 'package:shega_cloth_store_app/utils/snackBar.dart';
-import 'package:shega_cloth_store_app/utils/textfield.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class adminLogin extends StatefulWidget {
-  const adminLogin({super.key});
+class AdminLogin extends StatefulWidget {
+  const AdminLogin({Key? key}) : super(key: key);
 
   @override
-  State<adminLogin> createState() => _adminLoginState();
+  State<AdminLogin> createState() => _AdminLoginState();
 }
 
-class _adminLoginState extends State<adminLogin> {
-  TextEditingController adminpasswordController = TextEditingController();
-  TextEditingController adminemailController = TextEditingController();
+class _AdminLoginState extends State<AdminLogin> {
+  TextEditingController adminEmailController = TextEditingController();
+  TextEditingController adminPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 100,
-                left: 30,
-              ),
-              child: Text(
-                'Let\'s Sign You In',
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Admin Login',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30),
-              child: Text(
-                'Welcome back,',
-                style: TextStyle(
-                  fontSize: 20,
+              SizedBox(height: 20),
+              TextField(
+                controller: adminEmailController,
+                decoration: InputDecoration(
+                  hintText: 'Admin Email',
+                  prefixIcon: Icon(Icons.person),
                 ),
               ),
-            ),
-            textFields(
-              controller: adminemailController,
-              hint: 'Adminname or email',
-              prefix: Icon(
-                Icons.person_2_outlined,
+              SizedBox(height: 10),
+              TextField(
+                controller: adminPasswordController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  prefixIcon: Icon(Icons.lock),
+                ),
               ),
-            ),
-            textFields(
-              controller: adminpasswordController,
-              hint: 'Password',
-              prefix: Icon(
-                Icons.shopping_bag_rounded,
-              ),
-            ),
-            Flexible(
-              child: Container(),
-              flex: 1,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Consumer<defaultt>(
-                  builder: (context, value, child) {
-                    return MaterialButton(
-                      height: 60,
-                      minWidth: 400,
-                      color: Color.fromARGB(255, 128, 140, 220),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      onPressed: () {
-                        if (adminemailController.text ==
-                                authMethod().tojson()['adminEmail'] &&
-                            adminpasswordController.text ==
-                                authMethod().tojson()['adminpassword']) {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => adminHome(),
-                            ),
-                          );
-                        } else {
-                          showSnack(
-                            'please,enter correct information or register first!',
-                            context,
-                          );
-                        }
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  String result = await authMethod().adminSignIn(
+                    adminEmail: adminEmailController.text,
+                    adminPassword: adminPasswordController.text,
+                  );
 
-                        setState(() {
-                          value.islogin = true;
-                        });
-                      },
-                      child: Container(
-                        width: 400,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              'Signin',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black87,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Icon(
-                              Icons.login_outlined,
-                            ),
-                          ],
-                        ),
+                  if (result == 'success') {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => adminHome(),
                       ),
                     );
-                  },
+                  } else {
+                    showSnack(
+                      'Please enter correct information or register first!',
+                      context,
+                    );
+                  }
+
+                  // Additional logic as needed
+                },
+                child: Text('Sign in'),
+              ),
+              SizedBox(height: 10),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AdminSignup(),
+                    ),
+                  );
+                },
+                child: Text(
+                  "Don't have an account? Create account",
+                  style: TextStyle(
+                    color: Colors.blue,
+                  ),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Flexible(
-              child: Container(),
-              flex: 1,
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

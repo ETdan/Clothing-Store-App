@@ -5,18 +5,23 @@ import '/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class editProduct extends StatefulWidget {
-  const editProduct({super.key});
+class EditProduct extends StatefulWidget {
+  const EditProduct({Key? key}) : super(key: key);
 
   @override
-  State<editProduct> createState() => _editProductState();
+  State<EditProduct> createState() => _EditProductState();
 }
 
-class _editProductState extends State<editProduct> {
-  TextEditingController discriptionController = TextEditingController();
+class _EditProductState extends State<EditProduct> {
+  TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   Uint8List? file;
+
+  String selectedGender = 'male';
+  String selectedColor = 'blue';
+  String selectedBrand = 'nike';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +46,33 @@ class _editProductState extends State<editProduct> {
           ),
         ),
       ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            ListTile(
+              title: Text('Gender'),
+              subtitle: Text(selectedGender),
+              onTap: () {
+                // Similar to addPro widget, implement a dialog or navigation to select gender
+              },
+            ),
+            ListTile(
+              title: Text('Color'),
+              subtitle: Text(selectedColor),
+              onTap: () {
+                // Similar to addPro widget, implement a dialog or navigation to select color
+              },
+            ),
+            ListTile(
+              title: Text('Brand'),
+              subtitle: Text(selectedBrand),
+              onTap: () {
+                // Similar to addPro widget, implement a dialog or navigation to select brand
+              },
+            ),
+          ],
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -53,7 +85,7 @@ class _editProductState extends State<editProduct> {
             hint: 'Price',
           ),
           textFields(
-            controller: discriptionController,
+            controller: descriptionController,
             hint: 'Description',
           ),
           Padding(
@@ -66,18 +98,23 @@ class _editProductState extends State<editProduct> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: file != null
-                  ? Image(
-                      image: MemoryImage(file!),
+                  ? Image.memory(
+                      file!,
                       fit: BoxFit.fill,
                     )
                   : IconButton(
                       onPressed: () async {
-                        Uint8List im = await pickedImages(
-                          ImageSource.gallery,
-                        );
-                        setState(() {
-                          file = im;
-                        });
+                        try {
+                          Uint8List im = await pickedImages(
+                            ImageSource.gallery,
+                          );
+                          setState(() {
+                            file = im;
+                          });
+                        } catch (e) {
+                          // Handle image selection error
+                          print('Error selecting image: $e');
+                        }
                       },
                       icon: Icon(
                         Icons.upload,
@@ -94,16 +131,18 @@ class _editProductState extends State<editProduct> {
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: MaterialButton(
               color: Color.fromARGB(255, 112, 101, 185),
-              shape: OutlineInputBorder(
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              onPressed: () {},
+              onPressed: () {
+                // Implement the update logic here
+              },
               height: 60,
               minWidth: 300,
               child: Center(
                 child: Text(
                   'Update Product',
-                  style: TextStyle(color: Colors.black87),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
