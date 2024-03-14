@@ -27,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final userData = Provider.of<UserProvider>(context).userModel;
-    String name = userData['name'] ?? 'Default Name';
+    String name = userData['username'] ?? 'Default Name';
     String email = userData['email'] ?? 'Default Email';
     String avatarUrl = userData['avatarUrl'] ??
         'https://images.mubicdn.net/images/cast_member/286407/cache-139299-1463178721/image-w856.jpg?size=256x';

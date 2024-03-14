@@ -1,9 +1,16 @@
+import 'package:shega_cloth_store_app/database/provider.dart';
+
 import '/database/auth.dart';
 import '/prefs/loginPreference.dart';
 import '/screens/first-page.dart';
 import '/utils/snackBar.dart';
 import '/utils/textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
 
 class signup extends StatefulWidget {
@@ -21,6 +28,9 @@ class _signupState extends State<signup> {
   bool isFinishedLogin = false;
   @override
   Widget build(BuildContext context) {
+    DocumentSnapshot<Map<String, dynamic>> userData;
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -117,7 +127,6 @@ class _signupState extends State<signup> {
                           isFinishedLogin = true;
                         });
                         String result = await authMethod().UserSignUp(
-                          context: context,
                           userName: usernameController.text,
                           email: userEmailController.text,
                           password: userpasswordController.text,
@@ -126,6 +135,16 @@ class _signupState extends State<signup> {
                           isFinishedLogin = false;
                         });
                         if (result == 'success') {
+                          userData = await _firestore
+                              .collection('users')
+                              .doc(
+                                FirebaseAuth.instance.currentUser!.uid,
+                              )
+                              .get();
+
+                          print(userData.data());
+                          Provider.of<UserProvider>(context, listen: false)
+                              .userSignInMap(userData.data()!);
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => first(),

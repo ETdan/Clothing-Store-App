@@ -16,8 +16,6 @@ class first extends StatefulWidget {
 }
 
 class _firstState extends State<first> {
-  late Map<String, dynamic> user = {};
-  String uid = FirebaseAuth.instance.currentUser!.uid;
   int page = 0;
 
   final pages = [HomeScreen(), SearchScreen(), OrdersPage(), ProfilePage()];
