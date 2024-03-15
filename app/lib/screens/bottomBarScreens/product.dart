@@ -35,101 +35,6 @@ class _productScreenState extends State<productScreen> {
             ),
           ),
         ),
-
-      ),
-      body: Container(
-        padding: EdgeInsets.only(left: 16, right: 16),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isActiveUnderlined = true;
-                      isCompletedUnderlined = false;
-                      isCancelledUnderlined = false;
-                    });
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: isActiveUnderlined
-                              ? const Color(0xFF6055D8)
-                              : Colors.transparent,
-                          width: 4.0,
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      "Active",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isActiveUnderlined = false;
-                      isCompletedUnderlined = true;
-                      isCancelledUnderlined = false;
-                    });
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: isCompletedUnderlined
-                              ? const Color(0xFF6055D8)
-                              : Colors.transparent,
-                          width: 4.0,
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      "Completed",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isActiveUnderlined = false;
-                      isCompletedUnderlined = false;
-                      isCancelledUnderlined = true;
-                    });
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: isCancelledUnderlined
-                              ? const Color(0xFF6055D8)
-                              : Colors.transparent,
-                          width: 4.0,
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      "Cancelled",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-
         actions: [
           IconButton(
             onPressed: () {},
@@ -137,7 +42,6 @@ class _productScreenState extends State<productScreen> {
               Icons.more_vert,
               size: 30,
               color: Colors.black87,
-
             ),
           ),
         ],
