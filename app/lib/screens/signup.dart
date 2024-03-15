@@ -1,4 +1,5 @@
 import 'package:shega_cloth_store_app/database/provider.dart';
+import 'package:shega_cloth_store_app/screens/login.dart';
 
 import '/database/auth.dart';
 import '/prefs/loginPreference.dart';
@@ -194,6 +195,24 @@ class _signupState extends State<signup> {
             ),
             SizedBox(
               height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('You have an account? '),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => signin(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Sign In',
+                  ),
+                ),
+              ],
             ),
             Flexible(
               child: Container(),

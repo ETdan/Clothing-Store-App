@@ -1,5 +1,6 @@
 import 'package:shega_cloth_store_app/adminSide/adminScreen/adminHome.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
+import 'package:shega_cloth_store_app/screens/login.dart';
 
 import '/adminSide/adminLogin.dart';
 import '/database/auth.dart';
@@ -36,6 +37,33 @@ class _AdminLoginState extends State<AdminLogin> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 20,
+                right: 20,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => signin(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'User Login',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(
                 top: 100,
