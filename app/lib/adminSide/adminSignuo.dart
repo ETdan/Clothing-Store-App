@@ -26,20 +26,23 @@ class _AdminSignupState extends State<AdminSignup> {
   TextEditingController adminnameController = TextEditingController();
   TextEditingController adminEmailController = TextEditingController();
   TextEditingController adminpasswordController = TextEditingController();
+  TextEditingController adminCodeController = TextEditingController(); 
   bool isFinishedLogin = false;
+   String adminCode = 'AAA111'; // temporary admin code
+
   @override
   Widget build(BuildContext context) {
     DocumentSnapshot<Map<String, dynamic>> UserData;
     FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
-      body: SafeArea(
+      body: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                top: 80,
+                top: 35,
                 left: 30,
               ),
               child: Text(
@@ -51,7 +54,7 @@ class _AdminSignupState extends State<AdminSignup> {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30),
@@ -81,6 +84,13 @@ class _AdminSignupState extends State<AdminSignup> {
               hint: 'Password',
               prefix: Icon(
                 Icons.password_outlined,
+              ), maxLines: 1,
+            ),
+            textFields(
+              controller: adminCodeController,
+              hint: 'Admin Code', // Label for admin code field
+              prefix: Icon(
+                Icons.lock_outline,
               ), maxLines: 1,
             ),
             Padding(
@@ -131,6 +141,8 @@ class _AdminSignupState extends State<AdminSignup> {
                           adminName: adminnameController.text,
                           adminEmail: adminEmailController.text,
                           adminPassword: adminpasswordController.text,
+                          adminCode: adminCodeController.text, 
+
                         );
                         setState(() {
                           isFinishedLogin = false;

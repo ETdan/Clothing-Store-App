@@ -159,32 +159,37 @@ class authMethod {
       'adminEmail': AdminEmail,
     };
   }*/
-  
   Future<String> adminSignUp({
-    required String adminName,
-    required String adminEmail,
-    required String adminPassword,
-  }) async {
-    try {
-      UserCredential cred = await _auth.createUserWithEmailAndPassword(
-        email: adminEmail,
-        password: adminPassword,
-      );
-
-      await _firestore.collection('admins').doc(_auth.currentUser!.uid).set({
-        'adminName': adminName,
-        'adminEmail': adminEmail,
-        'adminPassword': adminPassword,
-        'uid': _auth.currentUser!.uid,
-        'profileImageUrl': "https://firebasestorage.googleapis.com/v0/b/e-commerse-40160.appspot.com/o/profile%2FPngItem_2652659.png?alt=media&token=b9ddf946-bbcc-43f4-a883-2cf496d6c269",
-      });
-
-      return 'success';
-    } catch (e) {
-      print('Error during admin signup: $e');
-      return 'Signup failed. Please try again!';
+  required String adminName,
+  required String adminEmail,
+  required String adminPassword,
+  required String adminCode, // New parameter for admin code
+}) async {
+  try {
+    // Check if the admin code is correct
+    if (adminCode != 'AAA111') {
+      return 'Incorrect admin code!';
     }
+    
+    UserCredential cred = await _auth.createUserWithEmailAndPassword(
+      email: adminEmail,
+      password: adminPassword,
+    );
+
+    await _firestore.collection('admins').doc(_auth.currentUser!.uid).set({
+      'adminName': adminName,
+      'adminEmail': adminEmail,
+      'adminPassword': adminPassword,
+      'uid': _auth.currentUser!.uid,
+      'profileImageUrl': "https://firebasestorage.googleapis.com/v0/b/e-commerse-40160.appspot.com/o/profile%2FPngItem_2652659.png?alt=media&token=b9ddf946-bbcc-43f4-a883-2cf496d6c269",
+    });
+
+    return 'success';
+  } catch (e) {
+    print('Error during admin signup: $e');
+    return 'Signup failed. Please try again!';
   }
+}
 
   Future<String> adminSignIn({
     required String adminEmail,
