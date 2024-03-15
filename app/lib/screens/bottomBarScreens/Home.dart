@@ -42,7 +42,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-
   final images = [
     'assets/sh11.jpg',
     'assets/sh2.jpg',
@@ -86,8 +85,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    
-       TextEditingController userpasswordController = TextEditingController();
+    TextEditingController userpasswordController = TextEditingController();
     TextEditingController userNameController = TextEditingController();
     Map<String, dynamic> userData =
         Provider.of<UserProvider>(context).userModel;
@@ -101,48 +99,59 @@ class _HomeScreenState extends State<HomeScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 35,),
-            Row(
-              children: [
-                SizedBox(width: 15,),
-                CircleAvatar(
-            radius: 30,
-            backgroundImage: NetworkImage(avatarUrl),
-          ),
-          SizedBox(width: 20),
-          Column(
-            children: [
-              Text("Hello !", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
-                Text(name, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
-            ],
-          ),
-          Spacer(),
-          IconButton(
+              SizedBox(
+                height: 35,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 15,
+                  ),
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundImage: NetworkImage(avatarUrl),
+                  ),
+                  SizedBox(width: 20),
+                  Column(
+                    children: [
+                      Text(
+                        "Hello !",
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        name,
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  IconButton(
                     onPressed: () {},
                     icon: Icon(
                       Icons.notifications,
                     ),
                   ),
-SizedBox(width: 20),
-              ],
-            ),
+                  SizedBox(width: 20),
+                ],
+              ),
               SizedBox(
                 width: 380,
-                
                 child: textFields(
                   controller: userSearchController,
                   hint: 'search here',
                   prefix: Icon(
                     Icons.search,
-                  ), maxLines: 1,
+                  ),
+                  maxLines: 1,
                 ),
               ),
               SizedBox(
-                height: 150,
-                width: 380,
+                height: 180,
+                width: 450,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  
                   child: CarouselSlider.builder(
                     itemCount: images.length,
                     itemBuilder: (context, index, realIndex) {
@@ -219,7 +228,6 @@ SizedBox(width: 20),
                   }
                   return SizedBox(
                     height: 150,
-                    
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
@@ -245,7 +253,6 @@ SizedBox(width: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Row(
@@ -382,17 +389,18 @@ class _buildAdvertiseState extends State<buildAdvertise> {
                         height: 90,
                         width: 150,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(image: NetworkImage(
-                          widget.image,
-                          
-                        ),fit: BoxFit.fill,)),
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                widget.image,
+                              ),
+                              fit: BoxFit.fill,
+                            )),
                       ),
                       Positioned(
                         left: 120,
                         child: likeAnimation(
-                          snap: FirebaseAuth.instance.currentUser!,
-                          product: widget.like,
+                          snap: widget.like,
                         ),
                       ),
                     ],
@@ -401,7 +409,9 @@ class _buildAdvertiseState extends State<buildAdvertise> {
                     children: [
                       Row(
                         children: [
-                          SizedBox(width: 5,),
+                          SizedBox(
+                            width: 5,
+                          ),
                           Text(
                             widget.title,
                             style: TextStyle(
@@ -414,7 +424,9 @@ class _buildAdvertiseState extends State<buildAdvertise> {
                       ),
                       Row(
                         children: [
-                          SizedBox(width: 5,),
+                          SizedBox(
+                            width: 5,
+                          ),
                           Text(
                             '\$ ${widget.price}',
                             style: TextStyle(

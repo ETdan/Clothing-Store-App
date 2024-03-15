@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shega_cloth_store_app/adminSide/adminLogin.dart';
-import 'package:shega_cloth_store_app/adminSide/adminSignuo.dart';
 import 'package:shega_cloth_store_app/screens/signup.dart';
-
 
 class AdminStarterPage extends StatelessWidget {
   @override

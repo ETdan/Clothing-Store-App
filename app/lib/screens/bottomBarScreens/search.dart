@@ -208,10 +208,9 @@ class _searchScreenState extends State<SearchScreen> {
                                               Positioned(
                                                 left: 150,
                                                 child: likeAnimation(
-                                                    snap: FirebaseAuth
-                                                        .instance.currentUser!,
-                                                    product: snapshot
-                                                        .data!.docs[index]),
+                                                  snap: snapshot.data!
+                                                      .docs[index]['like'],
+                                                ),
                                               ),
                                             ],
                                           ),
