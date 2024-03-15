@@ -176,6 +176,7 @@ class authMethod {
         'adminEmail': adminEmail,
         'adminPassword': adminPassword,
         'uid': _auth.currentUser!.uid,
+        'profileImageUrl': "https://firebasestorage.googleapis.com/v0/b/e-commerse-40160.appspot.com/o/profile%2FPngItem_2652659.png?alt=media&token=b9ddf946-bbcc-43f4-a883-2cf496d6c269",
       });
 
       return 'success';

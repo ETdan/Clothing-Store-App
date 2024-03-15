@@ -27,236 +27,252 @@ class _showDetailsState extends State<showDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 400,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: NetworkImage(widget.images),
-                    fit: BoxFit.fill,
+              Stack(
+                children: [
+                  Container(
+                    height: 450,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: NetworkImage(widget.images),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 25),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                ClipOval(
+                                  child: Material(
+                                    color: Colors.grey[300],
+                                    child: IconButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      icon: Icon(
+                                        Icons.arrow_back,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            ClipOval(
+                              child: Material(
+                                color: Colors.grey[300],
+                                child: likeAnimation(
+                                  snap: FirebaseAuth.instance.currentUser!,
+                                  product: widget.like,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ClipOval(
-                      child: Material(
-                        color: Colors.grey[300],
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 14, top: 10),
+                        child: Text(
+                          widget.title,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                            fontSize: 25,
                           ),
                         ),
                       ),
-                    ),
-                    ClipOval(
-                      child: Material(
-                        color: Colors.grey[300],
-                        child: likeAnimation(
-                          snap: FirebaseAuth.instance.currentUser!,
-                          product: widget.like,
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.star_border_outlined,
+                              size: 30,
+                              color: Colors.yellow,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              '${widget.like['like'].length}',
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
+                    ],
+                  ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 10, top: 5),
+                    padding: const EdgeInsets.only(
+                      top: 20,
+                      right: 20,
+                    ),
                     child: Text(
-                      widget.title,
+                      '${widget.price}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                        fontSize: 25,
+                        color: Color.fromARGB(255, 105, 94, 231),
+                        fontSize: 20,
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.star_border_outlined,
-                          size: 30,
-                          color: Colors.yellow,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          '${widget.like['like'].length}',
-                        ),
-                      ],
                     ),
                   ),
                 ],
               ),
+              SizedBox(
+                height: 10,
+              ),
               Padding(
-                padding: const EdgeInsets.only(
-                  top: 20,
-                  right: 20,
-                ),
+                padding: const EdgeInsets.only(left: 14),
                 child: Text(
-                  '\$ ${widget.price}',
+                  'Description',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.purple[200],
+                    color:  Colors.black,
                     fontSize: 20,
                   ),
                 ),
               ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Text(
-              'Description',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.purple[200],
-                fontSize: 20,
+              SizedBox(
+                height: 10,
               ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Text(
-              widget.discription,
-              style: TextStyle(
-                fontSize: 15,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 20, bottom: 20),
-            child: Text(
-              'Size',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: Row(
-              children: [
-                MaterialButton(
-                  shape: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black54,
-                    ),
-                  ),
-                  onPressed: () {},
-                  height: 50,
-                  minWidth: 50,
-                  child: Text(
-                    '8',
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                MaterialButton(
-                  shape: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black54,
-                    ),
-                  ),
-                  onPressed: () {},
-                  height: 50,
-                  minWidth: 50,
-                  child: Text(
-                    '10',
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                MaterialButton(
-                  shape: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black54,
-                    ),
-                  ),
-                  onPressed: () {},
-                  height: 50,
-                  minWidth: 50,
-                  child: Text(
-                    '38',
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              MaterialButton(
-                height: 50,
-                minWidth: 300,
-                color: const Color.fromARGB(255, 200, 104, 187),
-                shape: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                onPressed: () {},
-                child: Center(
-                  child: Text(
-                    'Buy Now',
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  widget.discription,
+                  style: TextStyle(
+                    fontSize: 15,
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: MaterialButton(
-                  height: 50,
-                  minWidth: 50,
-                  color: Colors.grey[100],
-                  onPressed: () {},
-                  child: Center(
-                    child: Icon(
-                      Icons.shopping_bag_rounded,
-                      color: Colors.grey,
-                    ),
+                padding: const EdgeInsets.only(left: 10, top: 20, bottom: 20),
+                child: Text(
+                  'Size',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Row(
+                  children: [
+                    MaterialButton(
+                      shape: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black54,
+                        ),
+                      ),
+                      onPressed: () {},
+                      height: 50,
+                      minWidth: 50,
+                      child: Text(
+                        '8',
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    MaterialButton(
+                      shape: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black54,
+                        ),
+                      ),
+                      onPressed: () {},
+                      height: 50,
+                      minWidth: 50,
+                      child: Text(
+                        '10',
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    MaterialButton(
+                      shape: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black54,
+                        ),
+                      ),
+                      onPressed: () {},
+                      height: 50,
+                      minWidth: 50,
+                      child: Text(
+                        '38',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(width: 10),
+                 MaterialButton(
+            height: 50,
+            minWidth: 300,
+            color: Color.fromARGB(255, 144, 106, 213),
+            shape: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: BorderSide(color: Color.fromARGB(255, 144, 106, 213)), // Same color as button color
+            ),
+            onPressed: () {},
+            child: Center(
+              child: Text(
+          'Buy Now',
+              ),
+            ),
+          ),
+          
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: MaterialButton(
+                      height: 50,
+                      minWidth: 50,
+                     shape: CircleBorder(eccentricity: BorderSide.strokeAlignOutside),
+                      onPressed: () {},
+                      child: Center(
+                        child: Icon(
+                          Icons.shopping_bag_rounded,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
