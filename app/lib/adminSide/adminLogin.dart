@@ -29,6 +29,7 @@ class _AdminLoginState extends State<AdminLogin> {
   bool isloggedin = true;
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     Map<String, dynamic> userData;
     FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -116,7 +117,7 @@ class _AdminLoginState extends State<AdminLogin> {
                   builder: (context, value, child) {
                     return MaterialButton(
                         height: 60,
-                        minWidth: 400,
+                        minWidth: width * 0.8,
                         color: Color.fromARGB(255, 128, 140, 220),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -161,7 +162,7 @@ class _AdminLoginState extends State<AdminLogin> {
                         },
                         child: isloggedin
                             ? Container(
-                                width: 400,
+                                width: width * 0.6,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
