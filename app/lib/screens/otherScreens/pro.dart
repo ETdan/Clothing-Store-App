@@ -76,7 +76,7 @@ class _ProState extends State<Pro> {
                         Stack(
                           children: [
                             Container(
-                              height: 150,
+                              height: 145,
                               width: 200,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),

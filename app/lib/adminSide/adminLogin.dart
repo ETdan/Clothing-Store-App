@@ -26,6 +26,7 @@ class AdminLogin extends StatefulWidget {
 class _AdminLoginState extends State<AdminLogin> {
   TextEditingController adminpasswordController = TextEditingController();
   TextEditingController adminEmailController = TextEditingController();
+    bool isLoggingIn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +95,10 @@ class _AdminLoginState extends State<AdminLogin> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       onPressed: () async {
+                        setState(() {
+      // Set login in progress
+      isLoggingIn = true;
+    });
                         String result = await authMethod().adminSignIn(
                           adminEmail: adminEmailController.text,
                           adminPassword: adminpasswordController.text,
@@ -119,6 +124,10 @@ class _AdminLoginState extends State<AdminLogin> {
                             value.toggle();
                             value.isAdminLogin();
                           });
+                           setState(() {
+      // Set login completed
+      isLoggingIn = false;
+    });
                         } else {
                           showSnack(
                             'please,enter correct information or register first!',
@@ -126,7 +135,11 @@ class _AdminLoginState extends State<AdminLogin> {
                           );
                         }
                       },
-                      child: Container(
+                      child: isLoggingIn
+      ? CircularProgressIndicator( // Display indicator if logging in
+          color: Colors.white,
+        )
+      :  Container(
                         width: 350,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,

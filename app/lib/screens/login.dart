@@ -24,6 +24,7 @@ class signin extends StatefulWidget {
 class _signinState extends State<signin> {
   TextEditingController userpasswordController = TextEditingController();
   TextEditingController userEmailController = TextEditingController();
+     bool isLoggingIn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +119,10 @@ class _signinState extends State<signin> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       onPressed: () async {
+                         setState(() {
+      // Set login in progress
+      isLoggingIn = true;
+    });
                         String result = await authMethod().UserSignin(
                           email: userEmailController.text,
                           password: userpasswordController.text,
@@ -144,14 +149,21 @@ class _signinState extends State<signin> {
                             value.toggle();
                             value.isUserLogin();
                           });
+                          setState(() {
+      // Set login completed
+      isLoggingIn = false;
+    });
                         } else {
                           showSnack(
                             'please,enter correct information or register first!',
                             context,
                           );
                         }
-                      },
-                      child: Container(
+                      },  child: isLoggingIn
+      ? CircularProgressIndicator( // Display indicator if logging in
+          color: Colors.white,
+        )
+      : Container(
                         width: 350,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
