@@ -66,10 +66,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => edit_profile(),
-      ),
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => edit_profile(),
+                        ),
                       );
                     },
                     child: Card(
@@ -97,14 +97,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SettingPage(
-                                  userData: {
-                                    'name': 'John Doe',
-                                    'email': 'john.doe@example.com',
-                                    'avatarUrl':
-                                        'https://example.com/avatar.jpg', // Replace with the actual URL
-                                  },
-                                )),
+                            builder: (context) =>
+                                SettingPage(userData: userData)),
                       );
                     },
                     child: Card(
@@ -214,12 +208,12 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-  onPressed: () async {
-    await authMethod().UserSignOut(context);;
-  },
-  child: Text('Log Out'),
-)
-
+                onPressed: () async {
+                  await authMethod().UserSignOut(context);
+                  ;
+                },
+                child: Text('Log Out'),
+              )
             ],
           ),
         ),

@@ -129,7 +129,8 @@ class _signinState extends State<signin> {
                                 FirebaseAuth.instance.currentUser!.uid,
                               )
                               .get();
-                          userData = snapshot.data()!;
+                          userData = snapshot.data()
+                          !;
                           print(userData);
                           Provider.of<UserProvider>(context, listen: false)
                               .userSignInMap(userData);
