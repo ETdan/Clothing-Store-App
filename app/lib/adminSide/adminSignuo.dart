@@ -169,7 +169,7 @@ class _AdminSignupState extends State<AdminSignup> {
                               ),
                             )
                           : Container(
-                              width: 400,
+                              width: 350,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,

@@ -168,7 +168,7 @@ class _signupState extends State<signup> {
                               ),
                             )
                           : Container(
-                              width: 400,
+                              width: 350,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,

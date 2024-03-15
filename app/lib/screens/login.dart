@@ -152,7 +152,7 @@ class _signinState extends State<signin> {
                         }
                       },
                       child: Container(
-                        width: 400,
+                        width: 350,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [

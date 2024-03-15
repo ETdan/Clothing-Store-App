@@ -45,8 +45,8 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        height: 200,
-        width: 250,
+        height: 190,
+        width: 200,
         child: Card(
           elevation: 20,
           child: Column(

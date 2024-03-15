@@ -101,11 +101,7 @@ String getCategory(String gender, String color, String brand) {
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color.fromARGB(255, 196, 156, 199), Color.fromARGB(255, 227, 145, 248)], // Example gradient colors
-          ),
+         
         ),
         child: SafeArea(
           
@@ -114,7 +110,7 @@ String getCategory(String gender, String color, String brand) {
               
             
               children: [
-                SizedBox(height: 50),
+                SizedBox(height: 10),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment:CrossAxisAlignment.center ,
@@ -126,16 +122,9 @@ String getCategory(String gender, String color, String brand) {
                         child: Container(
                         padding: EdgeInsets.only(left: 16, right: 16),
                         width: 350,
-                        height: 800,
+                        height: 700,
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Color.fromARGB(255, 208, 209, 211),
-                              Color.fromARGB(255, 179, 179, 179),
-                            ],
-                          ),
+                         
                         ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

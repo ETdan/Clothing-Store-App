@@ -45,17 +45,23 @@ class _adminHomeState extends State<adminHome> {
           ],
           bottom: TabBar(
             tabs: [
-              Tab(
-                icon: Text(
-                  'Dashboard',
-                  style: TextStyle(
-                    color: Colors.black87,
-                  ),
-                ),
-              ),
+             Container(
+  width: 100, // Set your desired width here
+  child: Tab(
+    child: Text(
+      'Dashboard',
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        color: Colors.black87,
+      ),
+    ),
+  ),
+),
+
               Tab(
                 icon: Text(
                   'Catagories',
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.black87,
                   ),
@@ -64,6 +70,7 @@ class _adminHomeState extends State<adminHome> {
               Tab(
                 icon: Text(
                   'Products',
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.black87,
                   ),
@@ -72,6 +79,7 @@ class _adminHomeState extends State<adminHome> {
               Tab(
                 icon: Text(
                   'Orders',
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.black87,
                   ),
@@ -80,6 +88,7 @@ class _adminHomeState extends State<adminHome> {
               Tab(
                 icon: Text(
                   'Settings',
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.black87,
                   ),
