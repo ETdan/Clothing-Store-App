@@ -1,5 +1,7 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
+import 'package:shega_cloth_store_app/screens/bottomBarScreens/search.dart';
+import 'package:shega_cloth_store_app/screens/otherScreens/filter.dart';
 
 import '/firebase_options.dart';
 import '/prefs/loginPreference.dart';
@@ -16,7 +18,7 @@ Future<void> main() async {
   );
   runApp(ChangeNotifierProvider<UserProvider>(
     child: const MyApp(),
-    create: (_) => UserProvider(), // Create a new ChangeNotifier object
+    create: (_) => UserProvider(),
   ));
 }
 
@@ -34,6 +36,10 @@ class MyApp extends StatelessWidget {
       child: Consumer<defaultt>(
         builder: (context, value, child) {
           return MaterialApp(
+            routes: {
+              '/search': (context) => SearchScreen(),
+              '/filter': (context) => filter(),
+            },
             debugShowCheckedModeBanner: false,
             home: (value.islogin && value.isUser) ? first() : welcome(),
           );
