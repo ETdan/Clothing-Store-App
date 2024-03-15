@@ -1,6 +1,18 @@
+import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:shega_cloth_store_app/database/provider.dart';
+import 'package:shega_cloth_store_app/screens/profile/profile_section.dart';
+import 'package:shega_cloth_store_app/utils/textfield.dart';
+import '/database/auth.dart';
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
+import "package:firebase_storage/firebase_storage.dart";
 
 class SettingPage extends StatelessWidget {
 final Map<String, dynamic> userData;
@@ -9,9 +21,16 @@ final Map<String, dynamic> userData;
 
   @override
   Widget build(BuildContext context) {
-    String name = userData['name'] ?? 'Default Name';
+    TextEditingController userpasswordController = TextEditingController();
+    TextEditingController userNameController = TextEditingController();
+    Map<String, dynamic> userData =
+        Provider.of<UserProvider>(context).userModel;
+    String name = userData['username'] ?? 'Default Name';
     String email = userData['email'] ?? 'Default Email';
-    String avatarUrl = userData['avatarUrl'] ?? 'Default Avatar URL';
+    String avatarUrl = userData['profileImageUrl'] ??
+        'https://images.mubicdn.net/images/cast_member/286407/cache-139299-1463178721/image-w856.jpg?size=256x';
+
+
   
     return  Scaffold(
       body: SafeArea(
@@ -22,22 +41,29 @@ final Map<String, dynamic> userData;
               SizedBox(height: 60,),
              Row(
   children: [ 
-    IconButton(
-      onPressed: null , // need to adjust later on
-      icon: Icon(Icons.arrow_back),
-      style: ButtonStyle(iconSize: MaterialStatePropertyAll(30)),
-    ),
+   IconButton(
+  onPressed: () {
+    Navigator.pop(context);
+  },
+  icon: Icon(Icons.arrow_back),
+  color: Colors.black,
+  iconSize: 30,
+)
+,
 
     SizedBox(width: 150),
 
     Text('Settings', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),)
+
   ],
 ),
 
 Column(
   children: [
+    SizedBox(height: 30),
     Row(
       children: [
+        SizedBox(width: 30),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           
@@ -47,10 +73,10 @@ Column(
     ),
     GestureDetector(
                     onTap: () {
-                      /*Navigator.push(
+                      Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) =>  null),
-    );*/
+      MaterialPageRoute(builder: (context) =>  edit_profile()),
+    );
                     },
                     child: Card(
                       child: Container(
@@ -63,9 +89,9 @@ Column(
                         child:  Row(
                           children: [
                           CircleAvatar(
-                      radius: 50,
-                      backgroundImage: NetworkImage(avatarUrl),
-                    ),
+            radius: 50,
+            backgroundImage: NetworkImage(avatarUrl),
+          ),
                             SizedBox(width: 10),
                     Column(
                       children: [
