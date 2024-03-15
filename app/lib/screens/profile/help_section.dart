@@ -105,7 +105,7 @@ class TutorialsSection extends StatelessWidget {
                             width: 350,
                             height: 300,
                             
-                            color: Color.fromARGB(255, 242, 212, 244),
+                            color: Color.fromARGB(255, 255, 255, 255),
                           
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -151,7 +151,7 @@ class TutorialsSection extends StatelessWidget {
                             width: 350,
                             height: 300,
                             
-                            color: Color.fromARGB(255, 242, 212, 244),
+                            color: Color.fromARGB(255, 255, 255, 255),
                           
                       child: Column(
                         children: [
@@ -196,7 +196,7 @@ class TutorialsSection extends StatelessWidget {
                             width: 350,
                             height: 300,
                             
-                            color: Color.fromARGB(255, 242, 212, 244),
+                            color: Color.fromARGB(255, 255, 255, 255),
                           
                       child: Column(
                         children: [
@@ -264,7 +264,7 @@ class TroubleshootingSection extends StatelessWidget {
                             width: 350,
                             height: 300,
                             
-                            color: Color.fromARGB(255, 242, 212, 244),
+                            color: Color.fromARGB(255, 255, 255, 255),
                   child: Column(
                     children: [
                       Text(
@@ -315,7 +315,7 @@ class TroubleshootingSection extends StatelessWidget {
                             width: 350,
                             height: 300,
                             
-                            color: Color.fromARGB(255, 242, 212, 244),
+                            color: Color.fromARGB(255, 255, 255, 255),
                   child: Column(
                     children: [
                       Text(
@@ -374,7 +374,7 @@ class ContactSupportSection extends StatelessWidget {
                             width: 350,
                             height: 300,
                             
-                            color: Color.fromARGB(255, 242, 212, 244),
+                            color: Color.fromARGB(255, 255, 255, 255),
                   child: Column(
                     children: [
                       Text(
@@ -412,7 +412,7 @@ class ContactSupportSection extends StatelessWidget {
                             width: 350,
                             height: 300,
                             
-                            color: Color.fromARGB(255, 242, 212, 244),
+                            color: Color.fromARGB(255, 255, 255, 255),
                   child: Column(
                     children: [
                       Text(
@@ -475,7 +475,7 @@ class UserManualSection extends StatelessWidget {
                             width: 350,
                             height: 300,
                             
-                            color: Color.fromARGB(255, 242, 212, 244),
+                            color: Color.fromARGB(255, 255, 255, 255),
                   child: Column(
                     children: [
                       Text(

@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shega_cloth_store_app/screens/profile/about_us.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+
+
+
+
 class ContactSection extends StatelessWidget {
   const ContactSection({super.key});
 
@@ -10,7 +17,19 @@ class ContactSection extends StatelessWidget {
           child: Column(
             children: [
 
-              Text('Contact Us', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+              Row(
+                children: [
+                  IconButton(
+  onPressed: () {
+    Navigator.pop(context);
+  },
+  icon: Icon(Icons.arrow_back),
+  color: Colors.black,
+  iconSize: 30,
+), SizedBox(width: 100),
+                  Text('Contact Us', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                ],
+              ),
               SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -59,29 +78,26 @@ class ContactSection extends StatelessWidget {
     );
   },
   child: ElevatedButton(
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ContactSection()),
-      );
-    },
-    style: ElevatedButton.styleFrom(
-      padding: EdgeInsets.symmetric(horizontal: 30),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-       fixedSize: Size(250, 40),
-    ),
-    child: Row(
-      children: [
-        Icon(Icons.phone),
-        SizedBox(width: 7),
-        Text('Call'),
-        Spacer(),
-        Icon(Icons.arrow_forward_ios),
-      ],
-    ),
-  ),
+                onPressed: () {
+                  launch('tel:+1234567890'); // Replace phone number with your desired number
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  fixedSize: Size(250, 40),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.phone),
+                    SizedBox(width: 7),
+                    Text('Call +1234567890'), // Display phone number
+                    Spacer(),
+                    Icon(Icons.arrow_forward_ios),
+                  ],
+                ),
+              ),
 ),
 
 SizedBox(height: 5),
@@ -93,29 +109,26 @@ SizedBox(height: 5),
     );
   },
   child: ElevatedButton(
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ContactSection()),
-      );
-    },
-    style: ElevatedButton.styleFrom(
-      padding: EdgeInsets.symmetric(horizontal: 30),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-       fixedSize: Size(250, 40),
-    ),
-    child: Row(
-      children: [
-        Icon(Icons.telegram),
-        SizedBox(width: 7),
-        Text('Telegram'),
-        Spacer(),
-        Icon(Icons.arrow_forward_ios),
-      ],
-    ),
-  ),
+                onPressed: () {
+                  launch('https://t.me/DSCAASTU'); // Replace phone number with your desired number
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  fixedSize: Size(250, 40),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.phone),
+                    SizedBox(width: 7),
+                    Text('Telegram'), // Display phone number
+                    Spacer(),
+                    Icon(Icons.arrow_forward_ios),
+                  ],
+                ),
+              ),
 ),
 
 
@@ -123,17 +136,11 @@ SizedBox(height: 5),
 SizedBox(height: 5),
  GestureDetector(
   onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ContactSection()),
-    );
+   
   },
   child: ElevatedButton(
     onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ContactSection()),
-      );
+      
     },
     style: ElevatedButton.styleFrom(
       padding: EdgeInsets.symmetric(horizontal: 30),
@@ -156,39 +163,7 @@ SizedBox(height: 5),
 
 SizedBox(height: 5),
 
- GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ContactSection()),
-    );
-  },
-  child: ElevatedButton(
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ContactSection()),
-      );
-    },
-    style: ElevatedButton.styleFrom(
-      padding: EdgeInsets.symmetric(horizontal: 30),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-       fixedSize: Size(250, 40),
-    ),
-    child: Row(
-      children: [
-        Icon(Icons.phone),
-        SizedBox(width: 7),
-        Text('Call'),
-        Spacer(),
-        Icon(Icons.arrow_forward_ios),
-      ],
-    ),
-  ),
-),
-
+ 
 
 SizedBox(height: 5),
 
@@ -201,10 +176,7 @@ SizedBox(height: 5),
   },
   child: ElevatedButton(
     onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ContactSection()),
-      );
+     
     },
     style: ElevatedButton.styleFrom(
       padding: EdgeInsets.symmetric(horizontal: 30),
@@ -233,14 +205,14 @@ SizedBox(
   onTap: () {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ContactSection()),
+      MaterialPageRoute(builder: (context) => AboutUSSection()),
     );
   },
   child: ElevatedButton(
     onPressed: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ContactSection()),
+        MaterialPageRoute(builder: (context) => AboutUSSection()),
       );
     },
     style: ElevatedButton.styleFrom(
