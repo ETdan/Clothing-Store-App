@@ -2,17 +2,14 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:shega_cloth_store_app/database/models/user.dart';
-import 'package:shega_cloth_store_app/database/provider.dart';
 
 import 'package:shega_cloth_store_app/screens/first-page.dart';
 import 'package:shega_cloth_store_app/screens/login.dart';
-import 'package:shega_cloth_store_app/screens/signup.dart';
 
 import '/database/storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
-import 'package:provider/provider.dart';
 
 class authMethod {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -34,7 +31,8 @@ class authMethod {
         email: email,
         uid: _auth.currentUser!.uid,
         password: password,
-        profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/e-commerse-40160.appspot.com/o/profile%2FPngItem_2652659.png?alt=media&token=b9ddf946-bbcc-43f4-a883-2cf496d6c269",
+        profileImageUrl:
+            "https://firebasestorage.googleapis.com/v0/b/e-commerse-40160.appspot.com/o/profile%2FPngItem_2652659.png?alt=media&token=b9ddf946-bbcc-43f4-a883-2cf496d6c269",
       );
 
       await _firestore
@@ -118,14 +116,14 @@ class authMethod {
 
   //like post code
 
-  Future<void> likepost(String prodID, String userID, List like) async {
+  Future<void> likepost(String userID, List like) async {
     try {
       if (like.contains(userID)) {
-        await _firestore.collection('products').doc(prodID).update({
+        await _firestore.collection('products').doc(userID).update({
           'like': FieldValue.arrayRemove([userID])
         });
       } else {
-        await _firestore.collection('products').doc(prodID).update({
+        await _firestore.collection('products').doc(userID).update({
           'like': FieldValue.arrayUnion([userID])
         });
       }
@@ -139,12 +137,89 @@ class authMethod {
       await _auth.signOut();
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) =>
-                signin()), 
+        MaterialPageRoute(builder: (context) => signin()),
       );
     } catch (e) {
       print('Error signing out: $e');
+    }
+  }
+//deleting posts
+
+  Future<void> deletingPosts(String postId) async {
+    try {
+      await _firestore.collection('products').doc(postId).delete();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+//updating product list
+
+  Future<void> updatingPosts(
+    String postId,
+    String title,
+    String price,
+    String description,
+    Uint8List file,
+  ) async {
+    String url = await uploadingimage('product', file);
+    try {
+      await _firestore.collection('products').doc(postId).update({
+        'title': title,
+        'price': price,
+        'discription': description,
+        'like': [],
+        'userId': postId,
+        'photourl': url,
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  // add to cart
+
+  Future<String> toCart({
+    required String imageurl,
+    required String title,
+    required String price,
+  }) async {
+    String res = 'some error ocurred';
+    try {
+      String postId = const Uuid().v1();
+      await _firestore
+          .collection('cart')
+          .doc(_auth.currentUser!.uid)
+          .collection('cart')
+          .doc(
+            postId,
+          )
+          .set({
+        'imageurl': imageurl,
+        'title': title,
+        'price': price,
+      });
+      res = 'success';
+    } catch (e) {
+      res = e.toString();
+    }
+    return res;
+  }
+
+  //deleting carts
+
+  Future<void> deletingcarts(String postId) async {
+    try {
+      await _firestore
+          .collection('cart')
+          .doc(_auth.currentUser!.uid)
+          .collection('cart')
+          .doc(postId)
+          .delete();
+    } catch (e) {
+      print(
+        e.toString(),
+      );
     }
   }
 
@@ -159,7 +234,7 @@ class authMethod {
       'adminEmail': AdminEmail,
     };
   }*/
-  
+
   Future<String> adminSignUp({
     required String adminName,
     required String adminEmail,
@@ -176,7 +251,8 @@ class authMethod {
         'adminEmail': adminEmail,
         'adminPassword': adminPassword,
         'uid': _auth.currentUser!.uid,
-        'profileImageUrl': "https://firebasestorage.googleapis.com/v0/b/e-commerse-40160.appspot.com/o/profile%2FPngItem_2652659.png?alt=media&token=b9ddf946-bbcc-43f4-a883-2cf496d6c269",
+        'profileImageUrl':
+            "https://firebasestorage.googleapis.com/v0/b/e-commerse-40160.appspot.com/o/profile%2FPngItem_2652659.png?alt=media&token=b9ddf946-bbcc-43f4-a883-2cf496d6c269",
       });
 
       return 'success';
@@ -188,7 +264,7 @@ class authMethod {
 
   Future<String> adminSignIn({
     required String adminEmail,
-    required String adminPassword, 
+    required String adminPassword,
   }) async {
     String res = 'some error occurred';
     try {
