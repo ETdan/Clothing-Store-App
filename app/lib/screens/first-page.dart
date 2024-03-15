@@ -18,7 +18,12 @@ class first extends StatefulWidget {
 class _firstState extends State<first> {
   int page = 0;
 
-  final pages = [HomeScreen(), SearchScreen(), OrdersPage(), ProfilePage()];
+  final pages = [
+    HomeScreen(),
+    SearchScreen(),
+    productScreen(),
+    ProfilePage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
