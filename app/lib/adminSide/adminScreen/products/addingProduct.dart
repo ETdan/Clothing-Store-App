@@ -1,14 +1,15 @@
 import 'dart:typed_data';
 
-import '/database/auth.dart';
-import '/utils/pickImages.dart';
-import '/utils/snackBar.dart';
-import '/utils/textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:shega_cloth_store_app/adminSide/adminScreen/adminHome.dart';
+import 'package:shega_cloth_store_app/database/auth.dart';
+import 'package:shega_cloth_store_app/utils/pickImages.dart';
+import 'package:shega_cloth_store_app/utils/snackBar.dart';
+import 'package:shega_cloth_store_app/utils/textfield.dart';
 import 'package:image_picker/image_picker.dart';
 
 class addPro extends StatefulWidget {
-  const addPro({super.key});
+  const addPro({Key? key});
 
   @override
   State<addPro> createState() => _addProState();
@@ -20,25 +21,39 @@ class _addProState extends State<addPro> {
   TextEditingController titleController = TextEditingController();
   Uint8List? image;
 
+  String selectedGender = 'male';
+  String selectedColor = 'blue';
+  String selectedBrand = 'nike';
+  String selectedCategory= 'gender';
+
   void selectedImages() async {
     Uint8List im = await pickedImages(ImageSource.gallery);
     setState(() {
       image = im;
     });
-  }
-
-  void posted() async {
+  }void posted() async {
+  if (titleController.text.isNotEmpty &&
+      priceController.text.isNotEmpty &&
+      discriptionController.text.isNotEmpty &&
+      image != null &&
+      selectedGender.isNotEmpty &&
+      selectedColor.isNotEmpty &&
+      selectedBrand.isNotEmpty) {
     String result = await authMethod().addProduct(
       price: priceController.text,
       description: discriptionController.text,
       title: titleController.text,
       photourl: image!,
       like: [],
+      gender: selectedGender,
+      color: selectedColor,
+      brand: selectedBrand,
+      category: getCategory(selectedGender, selectedColor, selectedBrand),
     );
 
     if (result == 'success') {
       showSnack(
-        'successfully added',
+        'Successfully added',
         context,
       );
     } else {
@@ -47,7 +62,18 @@ class _addProState extends State<addPro> {
         context,
       );
     }
+  } else {
+    showSnack(
+      'Please fill in all the required fields',
+      context,
+    );
   }
+}
+
+String getCategory(String gender, String color, String brand) {
+  return '$gender $color $brand';
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,84 +99,198 @@ class _addProState extends State<addPro> {
           ),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          textFields(
-            controller: titleController,
-            hint: 'Title',
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color.fromARGB(255, 196, 156, 199), Color.fromARGB(255, 227, 145, 248)], // Example gradient colors
           ),
-          textFields(
-            controller: priceController,
-            hint: 'Price',
-          ),
-          textFields(
-            controller: discriptionController,
-            hint: 'Description',
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Stack(
+        ),
+        child: SafeArea(
+          
+          child: SingleChildScrollView(
+            child: Column(
+              
+            
               children: [
-                Container(
-                  height: 200,
-                  width: 200,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black54),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: image != null
-                      ? Image(
-                          image: MemoryImage(image!),
-                          fit: BoxFit.fill,
-                        )
-                      : Center(
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.upload,
-                              size: 30,
-                              color: Colors.black87,
-                            ),
+                SizedBox(height: 50),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment:CrossAxisAlignment.center ,
+                  children: [
+                    Card(
+                    
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                        padding: EdgeInsets.only(left: 16, right: 16),
+                        width: 350,
+                        height: 800,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color.fromARGB(255, 208, 209, 211),
+                              Color.fromARGB(255, 179, 179, 179),
+                            ],
                           ),
                         ),
-                ),
-                Positioned(
-                  bottom: -3,
-                  right: -3,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.add_a_photo_outlined,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              textFields(
+                                controller: titleController,
+                                hint: 'Title', maxLines: 1,
+                              ),
+                              textFields(
+                                controller: priceController,
+                                hint: 'Price',
+                                maxLines: 1
+                              ),
+                              textFields(
+                                controller: discriptionController,
+                                hint: 'Description',
+                                maxLines: 1
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      height: 200,
+                                      width: 200,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.black54),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: image != null
+                                          ? Image(
+                                              image: MemoryImage(image!),
+                                              fit: BoxFit.fill,
+                                            )
+                                          : Center(
+                                              child: IconButton(
+                                                onPressed: () {},
+                                                icon: Icon(
+                                                  Icons.upload,
+                                                  size: 30,
+                                                  color: Colors.black87,
+                                                ),
+                                              ),
+                                            ),
+                                    ),
+                                    Positioned(
+                                      bottom: -3,
+                                      right: -3,
+                                      child: IconButton(
+                                        icon: Icon(
+                                          Icons.add_a_photo_outlined,
+                                        ),
+                                        onPressed: () => selectedImages(),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              // Category Selection
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  categorySelector(
+                                    title: 'Gender',
+                                    selectedCategory: selectedGender,
+                                    options: ['male', 'female'],
+                                    onSelect: (value) {
+                                      setState(() {
+                                        selectedGender = value;
+                                      });
+                                    },
+                                  ),
+                                  categorySelector(
+                                    title: 'Color',
+                                    selectedCategory: selectedColor,
+                                    options: ['blue', 'red', 'green', 'white', 'black', 'grey'],
+                                    onSelect: (value) {
+                                      setState(() {
+                                        selectedColor = value;
+                                      });
+                                    },
+                                  ),
+                                  categorySelector(
+                                    title: 'Brand',
+                                    selectedCategory: selectedBrand,
+                                    options: ['nike', 'adidas', 'puma', 'CR7'],
+                                    onSelect: (value) {
+                                      setState(() {
+                                        selectedBrand = value;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 20),
+                              // Upload New Product Button
+                              Padding(
+                                padding: const EdgeInsets.only(left: 30, right: 30),
+                                child: MaterialButton(
+                                  color: Color.fromARGB(255, 112, 101, 185),
+                                  shape: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  onPressed: () => posted(),
+                                  height: 60,
+                                  minWidth: 300,
+                                  child: Center(
+                                    child: Text(
+                                      'Upload New Product',
+                                      style: TextStyle(color: Colors.black87),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                    onPressed: () => selectedImages(),
-                  ),
-                )
+                  ],
+                ),
               ],
             ),
           ),
-          SizedBox(
-            height: 60,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 30, right: 30),
-            child: MaterialButton(
-              color: Color.fromARGB(255, 112, 101, 185),
-              shape: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              onPressed: () => posted(),
-              height: 60,
-              minWidth: 300,
-              child: Center(
-                child: Text(
-                  'Upload New Product',
-                  style: TextStyle(color: Colors.black87),
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
+    );
+  }
+
+  Widget categorySelector({
+    required String title,
+    required String selectedCategory,
+    required List<String> options,
+    required Function(String) onSelect,
+  }) {
+    return Column(
+      children: [
+        Text(title),
+        SizedBox(height: 5),
+        DropdownButton<String>(
+          value: selectedCategory,
+          onChanged: (String? value) {
+            if (value != null) {
+              onSelect(value);
+            }
+          },
+          items: options.map<DropdownMenuItem<String>>((String option) {
+            return DropdownMenuItem<String>(
+              value: option,
+              child: Text(option),
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
 }

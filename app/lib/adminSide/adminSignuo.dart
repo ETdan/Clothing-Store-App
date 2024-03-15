@@ -1,3 +1,4 @@
+import 'package:shega_cloth_store_app/adminSide/adminScreen/adminHome.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 
 import '/database/auth.dart';
@@ -13,22 +14,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
 
-class signup extends StatefulWidget {
-  const signup({super.key});
+class AdminSignup extends StatefulWidget {
+  const AdminSignup({super.key});
 
   @override
-  State<signup> createState() => _signupState();
+  State<AdminSignup> createState() => _AdminSignupState();
 }
 
-class _signupState extends State<signup> {
+class _AdminSignupState extends State<AdminSignup> {
   bool isCheak = false;
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController userEmailController = TextEditingController();
-  TextEditingController userpasswordController = TextEditingController();
+  TextEditingController adminnameController = TextEditingController();
+  TextEditingController adminEmailController = TextEditingController();
+  TextEditingController adminpasswordController = TextEditingController();
   bool isFinishedLogin = false;
   @override
   Widget build(BuildContext context) {
-    DocumentSnapshot<Map<String, dynamic>> userData;
+    DocumentSnapshot<Map<String, dynamic>> UserData;
     FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
@@ -62,21 +63,21 @@ class _signupState extends State<signup> {
               ),
             ),
             textFields(
-              controller: userEmailController,
+              controller: adminEmailController,
               hint: ' email',
               prefix: Icon(
                 Icons.email_outlined,
               ), maxLines: 1,
             ),
             textFields(
-              controller: usernameController,
+              controller: adminnameController,
               hint: 'username',
               prefix: Icon(
                 Icons.person_2_outlined,
               ), maxLines: 1,
             ),
             textFields(
-              controller: userpasswordController,
+              controller: adminpasswordController,
               hint: 'Password',
               prefix: Icon(
                 Icons.password_outlined,
@@ -126,33 +127,33 @@ class _signupState extends State<signup> {
                         setState(() {
                           isFinishedLogin = true;
                         });
-                        String result = await authMethod().UserSignUp(
-                          userName: usernameController.text,
-                          email: userEmailController.text,
-                          password: userpasswordController.text,
+                        String result = await authMethod().adminSignUp(
+                          adminName: adminnameController.text,
+                          adminEmail: adminEmailController.text,
+                          adminPassword: adminpasswordController.text,
                         );
                         setState(() {
                           isFinishedLogin = false;
                         });
                         if (result == 'success') {
-                          userData = await _firestore
-                              .collection('users')
+                          UserData = await _firestore
+                              .collection('admins')
                               .doc(
                                 FirebaseAuth.instance.currentUser!.uid,
                               )
                               .get();
 
-                          print(userData.data());
+                          print(UserData.data());
                           Provider.of<UserProvider>(context, listen: false)
-                              .userSignInMap(userData.data()!);
+                              .adminSignInMap(UserData.data()!);
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => first(),
+                              builder: (context) => adminHome(),
                             ),
                           );
                           setState(() {
                             value.toggle();
-                            value.isUserLogin();
+                            value.isAdminLogin();
                           });
                         } else {
                           showSnack(

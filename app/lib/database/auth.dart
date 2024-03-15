@@ -1,36 +1,49 @@
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
+import 'package:shega_cloth_store_app/database/models/user.dart';
+import 'package:shega_cloth_store_app/database/provider.dart';
+
+import 'package:shega_cloth_store_app/screens/first-page.dart';
+import 'package:shega_cloth_store_app/screens/login.dart';
+import 'package:shega_cloth_store_app/screens/signup.dart';
+
 import '/database/storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
+import 'package:provider/provider.dart';
 
 class authMethod {
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Map<String, dynamic> userData = {};
 
-  Future<String> UserSignUp({
-    required String userName,
-    required String email,
-    required String password,
-  }) async {
+  Future<String> UserSignUp(
+      {required String userName,
+      required String email,
+      required String password}) async {
     String res = 'some error occured';
     try {
       UserCredential cred = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      Users user = Users(
+        username: userName,
+        email: email,
+        uid: _auth.currentUser!.uid,
+        password: password,
+        profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/e-commerse-40160.appspot.com/o/profile%2FPngItem_2652659.png?alt=media&token=b9ddf946-bbcc-43f4-a883-2cf496d6c269",
+      );
+
       await _firestore
           .collection('users')
           .doc(
             FirebaseAuth.instance.currentUser!.uid,
           )
-          .set({
-        'userName': userName,
-        'email': email,
-        'password': password,
-        'uid': _auth.currentUser!.uid,
-      });
+          .set(user.tojson());
+
       res = 'success';
     } catch (e) {
       res = e.toString();
@@ -38,16 +51,22 @@ class authMethod {
     return res;
   }
 
-  Future<String> UserSignin({
-    required String email,
-    required String password,
-  }) async {
+  signOut(context) async {
+    await _auth.signOut();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => first()));
+  }
+
+  Future<String> UserSignin(
+      {required String email, required String password}) async {
     String res = 'some error occured';
+
     try {
       await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+
       res = 'success';
     } catch (e) {
       res = e.toString();
@@ -56,15 +75,18 @@ class authMethod {
   }
 
   //add products to the page
-
   Future<String> addProduct({
     required String price,
     required String description,
     required String title,
     required Uint8List photourl,
     required List like,
+    required String gender,
+    required String color,
+    required String brand,
+    required String category, // Add category field
   }) async {
-    String res = 'some error occured';
+    String res = 'some error occurred';
     try {
       String url = await uploadingimage('product', photourl);
 
@@ -81,6 +103,9 @@ class authMethod {
           'photourl': url,
           'like': like,
           'userID': userID,
+          'gender': gender,
+          'color': color,
+          'brand': brand,
         });
         res = 'success';
       }
@@ -109,8 +134,22 @@ class authMethod {
     }
   }
 
-  //sign in admin
+  Future<void> UserSignOut(BuildContext context) async {
+    try {
+      await _auth.signOut();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                signin()), 
+      );
+    } catch (e) {
+      print('Error signing out: $e');
+    }
+  }
 
+  //sign in admin
+/*
   String AdminName = 'GDSCGROUPONE';
   String AdminEmail = 'GDSCGROUPEmail@gmail.com';
 
@@ -119,5 +158,47 @@ class authMethod {
       'adminpassword': AdminName,
       'adminEmail': AdminEmail,
     };
+  }*/
+  
+  Future<String> adminSignUp({
+    required String adminName,
+    required String adminEmail,
+    required String adminPassword,
+  }) async {
+    try {
+      UserCredential cred = await _auth.createUserWithEmailAndPassword(
+        email: adminEmail,
+        password: adminPassword,
+      );
+
+      await _firestore.collection('admins').doc(_auth.currentUser!.uid).set({
+        'adminName': adminName,
+        'adminEmail': adminEmail,
+        'adminPassword': adminPassword,
+        'uid': _auth.currentUser!.uid,
+      });
+
+      return 'success';
+    } catch (e) {
+      print('Error during admin signup: $e');
+      return 'Signup failed. Please try again!';
+    }
+  }
+
+  Future<String> adminSignIn({
+    required String adminEmail,
+    required String adminPassword, 
+  }) async {
+    String res = 'some error occurred';
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: adminEmail,
+        password: adminPassword,
+      );
+      res = 'success';
+    } catch (e) {
+      res = e.toString();
+    }
+    return res;
   }
 }

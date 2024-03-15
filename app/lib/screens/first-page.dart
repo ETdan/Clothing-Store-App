@@ -2,6 +2,7 @@ import '/screens/bottomBarScreens/Home.dart';
 import '/screens/bottomBarScreens/product.dart';
 import '/screens/bottomBarScreens/profile.dart';
 import '/screens/bottomBarScreens/search.dart';
+import '/database/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,15 +16,9 @@ class first extends StatefulWidget {
 }
 
 class _firstState extends State<first> {
-  FirebaseFirestore db = FirebaseFirestore.instance;
-  String uid = FirebaseAuth.instance.currentUser!.uid;
   int page = 0;
-  final pages = [
-    HomeScreen(),
-    SearchScreen(),
-    OrdersPage(),
-    ProfilePage(),
-  ];
+
+  final pages = [HomeScreen(), SearchScreen(), OrdersPage(), ProfilePage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

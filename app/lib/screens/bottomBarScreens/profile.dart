@@ -1,3 +1,6 @@
+import 'package:shega_cloth_store_app/database/auth.dart';
+import 'package:shega_cloth_store_app/database/provider.dart';
+
 import '/screens/profile/contact_section.dart';
 import '/screens/profile/help_section.dart';
 import '/screens/profile/profile_section.dart';
@@ -6,17 +9,28 @@ import '/screens/profile/shareapp_section.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import '/database/auth.dart';
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
-  final Map<String, dynamic> userData;
-
-  ProfilePage({required this.userData});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
   Widget build(BuildContext context) {
-    String name = userData['name'] ?? 'Default Name';
+    final userData = Provider.of<UserProvider>(context).userModel;
+    String name = userData['username'] ?? 'Default Name';
     String email = userData['email'] ?? 'Default Email';
-    String avatarUrl = userData['avatarUrl'] ?? 'Default Avatar URL';
+    String avatarUrl = userData['profileImageUrl'] ??
+        'https://images.mubicdn.net/images/cast_member/286407/cache-139299-1463178721/image-w856.jpg?size=256x';
 
     return Scaffold(
       body: SafeArea(
@@ -52,13 +66,10 @@ class ProfilePage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfileSection(
-                                  name: '',
-                                  email: '',
-                                  avatarUrl: '',
-                                )),
+      context,
+      MaterialPageRoute(
+        builder: (context) => edit_profile(),
+      ),
                       );
                     },
                     child: Card(
@@ -201,6 +212,14 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height: 20),
+              ElevatedButton(
+  onPressed: () async {
+    await authMethod().UserSignOut(context);;
+  },
+  child: Text('Log Out'),
+)
+
             ],
           ),
         ),

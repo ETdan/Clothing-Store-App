@@ -61,7 +61,7 @@ class products extends StatelessWidget {
                                     onPressed: () {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
-                                          builder: (context) => editProduct(),
+                                          builder: (context) => EditProduct(),
                                         ),
                                       );
                                     },

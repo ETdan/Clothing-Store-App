@@ -1,3 +1,6 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:shega_cloth_store_app/database/provider.dart';
+
 import '/firebase_options.dart';
 import '/prefs/loginPreference.dart';
 import '/screens/first-page.dart';
@@ -11,7 +14,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider<UserProvider>(
+    child: const MyApp(),
+    create: (_) => UserProvider(), // Create a new ChangeNotifier object
+  ));
 }
 
 class MyApp extends StatelessWidget {

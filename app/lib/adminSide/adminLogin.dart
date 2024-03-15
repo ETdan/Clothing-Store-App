@@ -1,29 +1,43 @@
 import 'package:shega_cloth_store_app/adminSide/adminScreen/adminHome.dart';
-import 'package:shega_cloth_store_app/database/auth.dart';
-import 'package:shega_cloth_store_app/prefs/loginPreference.dart';
-import 'package:shega_cloth_store_app/utils/snackBar.dart';
-import 'package:shega_cloth_store_app/utils/textfield.dart';
+import 'package:shega_cloth_store_app/adminSide/adminSignuo.dart';
+import 'package:shega_cloth_store_app/database/provider.dart';
+
+import '/adminSide/adminLogin.dart';
+import '/database/auth.dart';
+import '/prefs/loginPreference.dart';
+import '/screens/first-page.dart';
+import '/screens/signup.dart';
+import '/utils/snackBar.dart';
+import '/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
+import 'package:provider/provider.dart';
 
-class adminLogin extends StatefulWidget {
-  const adminLogin({super.key});
+class AdminLogin extends StatefulWidget {
+  const AdminLogin({super.key});
 
   @override
-  State<adminLogin> createState() => _adminLoginState();
+  State<AdminLogin> createState() => _AdminLoginState();
 }
 
-class _adminLoginState extends State<adminLogin> {
+class _AdminLoginState extends State<AdminLogin> {
   TextEditingController adminpasswordController = TextEditingController();
-  TextEditingController adminemailController = TextEditingController();
+  TextEditingController adminEmailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> userData;
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            
             Padding(
               padding: const EdgeInsets.only(
                 top: 100,
@@ -50,18 +64,18 @@ class _adminLoginState extends State<adminLogin> {
               ),
             ),
             textFields(
-              controller: adminemailController,
-              hint: 'Adminname or email',
+              controller: adminEmailController,
+              hint: 'Username or email',
               prefix: Icon(
                 Icons.person_2_outlined,
-              ),
+              ), maxLines: 1,
             ),
             textFields(
               controller: adminpasswordController,
               hint: 'Password',
               prefix: Icon(
                 Icons.shopping_bag_rounded,
-              ),
+              ), maxLines: 1,
             ),
             Flexible(
               child: Container(),
@@ -79,26 +93,38 @@ class _adminLoginState extends State<adminLogin> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      onPressed: () {
-                        if (adminemailController.text ==
-                                authMethod().tojson()['adminEmail'] &&
-                            adminpasswordController.text ==
-                                authMethod().tojson()['adminpassword']) {
+                      onPressed: () async {
+                        String result = await authMethod().adminSignIn(
+                          adminEmail: adminEmailController.text,
+                          adminPassword: adminpasswordController.text,
+                        );
+                        if (result == 'success') {
+                          var snapshot = await _firestore
+                              .collection('admins')
+                              .doc(
+                                FirebaseAuth.instance.currentUser!.uid,
+                              )
+                              .get();
+                          userData = snapshot.data()!;
+                          print(userData);
+                          Provider.of<UserProvider>(context, listen: false)
+                              .adminSignInMap(userData);
+
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => adminHome(),
                             ),
                           );
+                          setState(() {
+                            value.toggle();
+                            value.isAdminLogin();
+                          });
                         } else {
                           showSnack(
                             'please,enter correct information or register first!',
                             context,
                           );
                         }
-
-                        setState(() {
-                          value.islogin = true;
-                        });
                       },
                       child: Container(
                         width: 400,
@@ -126,6 +152,24 @@ class _adminLoginState extends State<adminLogin> {
             ),
             SizedBox(
               height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Don\'t have an account ? '),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => AdminSignup(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Sign Up',
+                  ),
+                ),
+              ],
             ),
             Flexible(
               child: Container(),
