@@ -12,7 +12,7 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController _nameController = TextEditingController();
-   late File profileImageUrl;
+  late File profileImageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +26,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
           children: <Widget>[
             GestureDetector(
               onTap: () => _pickImageFromGallery(),
-              child:CircleAvatar(
-  radius: 50,
-  backgroundImage: profileImageUrl != null
-      ? Image.file(profileImageUrl).image
-      : NetworkImage('https://images.mubicdn.net/images/cast_member/286407/cache-139299-1463178721/image-w856.jpg?size=256x'),
-),
-
-
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: profileImageUrl != null
+                    ? Image.file(profileImageUrl).image
+                    : NetworkImage(
+                        'https://images.mubicdn.net/images/cast_member/286407/cache-139299-1463178721/image-w856.jpg?size=256x'),
+              ),
             ),
             SizedBox(height: 20),
             Consumer<UserProvider>(
@@ -67,13 +66,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
       // Upload image to storage and get URL
       String imageUrl = ''; // Replace with actual URL after uploading
       Provider.of<UserProvider>(context, listen: false)
-          .updateDefaultProfileImage(imageUrl);
+          .updateAdminDefaultProfileImage(imageUrl);
     }
     Navigator.pop(context);
   }
 
   Future<void> _pickImageFromGallery() async {
-    final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
       if (pickedImage != null) {
         profileImageUrl = File(pickedImage.path);

@@ -7,7 +7,7 @@ class UserProvider extends ChangeNotifier {
     'password': "n/a",
     'email': "n/a",
     'uid': "n/a",
-    'profileImageUrl': null, 
+    'profileImageUrl': null,
   };
 
   void userSignIn(Users user) {
@@ -30,7 +30,7 @@ class UserProvider extends ChangeNotifier {
     'password': "n/a",
     'email': "n/a",
     'uid': "n/a",
-    'profileImageUrl': null, 
+    'profileImageUrl': null,
   };
 
   void adminSignIn(Users admin) {
@@ -50,12 +50,24 @@ class UserProvider extends ChangeNotifier {
 
   // Method to update admin name
   void updateAdminName(String newName) {
+    adminModel['username'] = newName;
+    notifyListeners();
+  }
+
+  // Method to update default profile image for admin
+  void updateAdminDefaultProfileImage(String newImageUrl) {
+    adminModel['profileImageUrl'] = newImageUrl;
+    notifyListeners();
+  }
+
+  // Method to update admin name
+  void updateUserName(String newName) {
     userModel['username'] = newName;
     notifyListeners();
   }
 
   // Method to update default profile image for admin
-  void updateDefaultProfileImage(String newImageUrl) {
+  void updateUserDefaultProfileImage(String newImageUrl) {
     userModel['profileImageUrl'] = newImageUrl;
     notifyListeners();
   }
