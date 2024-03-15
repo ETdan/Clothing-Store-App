@@ -40,7 +40,7 @@ class _AdminLoginState extends State<AdminLogin> {
             
             Padding(
               padding: const EdgeInsets.only(
-                top: 100,
+                top: 80,
                 left: 30,
               ),
               child: Text(

@@ -39,7 +39,7 @@ class _AdminSignupState extends State<AdminSignup> {
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                top: 100,
+                top: 80,
                 left: 30,
               ),
               child: Text(

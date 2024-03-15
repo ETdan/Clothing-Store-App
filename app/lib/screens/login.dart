@@ -37,7 +37,7 @@ class _signinState extends State<signin> {
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                top: 20,
+                top: 10,
                 right: 20,
               ),
               child: Row(
