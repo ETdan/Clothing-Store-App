@@ -18,31 +18,36 @@ class _welcomeState extends State<welcome> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CarouselSlider.builder(
-            itemCount: 3,
-            itemBuilder: (context, index, realIndex) {
-              return Sbuilder(
-                index: index,
-              );
-            },
-            options: CarouselOptions(
-              enlargeCenterPage: true,
-              viewportFraction: 1.0,
-              autoPlayAnimationDuration: Duration(microseconds: 50),
-              autoPlay: true,
-              aspectRatio: 130 / 120,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  active_index = index;
-                });
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: CarouselSlider.builder(
+              itemCount: 3,
+              itemBuilder: (context, index, realIndex) {
+                return Sbuilder(
+                  index: index,
+                );
               },
+              options: CarouselOptions(
+                enlargeCenterPage: true,
+                viewportFraction: 1.0,
+                autoPlayAnimationDuration: Duration(microseconds: 50),
+                autoPlay: true,
+                aspectRatio: 130 / 120,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    active_index = index;
+                  });
+                },
+              ),
             ),
           ),
           indicator(
             index: active_index,
           ),
-          Text(
+          const Text(
             'Welcome to Our Shop !',
             style: TextStyle(
               fontSize: 30,
@@ -50,24 +55,24 @@ class _welcomeState extends State<welcome> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
+         const SizedBox(
             height: 30,
           ),
           MaterialButton(
             height: 60,
             minWidth: 400,
-            color: Color.fromARGB(255, 128, 140, 220),
+            color:const  Color.fromARGB(255, 128, 140, 220),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => signin(),
+                  builder: (context) => const signin(),
                 ),
               );
             },
-            child: Container(
+            child: const SizedBox(
               width: 400,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -101,13 +106,14 @@ class Sbuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      child: Image(
+      width: MediaQuery.of(context).size.width * 0.5,
+      decoration: BoxDecoration(
+          image: DecorationImage(
         image: AssetImage(
           collection().welcomeim[index],
         ),
         fit: BoxFit.fill,
-      ),
+      )),
     );
   }
 }
