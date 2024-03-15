@@ -7,11 +7,8 @@ import '/utils/snackBar.dart';
 import '/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:uuid/uuid.dart';
-import 'package:provider/provider.dart';
 
 class signup extends StatefulWidget {
   const signup({super.key});
@@ -66,21 +63,24 @@ class _signupState extends State<signup> {
               hint: ' email',
               prefix: Icon(
                 Icons.email_outlined,
-              ), maxLines: 1,
+              ),
+              maxLines: 1,
             ),
             textFields(
               controller: usernameController,
               hint: 'username',
               prefix: Icon(
                 Icons.person_2_outlined,
-              ), maxLines: 1,
+              ),
+              maxLines: 1,
             ),
             textFields(
               controller: userpasswordController,
               hint: 'Password',
               prefix: Icon(
                 Icons.password_outlined,
-              ), maxLines: 1,
+              ),
+              maxLines: 1,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20),

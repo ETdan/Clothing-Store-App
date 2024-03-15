@@ -1,3 +1,6 @@
+import 'package:shega_cloth_store_app/database/auth.dart';
+import 'package:shega_cloth_store_app/utils/snackBar.dart';
+
 import '/utils/likeanimation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +18,7 @@ class Pro extends StatefulWidget {
 }
 
 class _ProState extends State<Pro> {
+  bool isfinished = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,8 +95,7 @@ class _ProState extends State<Pro> {
                             Positioned(
                               left: 150,
                               child: likeAnimation(
-                                product: snapshot.data!.docs[index],
-                                snap: FirebaseAuth.instance.currentUser!,
+                                snap: snapshot.data!.docs[index],
                               ),
                             ),
                           ],
@@ -127,7 +130,32 @@ class _ProState extends State<Pro> {
                                 child: Material(
                                   color: Color.fromARGB(214, 117, 73, 220),
                                   child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      setState(() {
+                                        isfinished = false;
+                                      });
+                                      String res = await authMethod().toCart(
+                                        imageurl: snapshot.data!.docs[index]
+                                            ['photourl'],
+                                        title: snapshot.data!.docs[index]
+                                            ['title'],
+                                        price: snapshot.data!.docs[index]
+                                            ['price'],
+                                      );
+                                      setState(() {
+                                        isfinished = true;
+                                      });
+                                      if (res == 'success') {
+                                        showSnack('Added to cart', context);
+                                      } else {
+                                        showSnack(
+                                            'some error occured.cheak your connection',
+                                            context);
+                                      }
+                                      setState(() {
+                                        isfinished = true;
+                                      });
+                                    },
                                     icon: Center(
                                       child: Icon(
                                         Icons.add,
