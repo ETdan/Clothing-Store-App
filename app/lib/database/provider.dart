@@ -26,11 +26,11 @@ class UserProvider extends ChangeNotifier {
   }
 
   Map<String, dynamic> adminModel = {
-    'username': "n/a",
-    'password': "n/a",
-    'email': "n/a",
-    'uid': "n/a",
-    'profileImageUrl': null,
+    'adminname': "n/a",
+    'adminpassword': "n/a",
+    'adminemail': "n/a",
+    'aid': "n/a",
+    'aprofileImageUrl': null,
   };
 
   void adminSignIn(Users admin) {
@@ -50,7 +50,7 @@ class UserProvider extends ChangeNotifier {
 
   // Method to update admin name
   void updateAdminName(String newName) {
-    adminModel['username'] = newName;
+    adminModel['adminName'] = newName;
     notifyListeners();
   }
 

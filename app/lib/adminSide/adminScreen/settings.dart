@@ -1,4 +1,5 @@
-import 'package:shega_cloth_store_app/adminSide/adminScreen/products/admin_profile/edit_admin_profile.dart';
+import 'package:shega_cloth_store_app/adminSide/adminScreen/admin_profile_screens/edit_profile.dart';
+
 import 'package:shega_cloth_store_app/database/auth.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 
@@ -69,7 +70,7 @@ class _SettingState extends State<Setting> {
                       Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => EditProfilePage(),
+        builder: (context) => EditProfileScreen(),
       ),
                       );
                     },

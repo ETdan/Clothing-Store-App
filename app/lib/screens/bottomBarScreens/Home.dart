@@ -1,5 +1,8 @@
 import 'dart:typed_data';
-
+import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:shega_cloth_store_app/database/provider.dart';
 import '/screens/otherScreens/pro.dart';
 import '/screens/otherScreens/showdetails.dart';
 import '/utils/likeanimation.dart';
@@ -11,6 +14,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:shega_cloth_store_app/database/provider.dart';
+import 'package:shega_cloth_store_app/utils/textfield.dart';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:shega_cloth_store_app/database/provider.dart';
+import 'package:shega_cloth_store_app/utils/textfield.dart';
+import '/database/auth.dart';
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
+import "package:firebase_storage/firebase_storage.dart";
 
 int active_index = 0;
 
@@ -23,8 +42,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
+
   final images = [
-    'assets/sh1.jpg',
+    'assets/sh11.jpg',
     'assets/sh2.jpg',
     'assets/sh3.jpg',
     'assets/sh4.jpg',
@@ -66,93 +86,93 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    
+       TextEditingController userpasswordController = TextEditingController();
+    TextEditingController userNameController = TextEditingController();
+    Map<String, dynamic> userData =
+        Provider.of<UserProvider>(context).userModel;
+    String name = userData['username'] ?? 'Default Name';
+    String email = userData['email'] ?? 'Default Email';
+    String avatarUrl = userData['profileImageUrl'] ??
+        'https://images.mubicdn.net/images/cast_member/286407/cache-139299-1463178721/image-w856.jpg?size=256x';
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ListTile(
-                leading: InkWell(
-                  onTap: () async {
-                    Uint8List im = await pickedImages(ImageSource.gallery);
-                    setState(() {
-                      file = im;
-                    });
-                  },
-                  child: file != null
-                      ? CircleAvatar(
-                          radius: 40,
-                          backgroundImage: MemoryImage(file!),
-                        )
-                      : CircleAvatar(
-                          radius: 40,
-                          backgroundImage: AssetImage(
-                            "assets/im2.jpg",
-                          ),
-                        ),
-                ),
-                title: Text(
-                  'Hello!',
-                  style: TextStyle(
-                    fontSize: 12,
-                  ),
-                ),
-                subtitle: Text(
-                  'admin',
-                  // style: TextStyle(
-                  //   fontWeight: FontWeight.bold,
-                  //   fontSize: 18,
-                  //   color: Colors.black87,
-                  // ),
-                ),
-                trailing: Padding(
-                  padding: const EdgeInsets.only(
-                    right: 20,
-                  ),
-                  child: IconButton(
+              SizedBox(height: 35,),
+            Row(
+              children: [
+                SizedBox(width: 15,),
+                CircleAvatar(
+            radius: 30,
+            backgroundImage: NetworkImage(avatarUrl),
+          ),
+          SizedBox(width: 20),
+          Column(
+            children: [
+              Text("Hello !", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
+                Text(name, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
+            ],
+          ),
+          Spacer(),
+          IconButton(
                     onPressed: () {},
                     icon: Icon(
-                      Icons.notification_add_outlined,
+                      Icons.notifications,
+                    ),
+                  ),
+SizedBox(width: 20),
+              ],
+            ),
+              SizedBox(
+                width: 380,
+                
+                child: textFields(
+                  controller: userSearchController,
+                  hint: 'search here',
+                  prefix: Icon(
+                    Icons.search,
+                  ), maxLines: 1,
+                ),
+              ),
+              SizedBox(
+                height: 150,
+                width: 380,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  
+                  child: CarouselSlider.builder(
+                    itemCount: images.length,
+                    itemBuilder: (context, index, realIndex) {
+                      return BuildImages(imagee: images[index]);
+                    },
+                    options: CarouselOptions(
+                      enlargeCenterPage: true,
+                      viewportFraction: 1.0,
+                      autoPlayAnimationDuration: Duration(microseconds: 50),
+                      autoPlay: false,
+                      reverse: true,
+                      height: 200,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          active_index = index;
+                        });
+                      },
                     ),
                   ),
                 ),
               ),
-              textFields(
-                controller: userSearchController,
-                hint: 'search here',
-                prefix: Icon(
-                  Icons.search,
-                ), maxLines: 1,
-              ),
-              CarouselSlider.builder(
-                itemCount: images.length,
-                itemBuilder: (context, index, realIndex) {
-                  return BuildImages(imagee: images[index]);
-                },
-                options: CarouselOptions(
-                  enlargeCenterPage: true,
-                  viewportFraction: 1.0,
-                  autoPlayAnimationDuration: Duration(microseconds: 50),
-                  autoPlay: false,
-                  reverse: true,
-                  height: 200,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      active_index = index;
-                    });
-                  },
-                ),
-              ),
               SizedBox(
-                height: 12,
+                height: 8,
               ),
               indicator(index: images.length),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(30.0),
                     child: Text(
                       'Featured',
                       style: TextStyle(
@@ -199,6 +219,7 @@ class _HomeScreenState extends State<HomeScreen>
                   }
                   return SizedBox(
                     height: 150,
+                    
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
@@ -224,15 +245,21 @@ class _HomeScreenState extends State<HomeScreen>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  
                   Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      'Most Popular',
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: Row(
+                      children: [
+                        SizedBox(width: 15),
+                        Text(
+                          'Most Popular',
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -336,13 +363,13 @@ class _buildAdvertiseState extends State<buildAdvertise> {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 20),
         child: Container(
           height: 100,
           width: 150,
           decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(10),
+            color: Color.fromARGB(255, 244, 243, 243),
+            borderRadius: BorderRadius.circular(20),
           ),
           child: ListView(
             children: [
@@ -354,10 +381,12 @@ class _buildAdvertiseState extends State<buildAdvertise> {
                       Container(
                         height: 90,
                         width: 150,
-                        child: Image.network(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(image: NetworkImage(
                           widget.image,
-                          fit: BoxFit.fill,
-                        ),
+                          
+                        ),fit: BoxFit.fill,)),
                       ),
                       Positioned(
                         left: 120,
@@ -368,21 +397,35 @@ class _buildAdvertiseState extends State<buildAdvertise> {
                       ),
                     ],
                   ),
-                  Text(
-                    widget.title,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  Text(
-                    '\$ ${widget.price}',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(width: 5,),
+                          Text(
+                            widget.title,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(width: 5,),
+                          Text(
+                            '\$ ${widget.price}',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   )
                 ],
               ),

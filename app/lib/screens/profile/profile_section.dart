@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 import 'package:shega_cloth_store_app/utils/textfield.dart';
 import '/database/auth.dart';
@@ -79,17 +80,43 @@ class _edit_profileState extends State<edit_profile> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    GestureDetector(
-                      onTap: () async {
-                        pickImage();
-                      },
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: NetworkImage(avatarUrl),
-                      ),
-                    ),
-                  ]),
+                Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+     Stack(
+      children: [
+        GestureDetector(
+          onTap: () async {
+            pickImage();
+          },
+          child: CircleAvatar(
+            radius: 50,
+            backgroundImage: NetworkImage(avatarUrl),
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: GestureDetector(
+            onTap: () async {
+              pickImage(); // Call pickImage function when the edit icon is tapped
+            },
+            child: CircleAvatar(
+              backgroundColor: Color.fromARGB(255, 161, 139, 169),
+              radius: 20,
+              child: Icon(
+                Icons.photo_camera,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+
+  ],
+),
+
                   SizedBox(height: 16),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Text(
@@ -105,6 +132,48 @@ class _edit_profileState extends State<edit_profile> {
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                   ]),
+   /*  Row(
+  children: [
+     Padding(
+      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+       child: Container(
+         padding: EdgeInsets.all(25), 
+        width: 300,
+        height: 80,
+         decoration: BoxDecoration(
+           border: Border.all(
+        color: const Color.fromARGB(255, 0, 0, 0), // Add border color as needed
+        width: 1, 
+           ),
+           borderRadius: BorderRadius.circular(10), // Add border radius as needed
+         ),
+         child: Row(
+           children: [
+             GestureDetector(
+          onTap: () async {
+            pickImage();
+          },
+          child: Text(
+            'Edit Profile Pic',
+            style: TextStyle(
+              color: Colors.blue, // You can change the color as per your preference
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+             ),
+            Spacer(),// Adjust spacing as needed
+             CircleAvatar(
+          radius: 10,
+          backgroundImage: NetworkImage(avatarUrl),
+             ),
+           ],
+         ),
+       ),
+     ),
+   
+  ],
+),
+*/
                   textFields(
                     controller: userNameController,
                     hint: 'User Name Change',
@@ -133,6 +202,8 @@ class _edit_profileState extends State<edit_profile> {
                           .collection('users')
                           .doc(userData["uid"])
                           .update(userData);
+
+                            Navigator.pop(context);
                     },
                     child: Container(
                       width: 200,
