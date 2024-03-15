@@ -126,7 +126,7 @@ class _searchScreenState extends State<SearchScreen> {
                 ),
                 searchController.text != ''
                     ? FutureBuilder(
-                        future: arguments["gender"] != null &&
+                        future: arguments["gender"] != null ||
                                 arguments["color"] != null
                             ? performSearchAndFilter(
                                 searchController.text,
