@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class OrdersPage extends StatefulWidget {
   const OrdersPage({Key? key}) : super(key: key);
@@ -60,9 +62,9 @@ class _OrdersPageState extends State<OrdersPage> {
                       border: Border(
                         bottom: BorderSide(
                           color: isActiveUnderlined
-                              ? Colors.blue
+                              ? const Color(0xFF6055D8)
                               : Colors.transparent,
-                          width: 2.0,
+                          width: 4.0,
                         ),
                       ),
                     ),
@@ -88,9 +90,9 @@ class _OrdersPageState extends State<OrdersPage> {
                       border: Border(
                         bottom: BorderSide(
                           color: isCompletedUnderlined
-                              ? Colors.blue
+                              ? const Color(0xFF6055D8)
                               : Colors.transparent,
-                          width: 2.0,
+                          width: 4.0,
                         ),
                       ),
                     ),
@@ -116,9 +118,9 @@ class _OrdersPageState extends State<OrdersPage> {
                       border: Border(
                         bottom: BorderSide(
                           color: isCancelledUnderlined
-                              ? Colors.blue
+                              ? const Color(0xFF6055D8)
                               : Colors.transparent,
-                          width: 2.0,
+                          width: 4.0,
                         ),
                       ),
                     ),
@@ -141,88 +143,86 @@ class _OrdersPageState extends State<OrdersPage> {
                 children: [
                   Card(
                     child: Container(
-                      padding: EdgeInsets.only(left: 16, right: 16, top: 15),
-                      width: 350,
+                      padding: EdgeInsets.all(8),
+                      width: 370,
                       height: 150,
                       child: Row(
                         children: [
                           Column(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.red,
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.red,
+                                  ),
+                                  height: 120,
+                                  width: 150,
                                 ),
-                                height: 120,
-                                width: 120,
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Watch",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Rolex",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "\$40",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.deepPurple,
-                                    fontWeight: FontWeight.bold),
-                              )
                             ],
                           ),
                           SizedBox(
                             width: 10,
                           ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Watch",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Rolex",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: const Color(0xFF9B9999),
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "\$40",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: const Color(0xFF6055D8),
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                          // SizedBox(
+                          //   width: 10,
+                          // ),
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              SizedBox(
-                                height: 60,
-                              ),
                               ElevatedButton(
                                 onPressed: () {},
                                 child: Text(
                                   "Track Order",
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
                                   ),
                                 ),
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
-                                      Colors.deepPurple),
-                                  padding: MaterialStateProperty.all(
-                                    EdgeInsets.all(10),
-                                  ),
-                                  fixedSize: MaterialStateProperty.all(
-                                    Size(100, 20),
-                                  ),
+                                      const Color(0xFF6055D8)),
+                                  fixedSize:
+                                      MaterialStateProperty.all(Size(130, 50)),
                                 ),
                               )
                             ],
