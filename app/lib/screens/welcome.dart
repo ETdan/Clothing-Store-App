@@ -19,67 +19,82 @@ class welcome extends StatefulWidget {
 }
 
 class _welcomeState extends State<welcome> {
- 
-PageController _controller = PageController();
+  PageController _controller = PageController();
 
-bool onLastPage = false;
+  bool onLastPage = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [ PageView(
+      body: Stack(children: [
+        PageView(
           controller: _controller,
-          onPageChanged: (index){
+          onPageChanged: (index) {
             setState(() {
-              onLastPage =(index == 2);
+              onLastPage = (index == 2);
             });
-          } ,
+          },
           children: [
-           Page_1(),
-           Page_2(),
-           Page_3(),
+            Page_1(),
+            Page_2(),
+            Page_3(),
           ],
         ),
 
         // dot indicator
-        Container(alignment: Alignment(0, 0.75),
+        Container(
+          alignment: Alignment(0, 0.75),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               // skip
-GestureDetector(
-  onTap: (){
-    _controller.jumpToPage(2);
-  },
-  child: Text('skip', style: TextStyle(color: Colors.white,fontSize: 18, fontWeight: FontWeight.bold),)),
+              GestureDetector(
+                  onTap: () {
+                    _controller.jumpToPage(2);
+                  },
+                  child: Text(
+                    'skip',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  )),
 
               //dot indicator
-              SmoothPageIndicator(
-                controller: _controller, count: 3),
+              SmoothPageIndicator(controller: _controller, count: 3),
 
-                // done
-                onLastPage ?
-            GestureDetector(
-  onTap: (){
-    _controller.nextPage(duration: Duration(milliseconds: 500),
-     curve: Curves.easeIn);
-  },
-  child: Text('done', style: TextStyle(color: Colors.white,fontSize: 18, fontWeight: FontWeight.bold),))
-  :  GestureDetector(
-  onTap: (){
-  Navigator.push(context, MaterialPageRoute(builder: (context){
-    return signin();
-  }
-  )
-  );
-  },
-  child: Text('next', style: TextStyle(color: Colors.white,fontSize: 18, fontWeight: FontWeight.bold),)),
+              // done
+              onLastPage
+                  ? GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return signin();
+                        }));
+                      },
+                      child: Text(
+                        'done',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ))
+                  : GestureDetector(
+                      onTap: () {
+                        _controller.nextPage(
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.easeIn);
+                      },
+                      child: Text(
+                        'next',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      )),
             ],
           ),
         )
-        ]
-      ),
-      
+      ]),
     );
   }
 }
