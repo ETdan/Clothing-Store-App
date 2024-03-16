@@ -27,13 +27,13 @@ class _signinState extends State<signin> {
   bool isloggedin = true;
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     Map<String, dynamic> userData;
     FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             Padding(
               padding: const EdgeInsets.only(
@@ -103,6 +103,9 @@ class _signinState extends State<signin> {
               ),
               maxLines: 1,
             ),
+            SizedBox(
+              height: 30,
+            ),
             Flexible(
               child: Container(),
               flex: 1,
@@ -114,7 +117,7 @@ class _signinState extends State<signin> {
                   builder: (context, value, child) {
                     return MaterialButton(
                         height: 60,
-                        minWidth: 400,
+                        minWidth: width * 0.8,
                         color: Color.fromARGB(255, 128, 140, 220),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -160,7 +163,7 @@ class _signinState extends State<signin> {
                         },
                         child: isloggedin
                             ? Container(
-                                width: 400,
+                                width: width * .6,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
