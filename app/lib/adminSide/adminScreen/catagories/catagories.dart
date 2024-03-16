@@ -7,26 +7,29 @@ class Categories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CategoryCard(
-              imageIndex: 0,
-              title: 'Mens',
-            ),
-            CategoryCard(
-              imageIndex: 2,
-              title: 'Kids',
-            ),
-          ],
-        ),
-        CategoryCard(
-          imageIndex: 1,
-          title: 'Womens',
-        ),
-      ],
+    return Scaffold(
+      
+      body: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CategoryCard(
+                imageIndex: 0,
+                title: 'Mens',
+              ),
+              CategoryCard(
+                imageIndex: 2,
+                title: 'Kids',
+              ),
+            ],
+          ),
+          CategoryCard(
+            imageIndex: 1,
+            title: 'Womens',
+          ),
+        ],
+      ),
     );
   }
 }

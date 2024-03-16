@@ -97,20 +97,26 @@ class products extends StatelessWidget {
             ),
             Positioned(
               bottom: -1,
-              right: -1,
-              child: FloatingActionButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => addPro(),
-                    ),
-                  );
-                },
-                backgroundColor: Color.fromARGB(255, 110, 102, 195),
-                child: Icon(
-                  Icons.add,
+              right: -2,
+              child: Container(
+                 decoration: BoxDecoration(
+                        color: Colors.blue[600],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                child: FloatingActionButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => addPro(),
+                      ),
+                    );
+                  },
+                  backgroundColor:Colors.blue[600],
+                  child: Icon(
+                    Icons.add,
+                  ),
+                  foregroundColor: Colors.white,
                 ),
-                foregroundColor: Colors.white,
               ),
             ),
           ],
