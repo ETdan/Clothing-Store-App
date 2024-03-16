@@ -128,6 +128,7 @@ class _AdminLoginState extends State<AdminLogin> {
                           String result = await authMethod().adminSignIn(
                             adminEmail: adminEmailController.text,
                             adminPassword: adminpasswordController.text,
+
                           );
                           setState(() {
                             isloggedin = true;

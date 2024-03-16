@@ -1,3 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/widgets.dart';
+import 'package:shega_cloth_store_app/screens/splash%20and%20onboarding/intro_pages.dart/page_1.dart';
+import 'package:shega_cloth_store_app/screens/splash%20and%20onboarding/intro_pages.dart/page_2.dart';
+import 'package:shega_cloth_store_app/screens/splash%20and%20onboarding/intro_pages.dart/page_3.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 import '/screens/bottomBarScreens/Home.dart';
 import '/screens/login.dart';
 import '/utils/collections.dart';
@@ -12,102 +19,67 @@ class welcome extends StatefulWidget {
 }
 
 class _welcomeState extends State<welcome> {
-  int active_index = 0;
+ 
+PageController _controller = PageController();
 
+bool onLastPage = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          CarouselSlider.builder(
-            itemCount: 3,
-            itemBuilder: (context, index, realIndex) {
-              return Sbuilder(
-                index: index,
-              );
-            },
-            options: CarouselOptions(
-              enlargeCenterPage: true,
-              viewportFraction: 1.0,
-              autoPlayAnimationDuration: Duration(microseconds: 50),
-              autoPlay: true,
-              aspectRatio: 130 / 120,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  active_index = index;
-                });
-              },
-            ),
-          ),
-          indicator(
-            index: active_index,
-          ),
-          Text(
-            'Welcome to Our Shop !',
-            style: TextStyle(
-              fontSize: 30,
-              color: Colors.black87,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          MaterialButton(
-            height: 60,
-            minWidth: 400,
-            color: Color.fromARGB(255, 128, 140, 220),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => signin(),
-                ),
-              );
-            },
-            child: Container(
-              width: 400,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    'Get Started',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Icon(Icons.arrow_forward_ios_outlined)
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Sbuilder extends StatelessWidget {
-  final int index;
-  const Sbuilder({
-    super.key,
-    required this.index,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      child: Image(
-        image: AssetImage(
-          collection().welcomeim[index],
+      body: Stack(
+        children: [ PageView(
+          controller: _controller,
+          onPageChanged: (index){
+            setState(() {
+              onLastPage =(index == 2);
+            });
+          } ,
+          children: [
+           Page_1(),
+           Page_2(),
+           Page_3(),
+          ],
         ),
-        fit: BoxFit.fill,
+
+        // dot indicator
+        Container(alignment: Alignment(0, 0.75),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              // skip
+GestureDetector(
+  onTap: (){
+    _controller.jumpToPage(2);
+  },
+  child: Text('skip', style: TextStyle(color: Colors.white,fontSize: 18, fontWeight: FontWeight.bold),)),
+
+              //dot indicator
+              SmoothPageIndicator(
+                controller: _controller, count: 3),
+
+                // done
+                onLastPage ?
+            GestureDetector(
+  onTap: (){
+    _controller.nextPage(duration: Duration(milliseconds: 500),
+     curve: Curves.easeIn);
+  },
+  child: Text('done', style: TextStyle(color: Colors.white,fontSize: 18, fontWeight: FontWeight.bold),))
+  :  GestureDetector(
+  onTap: (){
+  Navigator.push(context, MaterialPageRoute(builder: (context){
+    return signin();
+  }
+  )
+  );
+  },
+  child: Text('next', style: TextStyle(color: Colors.white,fontSize: 18, fontWeight: FontWeight.bold),)),
+            ],
+          ),
+        )
+        ]
       ),
+      
     );
   }
 }
