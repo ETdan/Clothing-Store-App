@@ -1,6 +1,6 @@
 import 'package:shega_cloth_store_app/adminSide/adminScreen/adminHome.dart';
-import 'package:shega_cloth_store_app/adminSide/adminSignuo.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
+import 'package:shega_cloth_store_app/screens/login.dart';
 
 import '/adminSide/adminLogin.dart';
 import '/database/auth.dart';
@@ -26,18 +26,45 @@ class AdminLogin extends StatefulWidget {
 class _AdminLoginState extends State<AdminLogin> {
   TextEditingController adminpasswordController = TextEditingController();
   TextEditingController adminEmailController = TextEditingController();
-
+  bool isloggedin = true;
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     Map<String, dynamic> userData;
     FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          shrinkWrap: false,
           children: [
-            
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 20,
+                right: 20,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => signin(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'User Login',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(
                 top: 100,
@@ -68,18 +95,19 @@ class _AdminLoginState extends State<AdminLogin> {
               hint: 'Username or email',
               prefix: Icon(
                 Icons.person_2_outlined,
-              ), maxLines: 1,
+              ),
+              maxLines: 1,
             ),
             textFields(
               controller: adminpasswordController,
               hint: 'Password',
               prefix: Icon(
                 Icons.shopping_bag_rounded,
-              ), maxLines: 1,
+              ),
+              maxLines: 1,
             ),
-            Flexible(
-              child: Container(),
-              flex: 1,
+            SizedBox(
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -87,89 +115,82 @@ class _AdminLoginState extends State<AdminLogin> {
                 Consumer<defaultt>(
                   builder: (context, value, child) {
                     return MaterialButton(
-                      height: 60,
-                      minWidth: 400,
-                      color: Color.fromARGB(255, 128, 140, 220),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      onPressed: () async {
-                        String result = await authMethod().adminSignIn(
-                          adminEmail: adminEmailController.text,
-                          adminPassword: adminpasswordController.text,
-                        );
-                        if (result == 'success') {
-                          var snapshot = await _firestore
-                              .collection('admins')
-                              .doc(
-                                FirebaseAuth.instance.currentUser!.uid,
-                              )
-                              .get();
-                          userData = snapshot.data()!;
-                          print(userData);
-                          Provider.of<UserProvider>(context, listen: false)
-                              .adminSignInMap(userData);
-
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => adminHome(),
-                            ),
+                        height: 60,
+                        minWidth: width * 0.8,
+                        color: Color.fromARGB(255, 128, 140, 220),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        onPressed: () async {
+                          setState(() {
+                            isloggedin = false;
+                          });
+                          String result = await authMethod().adminSignIn(
+                            adminEmail: adminEmailController.text,
+                            adminPassword: adminpasswordController.text,
                           );
                           setState(() {
-                            value.toggle();
-                            value.isAdminLogin();
+                            isloggedin = true;
                           });
-                        } else {
-                          showSnack(
-                            'please,enter correct information or register first!',
-                            context,
-                          );
-                        }
-                      },
-                      child: Container(
-                        width: 400,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              'Signin',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black87,
-                                fontWeight: FontWeight.bold,
+                          if (result == 'success') {
+                            var snapshot = await _firestore
+                                .collection('admins')
+                                .doc(
+                                  FirebaseAuth.instance.currentUser!.uid,
+                                )
+                                .get();
+                            userData = snapshot.data()!;
+                            print(userData);
+                            Provider.of<UserProvider>(context, listen: false)
+                                .adminSignInMap(userData);
+                            showSnack(
+                              'Welcome back!',
+                              context,
+                            );
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => adminHome(),
                               ),
-                            ),
-                            Icon(
-                              Icons.login_outlined,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
+                            );
+                          } else {
+                            showSnack(
+                              'please,enter correct information or register first!',
+                              context,
+                            );
+                          }
+                        },
+                        child: isloggedin
+                            ? Container(
+                                width: width * 0.6,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      'Signin',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.black87,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.login_outlined,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.green,
+                                ),
+                              ));
                   },
                 ),
               ],
             ),
             SizedBox(
               height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Don\'t have an account ? '),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => AdminSignup(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    'Sign Up',
-                  ),
-                ),
-              ],
             ),
             Flexible(
               child: Container(),

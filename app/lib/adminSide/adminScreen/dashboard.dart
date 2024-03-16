@@ -15,6 +15,7 @@ class _dashBoardState extends State<dashBoard> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(width: 5),
         GestureDetector(
           onTap: () {
             Navigator.of(context).push(
@@ -26,7 +27,7 @@ class _dashBoardState extends State<dashBoard> {
           },
           child: Container(
             height: 200,
-            width: 250,
+            width: 200,
             child: Card(
               elevation: 20,
               child: Column(
@@ -50,7 +51,7 @@ class _dashBoardState extends State<dashBoard> {
           },
           child: Container(
             height: 200,
-            width: 250,
+            width: 200,
             child: Card(
               elevation: 20,
               child: Column(

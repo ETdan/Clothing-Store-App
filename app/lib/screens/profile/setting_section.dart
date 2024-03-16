@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
+import 'package:shega_cloth_store_app/screens/profile/about_us.dart';
+import 'package:shega_cloth_store_app/screens/profile/help_section.dart';
 import 'package:shega_cloth_store_app/screens/profile/profile_section.dart';
 import 'package:shega_cloth_store_app/utils/textfield.dart';
 import '/database/auth.dart';
@@ -214,10 +216,10 @@ Column(
                   ),
                   GestureDetector(
                     onTap: () {
-                      /*Navigator.push(
+                      Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) =>  null),
-    );*/
+      MaterialPageRoute(builder: (context) =>  FaqSection() ),
+    );
                     },
                     child: Card(
                       child: Container(
@@ -242,10 +244,10 @@ Column(
 
                    GestureDetector(
                     onTap: () {
-                      /*Navigator.push(
+                      Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) =>  null),
-    );*/
+      MaterialPageRoute(builder: (context) =>  AboutUSSection()),
+    );
                     },
                     child: Card(
                       child: Container(
