@@ -1,4 +1,6 @@
+import 'package:shega_cloth_store_app/database/googleauth.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
+import 'package:shega_cloth_store_app/utils/smallContainer.dart';
 
 import '/adminSide/adminLogin.dart';
 import '/database/auth.dart';
@@ -11,8 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:uuid/uuid.dart';
-import 'package:provider/provider.dart';
 
 class signin extends StatefulWidget {
   const signin({super.key});
@@ -25,16 +25,16 @@ class _signinState extends State<signin> {
   TextEditingController userpasswordController = TextEditingController();
   TextEditingController userEmailController = TextEditingController();
      bool isLoggingIn = false;
-
+  bool isloggedin = true;
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     Map<String, dynamic> userData;
     FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             Padding(
               padding: const EdgeInsets.only(
@@ -93,14 +93,19 @@ class _signinState extends State<signin> {
               hint: 'Username or email',
               prefix: Icon(
                 Icons.person_2_outlined,
-              ), maxLines: 1,
+              ),
+              maxLines: 1,
             ),
             textFields(
               controller: userpasswordController,
               hint: 'Password',
               prefix: Icon(
                 Icons.shopping_bag_rounded,
-              ), maxLines: 1,
+              ),
+              maxLines: 1,
+            ),
+            SizedBox(
+              height: 30,
             ),
             Flexible(
               child: Container(),
@@ -119,10 +124,6 @@ class _signinState extends State<signin> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       onPressed: () async {
-                         setState(() {
-      // Set login in progress
-      isLoggingIn = true;
-    });
                         String result = await authMethod().UserSignin(
                           email: userEmailController.text,
                           password: userpasswordController.text,
@@ -140,49 +141,48 @@ class _signinState extends State<signin> {
                           Provider.of<UserProvider>(context, listen: false)
                               .userSignInMap(userData);
 
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => first(),
-                            ),
-                          );
-                          setState(() {
-                            value.toggle();
-                            value.isUserLogin();
-                          });
-                          setState(() {
-      // Set login completed
-      isLoggingIn = false;
-    });
-                        } else {
-                          showSnack(
-                            'please,enter correct information or register first!',
-                            context,
-                          );
-                        }
-                      },  child: isLoggingIn
-      ? CircularProgressIndicator( // Display indicator if logging in
-          color: Colors.white,
-        )
-      : Container(
-                        width: 350,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              'Signin',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black87,
-                                fontWeight: FontWeight.bold,
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => first(),
                               ),
-                            ),
-                            Icon(
-                              Icons.login_outlined,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
+                            );
+                            setState(() {
+                              value.toggle();
+                              value.isUserLogin();
+                            });
+                          } else {
+                            showSnack(
+                              'please,enter correct information or register first!',
+                              context,
+                            );
+                          }
+                        },
+                        child: isloggedin
+                            ? Container(
+                                width: width * .6,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      'Signin',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.black87,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.login_outlined,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.green,
+                                ),
+                              ));
                   },
                 ),
               ],
@@ -207,6 +207,13 @@ class _signinState extends State<signin> {
                   ),
                 ),
               ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            smallcont(
+              images: 'assets/google.jpg',
+              ontapp: () => google().signInWithGoogle(),
             ),
             Flexible(
               child: Container(),

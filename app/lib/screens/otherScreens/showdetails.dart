@@ -1,3 +1,6 @@
+import 'package:shega_cloth_store_app/database/auth.dart';
+import 'package:shega_cloth_store_app/utils/snackBar.dart';
+
 import '/utils/likeanimation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,6 +26,8 @@ class showDetails extends StatefulWidget {
   State<showDetails> createState() => _showDetailsState();
 }
 
+bool isfinish = true;
+
 class _showDetailsState extends State<showDetails> {
   @override
   Widget build(BuildContext context) {
@@ -46,8 +51,8 @@ class _showDetailsState extends State<showDetails> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 30, horizontal: 20),
                     child: Column(
                       children: [
                         SizedBox(height: 25),
@@ -75,8 +80,8 @@ class _showDetailsState extends State<showDetails> {
                               child: Material(
                                 color: Colors.grey[300],
                                 child: likeAnimation(
-                                  snap: FirebaseAuth.instance.currentUser!,
                                   product: widget.like,
+                                  snap: FirebaseAuth.instance.currentUser!,
                                 ),
                               ),
                             ),
@@ -151,7 +156,7 @@ class _showDetailsState extends State<showDetails> {
                   'Description',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color:  Colors.black,
+                    color: Colors.black,
                     fontSize: 20,
                   ),
                 ),
@@ -237,28 +242,57 @@ class _showDetailsState extends State<showDetails> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(width: 10),
-                 MaterialButton(
-            height: 50,
-            minWidth: 300,
-            color: Color.fromARGB(255, 144, 106, 213),
-            shape: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30),
-              borderSide: BorderSide(color: Color.fromARGB(255, 144, 106, 213)), // Same color as button color
-            ),
-            onPressed: () {},
-            child: Center(
-              child: Text(
-          'Buy Now',
-              ),
-            ),
-          ),
-          
+                  MaterialButton(
+                    height: 50,
+                    minWidth: 300,
+                    color: Color.fromARGB(255, 144, 106, 213),
+                    shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                          color: Color.fromARGB(255, 144, 106,
+                              213)), // Same color as button color
+                    ),
+                    onPressed: () async {
+                      setState(() {
+                        isfinish = false;
+                      });
+                      String res = await authMethod().toCart(
+                        imageurl: widget.images,
+                        title: widget.title,
+                        price: widget.price,
+                      );
+                      setState(() {
+                        isfinish = true;
+                      });
+                      if (res == 'success') {
+                        showSnack('Added to cart', context);
+                      } else {
+                        showSnack('some error occured.cheak your connection',
+                            context);
+                      }
+                      setState(() {
+                        isfinish = true;
+                      });
+                    },
+                    child: isfinish
+                        ? Center(
+                            child: Text(
+                              'Buy Now',
+                            ),
+                          )
+                        : Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.green,
+                            ),
+                          ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: MaterialButton(
                       height: 50,
                       minWidth: 50,
-                     shape: CircleBorder(eccentricity: BorderSide.strokeAlignOutside),
+                      shape: CircleBorder(
+                          eccentricity: BorderSide.strokeAlignOutside),
                       onPressed: () {},
                       child: Center(
                         child: Icon(

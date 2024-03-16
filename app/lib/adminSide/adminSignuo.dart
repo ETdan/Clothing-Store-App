@@ -28,7 +28,7 @@ class _AdminSignupState extends State<AdminSignup> {
   TextEditingController adminpasswordController = TextEditingController();
   TextEditingController adminCodeController = TextEditingController(); 
   bool isFinishedLogin = false;
-   String adminCode = 'AAA111'; // temporary admin code
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +36,13 @@ class _AdminSignupState extends State<AdminSignup> {
     FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
-      body: Container(
+      body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                top: 35,
+                top: 100,
                 left: 30,
               ),
               child: Text(
@@ -54,7 +54,7 @@ class _AdminSignupState extends State<AdminSignup> {
               ),
             ),
             SizedBox(
-              height: 5,
+              height: 10,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30),
@@ -86,13 +86,7 @@ class _AdminSignupState extends State<AdminSignup> {
                 Icons.password_outlined,
               ), maxLines: 1,
             ),
-            textFields(
-              controller: adminCodeController,
-              hint: 'Admin Code', // Label for admin code field
-              prefix: Icon(
-                Icons.lock_outline,
-              ), maxLines: 1,
-            ),
+           
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Row(
@@ -141,7 +135,7 @@ class _AdminSignupState extends State<AdminSignup> {
                           adminName: adminnameController.text,
                           adminEmail: adminEmailController.text,
                           adminPassword: adminpasswordController.text,
-                          adminCode: adminCodeController.text, 
+                         
 
                         );
                         setState(() {
