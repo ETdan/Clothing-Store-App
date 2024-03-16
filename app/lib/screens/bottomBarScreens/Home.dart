@@ -400,7 +400,8 @@ class _buildAdvertiseState extends State<buildAdvertise> {
                       Positioned(
                         left: 120,
                         child: likeAnimation(
-                          snap: widget.like,
+                          product: widget.like,
+                          snap: FirebaseAuth.instance.currentUser!,
                         ),
                       ),
                     ],

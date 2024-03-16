@@ -35,8 +35,8 @@ class _AdminLoginState extends State<AdminLogin> {
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          shrinkWrap: false,
           children: [
             Padding(
               padding: const EdgeInsets.only(
@@ -106,9 +106,8 @@ class _AdminLoginState extends State<AdminLogin> {
               ),
               maxLines: 1,
             ),
-            Flexible(
-              child: Container(),
-              flex: 1,
+            SizedBox(
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

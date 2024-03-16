@@ -95,7 +95,8 @@ class _ProState extends State<Pro> {
                             Positioned(
                               left: 150,
                               child: likeAnimation(
-                                snap: snapshot.data!.docs[index],
+                                product: snapshot.data!.docs[index],
+                                snap: FirebaseAuth.instance.currentUser!,
                               ),
                             ),
                           ],

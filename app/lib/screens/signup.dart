@@ -32,8 +32,7 @@ class _signupState extends State<signup> {
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             Padding(
               padding: const EdgeInsets.only(
@@ -107,6 +106,9 @@ class _signupState extends State<signup> {
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 30,
             ),
             Flexible(
               child: Container(),
