@@ -31,59 +31,81 @@ class _signupState extends State<signup> {
     FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 80,
-                left: 30,
+      body: Stack(
+        children: [ Container( 
+
+
+          height: double.infinity,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xffB81736),
+                Color(0xff281537),
+              ]
               ),
-              child: Text(
-                'Getting Started',
+          ),
+          child: 
+              Padding(
+                padding: EdgeInsets.only(top: 60, left:22),
+                child: Text("Getting Started as admin\nCreate Account",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),),
                 ),
-              ),
+               
+           
+        ),
+
+        Padding(
+          padding: const EdgeInsets.only(top: 200.0),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(topLeft:Radius.circular(40) , topRight: Radius.circular(40)),
+              color: Colors.white,
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30),
-              child: Text(
-                'create an account to continue,',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            textFields(
-              controller: userEmailController,
-              hint: ' email',
-              prefix: Icon(
-                Icons.email_outlined,
-              ),
-              maxLines: 1,
-            ),
-            textFields(
-              controller: usernameController,
-              hint: 'username',
-              prefix: Icon(
-                Icons.person_2_outlined,
-              ),
-              maxLines: 1,
-            ),
-            textFields(
-              controller: userpasswordController,
-              hint: 'Password',
-              prefix: Icon(
-                Icons.password_outlined,
-              ),
-              maxLines: 1,
-            ),
-            Padding(
+            height: double.infinity,
+            width: double.infinity,
+            child:  Padding(
+              padding: const EdgeInsets.only(left: 18, right: 18),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+
+                  TextField(
+                    controller: userEmailController,
+                    decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.check, color: Colors.grey,),
+                      label: Text("Gmail", style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xffB81736),
+                      ),)
+                    ),
+                  ),
+                   TextField(
+                   controller: usernameController,
+                    decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.check, color: Colors.grey,),
+                      label: Text("User name", style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xffB81736),
+                      ),)
+                    ),
+                  ),
+                  TextField(
+                    controller: userpasswordController,
+                      decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.visibility_off, color: Colors.grey,),
+                      label: Text("Password", style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xffB81736),
+                      ),)
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                    Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Row(
                 children: [
@@ -107,22 +129,32 @@ class _signupState extends State<signup> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 30,
-            ),
-            Flexible(
-              child: Container(),
-              flex: 1,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Consumer<defaultt>(
+
+                  
+                  
+
+
+SizedBox(height: 7,),
+Container(
+  height: 55,
+  width: 300,
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(30),
+      gradient: LinearGradient(
+              colors: [
+                Color(0xffB81736),
+                Color(0xff281537),
+              ]
+              ),
+
+  ),
+  
+  child: Consumer<defaultt>(
                   builder: (context, value, child) {
                     return MaterialButton(
                       height: 60,
                       minWidth: width * 0.8,
-                      color: Color.fromARGB(255, 128, 140, 220),
+                     
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -181,12 +213,13 @@ class _signupState extends State<signup> {
                                     'Sign up',
                                     style: TextStyle(
                                       fontSize: 20,
-                                      color: Colors.black87,
+                                      color: const Color.fromARGB(221, 255, 255, 255),
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Icon(
                                     Icons.login_outlined,
+                                    color: Colors.white,
                                   ),
                                 ],
                               ),
@@ -194,18 +227,24 @@ class _signupState extends State<signup> {
                     );
                   },
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('You have an account? '),
-                TextButton(
+
+
+
+),
+SizedBox(height: 5,),
+
+SizedBox(height: 5,),
+
+
+Align(
+  alignment: Alignment.bottomRight,
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: [
+      Text('You have an account?', style: TextStyle(fontSize: 16),),
+       TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(
+                    Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => signin(),
                       ),
@@ -215,14 +254,19 @@ class _signupState extends State<signup> {
                     'Sign In',
                   ),
                 ),
-              ],
+
+    ],
+  ),
+),
+
+              
+                ],
+              ),
             ),
-            Flexible(
-              child: Container(),
-              flex: 1,
-            ),
-          ],
+          ),
         ),
+        ]
+    
       ),
     );
   }
