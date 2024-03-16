@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 import '/adminSide/adminScreen/products/products.dart';
 import '/utils/collections.dart';
 import 'package:flutter/material.dart';
@@ -9,26 +11,62 @@ class Categories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       
-      body: Column(
+      body: Stack(
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CategoryCard(
-                imageIndex: 0,
-                title: 'Mens',
+       SingleChildScrollView(
+         child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xffB81736),
+                  Color(0xff281537),
+                ],
               ),
-              CategoryCard(
-                imageIndex: 2,
-                title: 'Kids',
-              ),
-            ],
+            ),
+            child: Column(
+              children: [
+                SizedBox(height: 70,),
+                Row(
+               
+                  children: [
+                   IconButton(
+           onPressed: () {
+             Navigator.pop(context);
+           },
+           icon: Icon(Icons.arrow_back, color: Colors.white,) , iconSize:26 ,
+         
+         ),
+         SizedBox(width: 130,),
+         Text('Catagories', style: TextStyle(fontSize: 20,  fontWeight:FontWeight.bold, color: Colors.white),)
+         
+         
+                  ],
+                ),
+                SizedBox(height: 10,),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CategoryCard(
+                      imageIndex: 0,
+                      title: 'Mens',
+                    ),
+                    CategoryCard(
+                      imageIndex: 2,
+                      title: 'Kids',
+                    ),
+                  ],
+                ),
+                CategoryCard(
+                  imageIndex: 1,
+                  title: 'Womens',
+                ),
+              ],
+            ),
           ),
-          CategoryCard(
-            imageIndex: 1,
-            title: 'Womens',
-          ),
-        ],
+       ),
+        ]
       ),
     );
   }

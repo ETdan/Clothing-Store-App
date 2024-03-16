@@ -34,7 +34,9 @@ class _signinState extends State<signin> {
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
       body: Stack(
-        children: [ Container( 
+        children: [ 
+          
+          Container( 
 
 
           height: double.infinity,

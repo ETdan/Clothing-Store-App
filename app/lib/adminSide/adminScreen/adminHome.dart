@@ -30,11 +30,12 @@ class _adminHomeState extends State<adminHome> {
  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[800],
+      
+      
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.white,
+        selectedItemColor:  Color(0xffB81736),
+        unselectedItemColor: const Color.fromARGB(255, 137, 136, 136),
         onTap: (int index) {
           setState(() {
             _selectedIndex = index; // Update the selected index
@@ -63,8 +64,11 @@ class _adminHomeState extends State<adminHome> {
           ),
         ],
       ),
-      body: SafeArea(
-        child: _destinations[_selectedIndex], // Display the selected destination
+      body: Stack(
+        children:[
+          
+           _destinations[_selectedIndex],
+         ] // Display the selected destination
       ),
     );
   }
