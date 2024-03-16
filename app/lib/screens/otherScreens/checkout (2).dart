@@ -1,7 +1,7 @@
-import 'package:app/adminSide/adminScreen/order/orders.dart';
-import 'package:app/screens/login.dart';
-import 'package:app/screens/otherScreens/orders.dart';
-import 'package:app/utils/summeryProduct.dart';
+import '/adminSide/adminScreen/order/orders.dart';
+import '/screens/login.dart';
+import '/screens/otherScreens/orders.dart';
+import '/utils/summeryProduct.dart';
 import 'package:flutter/material.dart';
 
 class checkOut extends StatefulWidget {
