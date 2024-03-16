@@ -93,138 +93,144 @@ class TutorialsSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Card(
-                 child: ClipRRect(
-    borderRadius: BorderRadius.circular(20),
-                child:Container(
-                  
-                  padding: EdgeInsets.only(
-                              left: 16,
-                              right: 16,
-                            ),
-                            width: 350,
-                            height: 300,
+              Center(
+                child: Card(
+                   child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                  child:Container(
+                    
+                    padding: EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                              ),
+                              width: 350,
+                              height: 300,
+                              
+                              color: Color.fromARGB(255, 255, 255, 255),
                             
-                            color: Color.fromARGB(255, 242, 212, 244),
-                          
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                       Text(
-                      'How to Use Feature X:',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      '1. Open the app and navigate to the Home screen.',
-                      style: TextStyle(fontSize: 16),
-                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                         Text(
+                        'How to Use Feature X:',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
                       SizedBox(height: 8),
-                    Text(
-                      '2. Tap on the "Feature X" icon.',
-                      style: TextStyle(fontSize: 16),
+                      Text(
+                        '1. Open the app and navigate to the Home screen.',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                        SizedBox(height: 8),
+                      Text(
+                        '2. Tap on the "Feature X" icon.',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                        SizedBox(height: 8),
+                      Text(
+                        '3. Follow the on-screen instructions to complete the process.',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    
+                      ],
                     ),
-                      SizedBox(height: 8),
-                    Text(
-                      '3. Follow the on-screen instructions to complete the process.',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  
-                    ],
                   ),
+                )
                 ),
-              )
               ),
                   // Your Tutorials content here
                  
                   SizedBox(height: 16),
 
 
-                  Card(
-                     child: ClipRRect(
-    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                        padding: EdgeInsets.only(
-                              left: 16,
-                              right: 16,
-                            ),
-                            width: 350,
-                            height: 300,
+                  Center(
+                    child: Card(
+                       child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                          padding: EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                              ),
+                              width: 350,
+                              height: 300,
+                              
+                              color: Color.fromARGB(255, 255, 255, 255),
                             
-                            color: Color.fromARGB(255, 242, 212, 244),
-                          
-                      child: Column(
-                        children: [
-                          Text(
-                            'Troubleshooting Guide:',
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'If you encounter any issues with Feature X, follow these steps:',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Text(
-                            '1. Close and reopen the app.',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Text(
-                            '2. Check your internet connection.',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Text(
-                            '3. Contact support if the problem persists.',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ],
+                        child: Column(
+                          children: [
+                            Text(
+                              'Troubleshooting Guide:',
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              'If you encounter any issues with Feature X, follow these steps:',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Text(
+                              '1. Close and reopen the app.',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Text(
+                              '2. Check your internet connection.',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Text(
+                              '3. Contact support if the problem persists.',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
                       ),
+                       )
                     ),
-                     )
                   ),
 
                     SizedBox(height: 16),
 
 
-                  Card(
-                      child: ClipRRect(
-    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                        padding: EdgeInsets.only(
-                              left: 16,
-                              right: 16,
-                            ),
-                            width: 350,
-                            height: 300,
+                  Center(
+                    child: Card(
+                        child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                          padding: EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                              ),
+                              width: 350,
+                              height: 300,
+                              
+                              color: Color.fromARGB(255, 255, 255, 255),
                             
-                            color: Color.fromARGB(255, 242, 212, 244),
-                          
-                      child: Column(
-                        children: [
-                          Text(
-                            'Troubleshooting Guide:',
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'If you encounter any issues with Feature X, follow these steps:',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Text(
-                            '1. Close and reopen the app.',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Text(
-                            '2. Check your internet connection.',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Text(
-                            '3. Contact support if the problem persists.',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ],
+                        child: Column(
+                          children: [
+                            Text(
+                              'Troubleshooting Guide:',
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              'If you encounter any issues with Feature X, follow these steps:',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Text(
+                              '1. Close and reopen the app.',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Text(
+                              '2. Check your internet connection.',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Text(
+                              '3. Contact support if the problem persists.',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
                       ),
+                        )
                     ),
-                      )
                   ),
                 ],
               ),
@@ -252,94 +258,98 @@ class TroubleshootingSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Your troubleshooting tips content here
-               Card(
-                 child: ClipRRect(
-    borderRadius: BorderRadius.circular(20),
-                child:Container(
-                  
-                  padding: EdgeInsets.only(
-                              left: 16,
-                              right: 16,
-                            ),
-                            width: 350,
-                            height: 300,
-                            
-                            color: Color.fromARGB(255, 242, 212, 244),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Common Issues and Solutions:',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        '1. App Not Loading:',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '   - Ensure you have a stable internet connection.',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        '   - Close and reopen the app.',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        '2. Error Messages:',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '   - Note down the error message and contact support.',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        '   - Check the app\'s FAQ section for possible solutions.',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
+               Center(
+                 child: Card(
+                   child: ClipRRect(
+                     borderRadius: BorderRadius.circular(20),
+                  child:Container(
+                    
+                    padding: EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                              ),
+                              width: 350,
+                              height: 300,
+                              
+                              color: Color.fromARGB(255, 255, 255, 255),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Common Issues and Solutions:',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          '1. App Not Loading:',
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '   - Ensure you have a stable internet connection.',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          '   - Close and reopen the app.',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          '2. Error Messages:',
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '   - Note down the error message and contact support.',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          '   - Check the app\'s FAQ section for possible solutions.',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  )
                   ),
-                )
-                ),
-              ),
+                               ),
+               ),
               SizedBox(height: 16),
-               Card(
-                 child: ClipRRect(
-    borderRadius: BorderRadius.circular(20),
-                child:Container(
-                  
-                  padding: EdgeInsets.only(
-                              left: 16,
-                              right: 16,
-                            ),
-                            width: 350,
-                            height: 300,
-                            
-                            color: Color.fromARGB(255, 242, 212, 244),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Contact Support:',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'If you are unable to resolve the issue, please contact our support team:',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        'Email: support@example.com',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        'Phone: +1 (123) 456-7890',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
+               Center(
+                 child: Card(
+                   child: ClipRRect(
+                     borderRadius: BorderRadius.circular(20),
+                  child:Container(
+                    
+                    padding: EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                              ),
+                              width: 350,
+                              height: 300,
+                              
+                              color: Color.fromARGB(255, 255, 255, 255),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Contact Support:',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'If you are unable to resolve the issue, please contact our support team:',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          'Email: support@example.com',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          'Phone: +1 (123) 456-7890',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  )
                   ),
-                )
-                ),
-              ),
+                               ),
+               ),
             ],
           ),
         ),
@@ -362,80 +372,84 @@ class ContactSupportSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Card(
-                 child: ClipRRect(
-    borderRadius: BorderRadius.circular(20),
-                child:Container(
-                  
-                  padding: EdgeInsets.only(
-                              left: 16,
-                              right: 16,
-                            ),
-                            width: 350,
-                            height: 300,
-                            
-                            color: Color.fromARGB(255, 242, 212, 244),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Contact Us:',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'If you have any questions, concerns, or need assistance, feel free to reach out to our support team:',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        'Email: support@example.com',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        'Phone: +1 (123) 456-7890',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
+              Center(
+                child: Card(
+                   child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                  child:Container(
+                    
+                    padding: EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                              ),
+                              width: 350,
+                              height: 300,
+                              
+                              color: Color.fromARGB(255, 255, 255, 255),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Contact Us:',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'If you have any questions, concerns, or need assistance, feel free to reach out to our support team:',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          'Email: support@example.com',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          'Phone: +1 (123) 456-7890',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
+                   )
                 ),
-                 )
               ),
               SizedBox(height: 16),
-              Card(
-                 child: ClipRRect(
-    borderRadius: BorderRadius.circular(20),
-                child:Container(
-                  
-                  padding: EdgeInsets.only(
-                              left: 16,
-                              right: 16,
-                            ),
-                            width: 350,
-                            height: 300,
-                            
-                            color: Color.fromARGB(255, 242, 212, 244),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Support Hours:',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'Monday - Friday: 9:00 AM to 6:00 PM',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        'Saturday: 10:00 AM to 4:00 PM',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        'Sunday: Closed',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
+              Center(
+                child: Card(
+                   child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                  child:Container(
+                    
+                    padding: EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                              ),
+                              width: 350,
+                              height: 300,
+                              
+                              color: Color.fromARGB(255, 255, 255, 255),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Support Hours:',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Monday - Friday: 9:00 AM to 6:00 PM',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          'Saturday: 10:00 AM to 4:00 PM',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          'Sunday: Closed',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
+                   )
                 ),
-                 )
               ),
             ],
           ),
@@ -463,35 +477,37 @@ class UserManualSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Your User Manual content here
-             Card(
-                 child: ClipRRect(
-    borderRadius: BorderRadius.circular(20),
-                child:Container(
-                  
-                  padding: EdgeInsets.only(
-                              left: 16,
-                              right: 16,
-                            ),
-                            width: 350,
-                            height: 300,
-                            
-                            color: Color.fromARGB(255, 242, 212, 244),
-                  child: Column(
-                    children: [
-                      Text(
-                        'User Manual:',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'Welcome to our app! Here is a user manual to help you get started:',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
+             Center(
+               child: Card(
+                   child: ClipRRect(
+                   borderRadius: BorderRadius.circular(20),
+                  child:Container(
+                    
+                    padding: EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                              ),
+                              width: 350,
+                              height: 300,
+                              
+                              color: Color.fromARGB(255, 255, 255, 255),
+                    child: Column(
+                      children: [
+                        Text(
+                          'User Manual:',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Welcome to our app! Here is a user manual to help you get started:',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
+                   )
                 ),
-                 )
-              ),
+             ),
               // Add more content as needed
             ],
           ),
