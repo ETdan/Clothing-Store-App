@@ -1,5 +1,6 @@
 import 'package:shega_cloth_store_app/database/googleauth.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
+import 'package:shega_cloth_store_app/screens/resetpassword.dart';
 import 'package:shega_cloth_store_app/utils/smallContainer.dart';
 
 import '/adminSide/adminLogin.dart';
@@ -105,16 +106,23 @@ class _signinState extends State<signin> {
                     ),
                     SizedBox(height: 20),
                     Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        'Forgot Password? ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                          color: Color(0xff281537),
-                        ),
-                      ),
-                    ),
+                        alignment: Alignment.centerRight,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushReplacement(MaterialPageRoute(
+                              builder: (context) => reset(),
+                            ));
+                          },
+                          child: Text(
+                            'Forgot Password? ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                              color: Color(0xff281537),
+                            ),
+                          ),
+                        )),
                     SizedBox(
                       height: 5,
                     ),
@@ -165,7 +173,7 @@ class _signinState extends State<signin> {
                                             listen: false)
                                         .userSignInMap(userData);
 
-                                    Navigator.of(context).push(
+                                    Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
                                         builder: (context) => first(),
                                       ),
@@ -246,7 +254,7 @@ class _signinState extends State<signin> {
                             ),
                             child: TextButton(
                               onPressed: () {
-                                Navigator.of(context).push(
+                                Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
                                     builder: (context) => AdminLogin(),
                                   ),
@@ -276,7 +284,7 @@ class _signinState extends State<signin> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.of(context).push(
+                              Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                   builder: (context) => signup(),
                                 ),

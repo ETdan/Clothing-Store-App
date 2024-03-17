@@ -50,13 +50,15 @@ class _filterState extends State<filter> {
               color: Color.fromARGB(137, 255, 255, 255),
             ),
           ),
-          title: const Center(
-            child: Text(
-              'Filter',
-              style: TextStyle(
-                fontSize: 20,
-                color: Color.fromARGB(221, 255, 255, 255),
-                fontWeight: FontWeight.bold,
+          title: SingleChildScrollView(
+            child: Center(
+              child: Text(
+                'Filter',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Color.fromARGB(221, 255, 255, 255),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
