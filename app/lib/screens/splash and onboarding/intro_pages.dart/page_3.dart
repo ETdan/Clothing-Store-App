@@ -14,8 +14,8 @@ class Page_3 extends StatelessWidget {
             begin: Alignment.topRight,
             end: Alignment.bottomRight,
             colors: [
-              Color.fromARGB(255, 180, 71, 239),
-              Color.fromARGB(255, 146, 46, 148),
+              Color(0xffB81736),
+                Color(0xff281537),
             ],
           ),
         ),
@@ -42,7 +42,8 @@ class Page_3 extends StatelessWidget {
                 MaterialButton(
             height: 60,
             minWidth: 350,
-            color: Color.fromARGB(255, 128, 140, 220),
+            color:  Color(0xffB81736),
+          
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
@@ -63,11 +64,11 @@ class Page_3 extends StatelessWidget {
                     'Get Started',
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.black87,
+                   color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Icon(Icons.arrow_forward_ios_outlined)
+                  Icon(Icons.arrow_forward_ios_outlined,  color: Colors.white,)
                 ],
               ),
             ),
