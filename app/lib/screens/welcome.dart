@@ -66,7 +66,7 @@ class _welcomeState extends State<welcome> {
               onLastPage
                   ? GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
+                        Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {
                           return signin();
                         }));

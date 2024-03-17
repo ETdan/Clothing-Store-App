@@ -149,7 +149,7 @@ class _signupState extends State<signup> {
                           print(userData.data());
                           Provider.of<UserProvider>(context, listen: false)
                               .userSignInMap(userData.data()!);
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => first(),
                             ),

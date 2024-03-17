@@ -1,8 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:shega_cloth_store_app/adminSide/adminLogin.dart';
 import 'package:shega_cloth_store_app/screens/signup.dart';
 
 class AdminStarterPage extends StatelessWidget {
+  const AdminStarterPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

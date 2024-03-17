@@ -7,6 +7,8 @@ class defaultt with ChangeNotifier {
   }
   bool islogin = false;
   bool isUser = false;
+  String usertoken = '';
+
   SharedPreferences? _prefs;
   _initializePrefs() async {
     if (_prefs == null) {
@@ -19,6 +21,7 @@ class defaultt with ChangeNotifier {
     await _initializePrefs();
     islogin = await _prefs?.getBool('loggedIn') ?? false;
     isUser = await _prefs?.getBool('isUser') ?? false;
+    usertoken = await _prefs?.getString('usertoken') ?? '';
     notifyListeners();
   }
 
@@ -43,7 +46,7 @@ class defaultt with ChangeNotifier {
     notifyListeners();
   }
 
-   void isAdminLogin() async {
+  void isAdminLogin() async {
     isUser = !isUser;
     _savingPrefs();
     notifyListeners();

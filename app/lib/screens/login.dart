@@ -145,7 +145,7 @@ class _signinState extends State<signin> {
                             Provider.of<UserProvider>(context, listen: false)
                                 .userSignInMap(userData);
 
-                            Navigator.of(context).push(
+                            Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 builder: (context) => first(),
                               ),
@@ -200,7 +200,7 @@ class _signinState extends State<signin> {
                 Text('Don\'t have an account ? '),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).push(
+                    Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
                         builder: (context) => signup(),
                       ),

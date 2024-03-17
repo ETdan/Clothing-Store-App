@@ -1,20 +1,14 @@
 import 'package:shega_cloth_store_app/adminSide/adminScreen/adminHome.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 import 'package:shega_cloth_store_app/screens/login.dart';
-
-import '/adminSide/adminLogin.dart';
 import '/database/auth.dart';
 import '/prefs/loginPreference.dart';
-import '/screens/first-page.dart';
-import '/screens/signup.dart';
 import '/utils/snackBar.dart';
 import '/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:uuid/uuid.dart';
-import 'package:provider/provider.dart';
 
 class AdminLogin extends StatefulWidget {
   const AdminLogin({super.key});
@@ -50,11 +44,11 @@ class _AdminLoginState extends State<AdminLogin> {
                     onPressed: () {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => signin(),
+                          builder: (context) => const signin(),
                         ),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       'User Login',
                       style: TextStyle(
                         fontSize: 20,
@@ -65,8 +59,8 @@ class _AdminLoginState extends State<AdminLogin> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
+            const Padding(
+              padding: EdgeInsets.only(
                 top: 100,
                 left: 30,
               ),
@@ -78,11 +72,11 @@ class _AdminLoginState extends State<AdminLogin> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30),
+            const Padding(
+              padding: EdgeInsets.only(left: 30),
               child: Text(
                 'Welcome back,',
                 style: TextStyle(
@@ -93,7 +87,7 @@ class _AdminLoginState extends State<AdminLogin> {
             textFields(
               controller: adminEmailController,
               hint: 'Username or email',
-              prefix: Icon(
+              prefix: const Icon(
                 Icons.person_2_outlined,
               ),
               maxLines: 1,
@@ -101,12 +95,12 @@ class _AdminLoginState extends State<AdminLogin> {
             textFields(
               controller: adminpasswordController,
               hint: 'Password',
-              prefix: Icon(
+              prefix: const Icon(
                 Icons.shopping_bag_rounded,
               ),
               maxLines: 1,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -117,7 +111,7 @@ class _AdminLoginState extends State<AdminLogin> {
                     return MaterialButton(
                         height: 60,
                         minWidth: width * 0.8,
-                        color: Color.fromARGB(255, 128, 140, 220),
+                        color: const Color.fromARGB(255, 128, 140, 220),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -149,7 +143,7 @@ class _AdminLoginState extends State<AdminLogin> {
                             );
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => adminHome(),
+                                builder: (context) => const adminHome(),
                               ),
                             );
                           } else {
@@ -162,7 +156,7 @@ class _AdminLoginState extends State<AdminLogin> {
                         child: isloggedin
                             ? Container(
                                 width: width * 0.6,
-                                child: Row(
+                                child: const Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
@@ -180,7 +174,7 @@ class _AdminLoginState extends State<AdminLogin> {
                                   ],
                                 ),
                               )
-                            : Center(
+                            : const Center(
                                 child: CircularProgressIndicator(
                                   color: Colors.green,
                                 ),
@@ -189,7 +183,7 @@ class _AdminLoginState extends State<AdminLogin> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Flexible(
