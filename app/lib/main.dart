@@ -17,8 +17,7 @@ import 'package:provider/provider.dart';
 
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(statusBarColor: Colors.transparent)
-  );
+      SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -51,7 +50,7 @@ class MyApp extends StatelessWidget {
               '/notification': (context) => productScreen(),
             },
             debugShowCheckedModeBanner: false,
-        home: Splash(isUserLoggedIn: value.islogin && value.isUser),
+            home: Splash(isUserLoggedIn: value.islogin && value.isUser),
           );
         },
       ),
