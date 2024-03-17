@@ -1,5 +1,6 @@
+import 'package:shega_cloth_store_app/adminSide/adminLogin.dart';
+import 'package:shega_cloth_store_app/adminSide/adminScreen/adminHome.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
-import 'package:shega_cloth_store_app/screens/login.dart';
 
 import '/database/auth.dart';
 import '/prefs/loginPreference.dart';
@@ -8,29 +9,34 @@ import '/utils/snackBar.dart';
 import '/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
+import 'package:provider/provider.dart';
 
-class signup extends StatefulWidget {
-  const signup({super.key});
+class AdminSignup extends StatefulWidget {
+  const AdminSignup({super.key});
 
   @override
-  State<signup> createState() => _signupState();
+  State<AdminSignup> createState() => _AdminSignupState();
 }
 
-class _signupState extends State<signup> {
+class _AdminSignupState extends State<AdminSignup> {
   bool isCheak = false;
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController userEmailController = TextEditingController();
-  TextEditingController userpasswordController = TextEditingController();
+  TextEditingController adminnameController = TextEditingController();
+  TextEditingController adminEmailController = TextEditingController();
+  TextEditingController adminpasswordController = TextEditingController();
+  TextEditingController adminCodeController = TextEditingController(); 
   bool isFinishedLogin = false;
+ 
+
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    DocumentSnapshot<Map<String, dynamic>> userData;
+    DocumentSnapshot<Map<String, dynamic>> UserData;
     FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    return Scaffold(
+     return Scaffold(
       body: Stack(
         children: [ Container( 
 
@@ -48,7 +54,7 @@ class _signupState extends State<signup> {
           child: 
               Padding(
                 padding: EdgeInsets.only(top: 60, left:22),
-                child: Text("Getting Started as admin\nCreate Account",
+                child: Text("Getting Started\nCreate Account",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -75,7 +81,7 @@ class _signupState extends State<signup> {
                 children: [
 
                   TextField(
-                    controller: userEmailController,
+                    controller: adminEmailController,
                     decoration: InputDecoration(
                       suffixIcon: Icon(Icons.check, color: Colors.grey,),
                       label: Text("Gmail", style: TextStyle(
@@ -85,7 +91,7 @@ class _signupState extends State<signup> {
                     ),
                   ),
                    TextField(
-                   controller: usernameController,
+                    controller: adminnameController,
                     decoration: InputDecoration(
                       suffixIcon: Icon(Icons.check, color: Colors.grey,),
                       label: Text("User name", style: TextStyle(
@@ -95,7 +101,7 @@ class _signupState extends State<signup> {
                     ),
                   ),
                   TextField(
-                    controller: userpasswordController,
+                     controller: adminpasswordController,
                       decoration: InputDecoration(
                       suffixIcon: Icon(Icons.visibility_off, color: Colors.grey,),
                       label: Text("Password", style: TextStyle(
@@ -105,7 +111,7 @@ class _signupState extends State<signup> {
                     ),
                   ),
                   SizedBox(height: 20),
-                    Padding(
+                   Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Row(
                 children: [
@@ -151,90 +157,102 @@ Container(
   
   child: Consumer<defaultt>(
                   builder: (context, value, child) {
-                    return MaterialButton(
-                      height: 60,
-                      minWidth: width * 0.8,
-                     
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      onPressed: () async {
-                        setState(() {
-                          isFinishedLogin = true;
-                        });
-                        String result = await authMethod().UserSignUp(
-                          userName: usernameController.text,
-                          email: userEmailController.text,
-                          password: userpasswordController.text,
-                        );
-                        setState(() {
-                          isFinishedLogin = false;
-                        });
-                        if (result == 'success') {
-                          userData = await _firestore
-                              .collection('users')
-                              .doc(
-                                FirebaseAuth.instance.currentUser!.uid,
-                              )
-                              .get();
+                    return Container(
+                           decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(30),
+    gradient: LinearGradient(
+      colors: [
+        Color(0xffB81736),
+        Color(0xff281537),
+      ],
+    ),
+  ),
 
-                          print(userData.data());
-                          Provider.of<UserProvider>(context, listen: false)
-                              .userSignInMap(userData.data()!);
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => first(),
-                            ),
+                      child: MaterialButton(
+                        height: 60,
+                        minWidth: 400,
+                        
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        onPressed: () async {
+                          setState(() {
+                            isFinishedLogin = true;
+                          });
+                          String result = await authMethod().adminSignUp(
+                            adminName: adminnameController.text,
+                            adminEmail: adminEmailController.text,
+                            adminPassword: adminpasswordController.text,
+                           
+                      
                           );
                           setState(() {
-                            value.toggle();
-                            value.isUserLogin();
+                            isFinishedLogin = false;
                           });
-                        } else {
-                          showSnack(
-                            'please,enter correct information or register first!',
-                            context,
-                          );
-                        }
-                      },
-                      child: isFinishedLogin
-                          ? Center(
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
+                          if (result == 'success') {
+                            UserData = await _firestore
+                                .collection('admins')
+                                .doc(
+                                  FirebaseAuth.instance.currentUser!.uid,
+                                )
+                                .get();
+                      
+                            print(UserData.data());
+                            Provider.of<UserProvider>(context, listen: false)
+                                .adminSignInMap(UserData.data()!);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => adminHome(),
                               ),
-                            )
-                          : Container(
-                              width: width * 0.6,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'Sign up',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: const Color.fromARGB(221, 255, 255, 255),
-                                      fontWeight: FontWeight.bold,
+                            );
+                            setState(() {
+                              value.toggle();
+                              value.isAdminLogin();
+                            });
+                          } else {
+                            showSnack(
+                              'please,enter correct information or register first!',
+                              context,
+                            );
+                          }
+                        },
+                        child: isFinishedLogin
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              )
+                            : Container(
+                                width: 350,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      'Sign up',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: const Color.fromARGB(221, 255, 255, 255),
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
-                                  Icon(
-                                    Icons.login_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ],
+                                    Icon(
+                                      Icons.login_outlined,
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
+                      ),
                     );
                   },
                 ),
-
 
 
 ),
 SizedBox(height: 5,),
 
 SizedBox(height: 5,),
-
 
 Align(
   alignment: Alignment.bottomRight,
@@ -246,7 +264,7 @@ Align(
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => signin(),
+                        builder: (context) => AdminLogin(),
                       ),
                     );
                   },

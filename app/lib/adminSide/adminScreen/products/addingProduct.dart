@@ -79,7 +79,7 @@ String getCategory(String gender, String color, String brand) {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xffB81736),
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {
@@ -87,156 +87,157 @@ String getCategory(String gender, String color, String brand) {
           },
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black87,
+            color: const Color.fromARGB(221, 255, 255, 255),
           ),
         ),
         title: Center(
           child: Text(
             'Adding New Product',
             style: TextStyle(
-              color: Colors.black87,
+              color: const Color.fromARGB(221, 255, 255, 255),
             ),
           ),
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color.fromARGB(255, 196, 156, 199), Color.fromARGB(255, 227, 145, 248)], // Example gradient colors
-          ),
-        ),
-        child: SafeArea(
-          
-          child: SingleChildScrollView(
-            child: Column(
-              
+      body:Stack(
+        children: [ Container( 
+        
+        
+            height: double.infinity,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xffB81736),
+                  Color(0xff281537),
+                ]
+                ),
+            ),
+          child: Column(
             
-              children: [
-                SizedBox(height: 50),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment:CrossAxisAlignment.center ,
-                  children: [
-                    Card(
-                    
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                        padding: EdgeInsets.only(left: 16, right: 16),
-                        width: 350,
-                        height: 800,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Color.fromARGB(255, 208, 209, 211),
-                              Color.fromARGB(255, 179, 179, 179),
-                            ],
-                          ),
-                        ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              textFields(
-                                controller: titleController,
-                                hint: 'Title', maxLines: 1,
-                              ),
-                              textFields(
-                                controller: priceController,
-                                hint: 'Price',
-                                maxLines: 1
-                              ),
-                              textFields(
-                                controller: discriptionController,
-                                hint: 'Description',
-                                maxLines: 1
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      height: 200,
-                                      width: 200,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.black54),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: image != null
-                                          ? Image(
-                                              image: MemoryImage(image!),
-                                              fit: BoxFit.fill,
-                                            )
-                                          : Center(
-                                              child: IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(
-                                                  Icons.upload,
-                                                  size: 30,
-                                                  color: Colors.black87,
-                                                ),
+          
+            children: [
+              SizedBox(height: 10),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment:CrossAxisAlignment.center ,
+                children: [
+                  Card(
+                  
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        
+                      padding: EdgeInsets.only(left: 16, right: 16),
+                      width: 350,
+                      height: 700,
+                      decoration: BoxDecoration(
+                      
+                      ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            textFields(
+                              controller: titleController,
+                              hint: 'Title', maxLines: 1,
+                            ),
+                            textFields(
+                              controller: priceController,
+                              hint: 'Price',
+                              maxLines: 1
+                            ),
+                            textFields(
+                              controller: discriptionController,
+                              hint: 'Description',
+                              maxLines: 1
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: 200,
+                                    width: 200,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black54),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: image != null
+                                        ? Image(
+                                            image: MemoryImage(image!),
+                                            fit: BoxFit.fill,
+                                          )
+                                        : Center(
+                                            child: IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.upload,
+                                                size: 30,
+                                                color: Colors.black87,
                                               ),
                                             ),
-                                    ),
-                                    Positioned(
-                                      bottom: -3,
-                                      right: -3,
-                                      child: IconButton(
-                                        icon: Icon(
-                                          Icons.add_a_photo_outlined,
-                                        ),
-                                        onPressed: () => selectedImages(),
+                                          ),
+                                  ),
+                                  Positioned(
+                                    bottom: -3,
+                                    right: -3,
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.add_a_photo_outlined,
                                       ),
+                                      onPressed: () => selectedImages(),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: 20),
-                              // Category Selection
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  categorySelector(
-                                    title: 'Gender',
-                                    selectedCategory: selectedGender,
-                                    options: ['male', 'female'],
-                                    onSelect: (value) {
-                                      setState(() {
-                                        selectedGender = value;
-                                      });
-                                    },
-                                  ),
-                                  categorySelector(
-                                    title: 'Color',
-                                    selectedCategory: selectedColor,
-                                    options: ['blue', 'red', 'green', 'white', 'black', 'grey'],
-                                    onSelect: (value) {
-                                      setState(() {
-                                        selectedColor = value;
-                                      });
-                                    },
-                                  ),
-                                  categorySelector(
-                                    title: 'Brand',
-                                    selectedCategory: selectedBrand,
-                                    options: ['nike', 'adidas', 'puma', 'CR7'],
-                                    onSelect: (value) {
-                                      setState(() {
-                                        selectedBrand = value;
-                                      });
-                                    },
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 20),
-                              // Upload New Product Button
-                              Padding(
-                                padding: const EdgeInsets.only(left: 30, right: 30),
+                            ),
+                            SizedBox(height: 20),
+                            // Category Selection
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                categorySelector(
+                                  title: 'Gender',
+                                  selectedCategory: selectedGender,
+                                  options: ['male', 'female'],
+                                  onSelect: (value) {
+                                    setState(() {
+                                      selectedGender = value;
+                                    });
+                                  },
+                                ),
+                                categorySelector(
+                                  title: 'Color',
+                                  selectedCategory: selectedColor,
+                                  options: ['blue', 'red', 'green', 'white', 'black', 'grey'],
+                                  onSelect: (value) {
+                                    setState(() {
+                                      selectedColor = value;
+                                    });
+                                  },
+                                ),
+                                categorySelector(
+                                  title: 'Brand',
+                                  selectedCategory: selectedBrand,
+                                  options: ['nike', 'adidas', 'puma', 'CR7'],
+                                  onSelect: (value) {
+                                    setState(() {
+                                      selectedBrand = value;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            // Upload New Product Button
+                            Padding(
+                              padding: const EdgeInsets.only(left: 30, right: 30),
+                             
+                
+                
+                   
                                 child: MaterialButton(
-                                  color: Color.fromARGB(255, 112, 101, 185),
+                                  color:  Color(0xffB81736),
                                   shape: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                   ),
@@ -246,22 +247,23 @@ String getCategory(String gender, String color, String brand) {
                                   child: Center(
                                     child: Text(
                                       'Upload New Product',
-                                      style: TextStyle(color: Colors.black87),
+                                      style: TextStyle(color: const Color.fromARGB(221, 255, 255, 255)),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
+        ]
       ),
     );
   }
