@@ -21,7 +21,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds: 6),
+      Duration(seconds: 3),
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -63,6 +63,7 @@ class _SplashState extends State<Splash> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
+                    color: Colors.white,
                   ),
                 ),
               ],

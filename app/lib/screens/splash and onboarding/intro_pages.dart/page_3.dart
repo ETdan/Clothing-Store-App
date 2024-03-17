@@ -64,11 +64,11 @@ class Page_3 extends StatelessWidget {
                     'Get Started',
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.black87,
+                   color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Icon(Icons.arrow_forward_ios_outlined)
+                  Icon(Icons.arrow_forward_ios_outlined,  color: Colors.white,)
                 ],
               ),
             ),
