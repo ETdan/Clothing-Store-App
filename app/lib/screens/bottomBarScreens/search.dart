@@ -1,3 +1,6 @@
+import 'package:shega_cloth_store_app/database/auth.dart';
+import 'package:shega_cloth_store_app/utils/snackBar.dart';
+
 import '/screens/otherScreens/filter.dart';
 import '/screens/otherScreens/showdetails.dart';
 import '/utils/likeanimation.dart';
@@ -19,6 +22,7 @@ class SearchScreen extends StatefulWidget {
 class _searchScreenState extends State<SearchScreen> {
   TextEditingController searchController = TextEditingController();
   bool isShowData = false;
+  bool isfinished = false;
 
   Future<QuerySnapshot<Object?>> performSearchAndFilter(String searchQuery,
       [String gender = '', String color = '']) {
@@ -50,18 +54,16 @@ class _searchScreenState extends State<SearchScreen> {
     }
 
     return Scaffold(
-backgroundColor:     Color(0xffB81736),
+      backgroundColor: Color(0xffB81736),
       body: SafeArea(
         child: Container(
-           height: double.infinity,
+          height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xffB81736),
-                Color(0xff281537),
-              ]
-              ),
+            gradient: LinearGradient(colors: [
+              Color(0xffB81736),
+              Color(0xff281537),
+            ]),
           ),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -82,15 +84,16 @@ backgroundColor:     Color(0xffB81736),
                               });
                             },
                             decoration: InputDecoration(
-                            
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               prefixIcon: Padding(
-                                padding: const EdgeInsets.only(left: 20, right: 20),
+                                padding:
+                                    const EdgeInsets.only(left: 20, right: 20),
                                 child: Icon(
                                   Icons.search,
-                                  color: const Color.fromARGB(255, 255, 255, 255),
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
                                 ),
                               ),
                               suffixIcon: IconButton(
@@ -102,7 +105,8 @@ backgroundColor:     Color(0xffB81736),
                                   color: Colors.white,
                                 ),
                               ),
-                              hintText: 'search here', hintStyle: TextStyle(color: Colors.white),
+                              hintText: 'search here',
+                              hintStyle: TextStyle(color: Colors.white),
                             ),
                           ),
                         )
@@ -117,14 +121,18 @@ backgroundColor:     Color(0xffB81736),
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Results for\" ${searchController.text}\"',style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                            'Results for\" ${searchController.text}\"',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
-                              Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xffB81736),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        padding: EdgeInsets.all(2),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Color(0xffB81736),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: EdgeInsets.all(2),
                             child: TextButton(
                               onPressed: () {
                                 Navigator.pushNamed(context, '/filter',
@@ -135,7 +143,7 @@ backgroundColor:     Color(0xffB81736),
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 255, 255, 255),
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 16, 
+                                  fontSize: 16,
                                 ),
                               ),
                             ),
@@ -171,7 +179,8 @@ backgroundColor:     Color(0xffB81736),
                                 );
                               }
                               return Padding(
-                                padding: const EdgeInsets.only(left: 10, top: 10),
+                                padding:
+                                    const EdgeInsets.only(left: 10, top: 10),
                                 child: SizedBox(
                                   height: MediaQuery.of(context).size.height,
                                   child: GridView.count(
@@ -186,15 +195,16 @@ backgroundColor:     Color(0xffB81736),
                                             MaterialPageRoute(
                                               builder: (context) => showDetails(
                                                 indexs: index,
-                                                title: snapshot.data!.docs[index]
-                                                    ['title'],
-                                                price: snapshot.data!.docs[index]
-                                                    ['price'],
-                                                images: snapshot.data!.docs[index]
-                                                    ['photourl'],
+                                                title: snapshot
+                                                    .data!.docs[index]['title'],
+                                                price: snapshot
+                                                    .data!.docs[index]['price'],
+                                                images: snapshot.data!
+                                                    .docs[index]['photourl'],
                                                 discription: snapshot.data!
                                                     .docs[index]['description'],
-                                                like: snapshot.data!.docs[index],
+                                                like:
+                                                    snapshot.data!.docs[index],
                                               ),
                                             ),
                                           );
@@ -205,7 +215,8 @@ backgroundColor:     Color(0xffB81736),
                                           width: 90,
                                           decoration: BoxDecoration(
                                             color: Colors.grey[200],
-                                            borderRadius: BorderRadius.circular(15),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
                                           ),
                                           child: Column(
                                             crossAxisAlignment:
@@ -218,10 +229,12 @@ backgroundColor:     Color(0xffB81736),
                                                     width: 200,
                                                     decoration: BoxDecoration(
                                                       borderRadius:
-                                                          BorderRadius.circular(15),
+                                                          BorderRadius.circular(
+                                                              15),
                                                       image: DecorationImage(
                                                         image: NetworkImage(
-                                                          snapshot.data!.docs[index]
+                                                          snapshot.data!
+                                                                  .docs[index]
                                                               ['photourl'],
                                                         ),
                                                         fit: BoxFit.fill,
@@ -234,7 +247,8 @@ backgroundColor:     Color(0xffB81736),
                                                       product: snapshot
                                                           .data!.docs[index],
                                                       snap: FirebaseAuth
-                                                          .instance.currentUser!,
+                                                          .instance
+                                                          .currentUser!,
                                                     ),
                                                   ),
                                                 ],
@@ -250,34 +264,80 @@ backgroundColor:     Color(0xffB81736),
                                                     Column(
                                                       children: [
                                                         Text(
-                                                          snapshot.data!.docs[index]
+                                                          snapshot.data!
+                                                                  .docs[index]
                                                               ['title'],
-                                                          style: const TextStyle(
+                                                          style:
+                                                              const TextStyle(
                                                             fontSize: 20,
                                                             fontWeight:
                                                                 FontWeight.bold,
-                                                            color: Colors.black87,
+                                                            color:
+                                                                Colors.black87,
                                                           ),
                                                         ),
                                                         Text(
                                                           '\$ ${snapshot.data!.docs[index]['price']} ',
-                                                          style: const TextStyle(
+                                                          style:
+                                                              const TextStyle(
                                                             fontSize: 20,
                                                             fontWeight:
                                                                 FontWeight.bold,
-                                                            color: Colors.black87,
+                                                            color:
+                                                                Colors.black87,
                                                           ),
                                                         ),
                                                       ],
                                                     ),
                                                     ClipOval(
-                                                      clipBehavior: Clip.antiAlias,
+                                                      clipBehavior:
+                                                          Clip.antiAlias,
                                                       child: Material(
-                                                        color: const Color.fromARGB(
+                                                        color: Color.fromARGB(
                                                             214, 117, 73, 220),
                                                         child: IconButton(
-                                                          onPressed: () {},
-                                                          icon: const Center(
+                                                          onPressed: () async {
+                                                            setState(() {
+                                                              isfinished =
+                                                                  false;
+                                                            });
+                                                            String res =
+                                                                await authMethod()
+                                                                    .toCart(
+                                                              imageurl: snapshot
+                                                                          .data!
+                                                                          .docs[
+                                                                      index]
+                                                                  ['photourl'],
+                                                              title: snapshot
+                                                                          .data!
+                                                                          .docs[
+                                                                      index]
+                                                                  ['title'],
+                                                              price: snapshot
+                                                                          .data!
+                                                                          .docs[
+                                                                      index]
+                                                                  ['price'],
+                                                            );
+                                                            setState(() {
+                                                              isfinished = true;
+                                                            });
+                                                            if (res ==
+                                                                'success') {
+                                                              showSnack(
+                                                                  'Added to cart',
+                                                                  context);
+                                                            } else {
+                                                              showSnack(
+                                                                  'some error occured.cheak your connection',
+                                                                  context);
+                                                            }
+                                                            setState(() {
+                                                              isfinished = true;
+                                                            });
+                                                          },
+                                                          icon: Center(
                                                             child: Icon(
                                                               Icons.add,
                                                               //color: Colors.purple,

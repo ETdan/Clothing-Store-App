@@ -10,9 +10,9 @@ class PaypalPayment extends StatelessWidget {
       body: PaypalCheckoutView(
         sandboxMode: true,
         clientId:
-            "AYNraIHprwW3ExZshqa3XqWOxOwtoUIb0z3W1cPPFjAoszB8L0A0gRE0NgDbvSwH-esagnzE0s86llpc",
+            "AWZvsxu3RpPa09QmaDGQESzokzS-XktU4Dk7nLMkjsea488GSTknltiwGQ7KGL9ykXGnGkMhh6gc5DU1",
         secretKey:
-            "EMaiz6T5kV8Cvsb8z3Inp10UKEGPz1x0_FuyNuO1pWwmeGKeRxgTVsW61PGgLZ2t9QV0yia06PK0ViAW",
+            "EGcIdWU0TRYOi2Hmla4CocPHmPJEW-fUJLeig9xpnD3prRYmaoD-sJBc3okvnXGSAlYkCno2UloElifZ",
         transactions: const [
           {
             "amount": {

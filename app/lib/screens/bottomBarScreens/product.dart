@@ -27,10 +27,9 @@ class _productScreenState extends State<productScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-backgroundColor: Color(0xffB81736),
+        backgroundColor: Color(0xffB81736),
         automaticallyImplyLeading: false,
         title: Row(
-
           children: [
             Row(
               children: [
@@ -38,10 +37,14 @@ backgroundColor: Color(0xffB81736),
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.arrow_back, color: Colors.white,), // Assuming 'icon' is already defined elsewhere
-                )
-                ,
-                SizedBox(width: 120,),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ), // Assuming 'icon' is already defined elsewhere
+                ),
+                SizedBox(
+                  width: 120,
+                ),
                 Center(
                   child: Text(
                     'Cart',
@@ -66,17 +69,14 @@ backgroundColor: Color(0xffB81736),
         ],
       ),
       body: SafeArea(
-
-        child:Container(
-           height: double.infinity,
+        child: Container(
+          height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xffB81736),
-                Color(0xff281537),
-              ]
-              ),
+            gradient: LinearGradient(colors: [
+              Color(0xffB81736),
+              Color(0xff281537),
+            ]),
           ),
           child: Column(
             children: [
@@ -87,9 +87,9 @@ backgroundColor: Color(0xffB81736),
                   right: 10,
                 ),
                 child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16),
                   child: Container(
-                    height: 420,
+                    height: 370,
                     color: Color.fromARGB(255, 252, 228, 228),
                     child: ListView(
                       children: [
@@ -100,7 +100,8 @@ backgroundColor: Color(0xffB81736),
                               .collection('cart')
                               .snapshots(),
                           builder: (context, snapshot) {
-                            if (snapshot.connectionState == ConnectionState.waiting) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
                               return Center(
                                 child: CircularProgressIndicator(
                                   color: Color(0xffB81736),
@@ -109,11 +110,11 @@ backgroundColor: Color(0xffB81736),
                             }
                             return Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20)
-                              ),
+                                  borderRadius: BorderRadius.circular(20)),
                               height: 410,
                               child: ListView.builder(
-                                itemCount: (snapshot.data! as dynamic).docs.length,
+                                itemCount:
+                                    (snapshot.data! as dynamic).docs.length,
                                 itemBuilder: (context, index) {
                                   return Container(
                                     height: 150,
@@ -133,15 +134,18 @@ backgroundColor: Color(0xffB81736),
                                                       BorderRadius.circular(20),
                                                   image: DecorationImage(
                                                       image: NetworkImage(
-                                                        snapshot.data!.docs[index]
+                                                        snapshot.data!
+                                                                .docs[index]
                                                             ['imageurl'],
                                                       ),
                                                       fit: BoxFit.fill),
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.symmetric(
-                                                    vertical: 20, horizontal: 20),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 20,
+                                                        horizontal: 20),
                                                 child: Column(
                                                   children: [
                                                     Text(
@@ -149,15 +153,15 @@ backgroundColor: Color(0xffB81736),
                                                           ['title'],
                                                       style: TextStyle(
                                                         color: Colors.black87,
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     ),
                                                     SizedBox(
                                                       height: 20,
                                                     ),
                                                     Text(
-                                                      snapshot.data!.docs[index]
-                                                          ['price'],
+                                                      "\$${snapshot.data!.docs[index]['price']}",
                                                       style: TextStyle(
                                                         color: Colors.black54,
                                                       ),
@@ -171,19 +175,22 @@ backgroundColor: Color(0xffB81736),
                                             children: [
                                               IconButton(
                                                 onPressed: () async {
-                                                  await authMethod().deletingcarts(
+                                                  await authMethod()
+                                                      .deletingcarts(
                                                     snapshot.data!.docs[index]
                                                         ['userId'],
                                                   );
-                            
+
                                                   Navigator.pushReplacement(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (context) => first(
+                                                          builder: (context) =>
+                                                              first(
                                                                 page: 2,
                                                               )));
-                            
-                                                  showSnack('Deleted!', context);
+
+                                                  showSnack(
+                                                      'Deleted!', context);
                                                 },
                                                 icon: Icon(
                                                   Icons.delete_outline,
@@ -196,39 +203,39 @@ backgroundColor: Color(0xffB81736),
                                                 height: 20,
                                               ),
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.only(right: 20),
+                                                padding: const EdgeInsets.only(
+                                                    right: 20),
                                                 child: Row(
                                                   children: [
-                                                    ClipOval(
-                                                      child: Material(
-                                                        color: Color(0xffB81736),
-                                                        child: IconButton(
-                                                          onPressed: () {},
-                                                          icon: Icon(
-                                                            color: Colors.white,
-                                                            size: 30,
-                                                            Icons.minimize_outlined,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 20,
-                                                    ),
-                                                    ClipOval(
-                                                      child: Material(
-                                                        color: Color(0xffB81736),
-                                                        child: IconButton(
-                                                          onPressed: () {},
-                                                          icon: Icon(
-                                                            Icons.add,
-                                                            color: Colors.white,
-                                                            size: 30,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
+                                                    // ClipOval(
+                                                    //   child: Material(
+                                                    //     color: Color(0xffB81736),
+                                                    //     child: IconButton(
+                                                    //       onPressed: () {},
+                                                    //       icon: Icon(
+                                                    //         color: Colors.white,
+                                                    //         size: 30,
+                                                    //         Icons.minimize_outlined,
+                                                    //       ),
+                                                    //     ),
+                                                    //   ),
+                                                    // ),
+                                                    // SizedBox(
+                                                    //   width: 20,
+                                                    // ),
+                                                    // ClipOval(
+                                                    //   child: Material(
+                                                    //     color: Color(0xffB81736),
+                                                    //     child: IconButton(
+                                                    //       onPressed: () {},
+                                                    //       icon: Icon(
+                                                    //         Icons.add,
+                                                    //         color: Colors.white,
+                                                    //         size: 30,
+                                                    //       ),
+                                                    //     ),
+                                                    //   ),
+                                                    // ),
                                                   ],
                                                 ),
                                               ),
@@ -262,7 +269,7 @@ backgroundColor: Color(0xffB81736),
                       ),
                     );
                   },
-                  color:  Color.fromARGB(255, 235, 151, 168),
+                  color: Color.fromARGB(255, 235, 151, 168),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),

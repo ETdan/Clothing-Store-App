@@ -13,6 +13,8 @@ class _summeryState extends State<summery> {
   List<Map<String, dynamic>> userdata = [];
   var count = 0;
   var price = 0;
+  var discount = 0;
+  var delivery = 0;
 
   @override
   Future<List<Map<String, dynamic>>> getDataFromFirestore() async {
@@ -55,6 +57,10 @@ class _summeryState extends State<summery> {
         count += 1;
       });
     }
+    setState(() {
+      discount = (price * 0.15).round();
+      delivery = (price * 0.05).round();
+    });
   }
 
   @override
@@ -75,7 +81,7 @@ class _summeryState extends State<summery> {
             'Order summary',
             style: TextStyle(
               color: const Color.fromARGB(221, 255, 254, 254),
-              fontSize: 17,
+              fontSize: 14,
             ),
           ),
           Row(
@@ -83,36 +89,34 @@ class _summeryState extends State<summery> {
             children: [
               Text(
                 'Items',
-                style: TextStyle(color: const Color.fromARGB(221, 255, 254, 254),
-              fontSize: 17,),
+                style: TextStyle(
+                  color: const Color.fromARGB(221, 255, 254, 254),
+                  fontSize: 14,
+                ),
               ),
-              Text('${count}', style: TextStyle(color: const Color.fromARGB(221, 255, 254, 254),
-              fontSize: 17,)),
+              Text('${count}',
+                  style: TextStyle(
+                    color: const Color.fromARGB(221, 255, 254, 254),
+                    fontSize: 14,
+                  )),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Subtotal', style: TextStyle(color: const Color.fromARGB(221, 255, 254, 254),
-              fontSize: 17,),
+                'Subtotal',
+                style: TextStyle(
+                  color: const Color.fromARGB(221, 255, 254, 254),
+                  fontSize: 14,
+                ),
               ),
               Text(
-                '\$${price}', style: TextStyle(color: const Color.fromARGB(221, 255, 254, 254),
-              fontSize: 17,),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Discount', style: TextStyle(color: const Color.fromARGB(221, 255, 254, 254),
-              fontSize: 17,),
-              ),
-              Text(
-                '\$5', style: TextStyle(color: const Color.fromARGB(221, 255, 254, 254),
-              fontSize: 17,),
+                '\$${price}',
+                style: TextStyle(
+                  color: const Color.fromARGB(221, 255, 254, 254),
+                  fontSize: 14,
+                ),
               ),
             ],
           ),
@@ -120,12 +124,37 @@ class _summeryState extends State<summery> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Delivery Charges', style: TextStyle(color: const Color.fromARGB(221, 255, 254, 254),
-              fontSize: 17,),
+                'Discount',
+                style: TextStyle(
+                  color: const Color.fromARGB(221, 255, 254, 254),
+                  fontSize: 14,
+                ),
               ),
               Text(
-                '\$2', style: TextStyle(color: const Color.fromARGB(221, 255, 254, 254),
-              fontSize: 17,),
+                '\$${discount}',
+                style: TextStyle(
+                  color: const Color.fromARGB(221, 255, 254, 254),
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Delivery Charges',
+                style: TextStyle(
+                  color: const Color.fromARGB(221, 255, 254, 254),
+                  fontSize: 14,
+                ),
+              ),
+              Text(
+                '\$${delivery}',
+                style: TextStyle(
+                  color: const Color.fromARGB(221, 255, 254, 254),
+                  fontSize: 14,
+                ),
               ),
             ],
           ),
@@ -141,12 +170,18 @@ class _summeryState extends State<summery> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                ' Total', style: TextStyle(color: const Color.fromARGB(221, 255, 254, 254),
-              fontSize: 17,),
+                ' Total',
+                style: TextStyle(
+                  color: const Color.fromARGB(221, 255, 254, 254),
+                  fontSize: 14,
+                ),
               ),
               Text(
-                '\$${price + 2 - 5}', style: TextStyle(color: const Color.fromARGB(221, 255, 254, 254),
-              fontSize: 17,),
+                '\$${price + delivery - discount}',
+                style: TextStyle(
+                  color: const Color.fromARGB(221, 255, 254, 254),
+                  fontSize: 14,
+                ),
               ),
             ],
           ),

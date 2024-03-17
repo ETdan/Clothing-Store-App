@@ -35,7 +35,7 @@ class _firstState extends State<first> {
         },
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         //tabBackgroundColor: Colors.grey,
-        activeColor: Colors.purple,
+        activeColor: Color(0xffB81736),
         selectedIndex: widget.page,
         color: Colors.grey,
         tabBorderRadius: 14,
