@@ -137,7 +137,7 @@ class _showDetailsState extends State<showDetails> {
                       right: 20,
                     ),
                     child: Text(
-                      '${widget.price}',
+                      '\$ ${widget.price}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 105, 94, 231),

@@ -183,7 +183,7 @@ class _searchScreenState extends State<SearchScreen> {
                                       width: 90,
                                       decoration: BoxDecoration(
                                         color: Colors.grey[200],
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(15),
                                       ),
                                       child: Column(
                                         crossAxisAlignment:
@@ -196,7 +196,7 @@ class _searchScreenState extends State<SearchScreen> {
                                                 width: 200,
                                                 decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(10),
+                                                      BorderRadius.circular(15),
                                                   image: DecorationImage(
                                                     image: NetworkImage(
                                                       snapshot.data!.docs[index]

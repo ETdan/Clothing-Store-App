@@ -27,7 +27,7 @@ class _EditProductState extends State<EditProduct> {
   String selectedGender = 'male';
   String selectedColor = 'blue';
   String selectedBrand = 'nike';
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
