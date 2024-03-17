@@ -25,7 +25,7 @@ class _SplashState extends State<Splash> {
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => widget.isUserLoggedIn ? const first() : welcome(),
+          builder: (context) => widget.isUserLoggedIn ? first() : welcome(),
         ),
       ),
     );

@@ -1,13 +1,13 @@
-import 'package:shega_cloth_store_app/database/auth.dart';
-import 'package:shega_cloth_store_app/utils/snackBar.dart';
-
+import '/screens/otherScreens/filter.dart';
 import '/screens/otherScreens/showdetails.dart';
 import '/utils/likeanimation.dart';
 import '/utils/shimmerwidget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -43,7 +43,6 @@ class _searchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool isfinished;
     Map<String, dynamic> arguments = {};
     if (ModalRoute.of(context)!.settings.arguments != null) {
       arguments =
@@ -251,44 +250,11 @@ class _searchScreenState extends State<SearchScreen> {
                                                 ClipOval(
                                                   clipBehavior: Clip.antiAlias,
                                                   child: Material(
-                                                    color: Color.fromARGB(
+                                                    color: const Color.fromARGB(
                                                         214, 117, 73, 220),
                                                     child: IconButton(
-                                                      onPressed: () async {
-                                                        setState(() {
-                                                          isfinished = false;
-                                                        });
-                                                        String res =
-                                                            await authMethod()
-                                                                .toCart(
-                                                          imageurl: snapshot
-                                                                  .data!
-                                                                  .docs[index]
-                                                              ['photourl'],
-                                                          title: snapshot.data!
-                                                                  .docs[index]
-                                                              ['title'],
-                                                          price: snapshot.data!
-                                                                  .docs[index]
-                                                              ['price'],
-                                                        );
-                                                        setState(() {
-                                                          isfinished = true;
-                                                        });
-                                                        if (res == 'success') {
-                                                          showSnack(
-                                                              'Added to cart',
-                                                              context);
-                                                        } else {
-                                                          showSnack(
-                                                              'some error occured.cheak your connection',
-                                                              context);
-                                                        }
-                                                        setState(() {
-                                                          isfinished = true;
-                                                        });
-                                                      },
-                                                      icon: Center(
+                                                      onPressed: () {},
+                                                      icon: const Center(
                                                         child: Icon(
                                                           Icons.add,
                                                           //color: Colors.purple,

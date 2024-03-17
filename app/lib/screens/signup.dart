@@ -181,7 +181,7 @@ Container(
                           print(userData.data());
                           Provider.of<UserProvider>(context, listen: false)
                               .userSignInMap(userData.data()!);
-                          Navigator.of(context).pushReplacement(
+                          Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => first(),
                             ),

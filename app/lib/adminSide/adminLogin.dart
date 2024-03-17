@@ -1,15 +1,20 @@
 import 'package:shega_cloth_store_app/adminSide/adminScreen/adminHome.dart';
-import 'package:shega_cloth_store_app/adminSide/adminSignuo.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 import 'package:shega_cloth_store_app/screens/login.dart';
+
+import '/adminSide/adminLogin.dart';
 import '/database/auth.dart';
 import '/prefs/loginPreference.dart';
+import '/screens/first-page.dart';
+import '/screens/signup.dart';
 import '/utils/snackBar.dart';
 import '/utils/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
+import 'package:provider/provider.dart';
 
 class AdminLogin extends StatefulWidget {
   const AdminLogin({super.key});
@@ -246,30 +251,6 @@ class _AdminLoginState extends State<AdminLogin> {
                                 color: Colors.white,
                               ),
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          'Don\'t have an account?',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => AdminSignup(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            'Sign Up',
                           ),
                         ),
                       ],

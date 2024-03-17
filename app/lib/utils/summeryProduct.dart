@@ -1,7 +1,68 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class summery extends StatelessWidget {
+class summery extends StatefulWidget {
   const summery({super.key});
+
+  @override
+  State<summery> createState() => _summeryState();
+}
+
+class _summeryState extends State<summery> {
+  List<Map<String, dynamic>> userdata = [];
+  var count = 0;
+  var price = 0;
+
+  @override
+  Future<List<Map<String, dynamic>>> getDataFromFirestore() async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    List<Map<String, dynamic>> dataList = [];
+
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('cart')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('cart')
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        for (DocumentSnapshot document in querySnapshot.docs) {
+          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+          dataList.add(data);
+        }
+      } else {
+        print('No documents found in the collection.');
+      }
+    } catch (e) {
+      print('Error retrieving data from Firestore: $e');
+    }
+
+    return dataList;
+  }
+
+  Future<void> fetchDataFromFirestore() async {
+    List<Map<String, dynamic>> dataList = await getDataFromFirestore();
+    setState(() {
+      price = 0;
+      count = 0;
+    });
+    // Use the dataList variable to access the retrieved data
+    for (var data in dataList) {
+      int prico = int.parse(data["price"]);
+      setState(() {
+        price += prico;
+        count += 1;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    fetchDataFromFirestore();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +84,7 @@ class summery extends StatelessWidget {
               Text(
                 'Items',
               ),
-              Text(
-                '3',
-              ),
+              Text('${count}'),
             ],
           ),
           Row(
@@ -35,7 +94,7 @@ class summery extends StatelessWidget {
                 'Subtotal',
               ),
               Text(
-                '\$567',
+                '\$${price}',
               ),
             ],
           ),
@@ -76,7 +135,7 @@ class summery extends StatelessWidget {
                 ' Total',
               ),
               Text(
-                '\$423',
+                '\$${price + 2 - 5}',
               ),
             ],
           ),

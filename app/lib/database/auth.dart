@@ -2,18 +2,14 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:shega_cloth_store_app/database/models/user.dart';
-import 'package:shega_cloth_store_app/database/provider.dart';
-import 'package:shega_cloth_store_app/prefs/loginPreference.dart';
 
 import 'package:shega_cloth_store_app/screens/first-page.dart';
 import 'package:shega_cloth_store_app/screens/login.dart';
-import 'package:provider/provider.dart';
 
 import '/database/storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class authMethod {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -59,23 +55,15 @@ class authMethod {
         context, MaterialPageRoute(builder: (context) => first()));
   }
 
-  saveUserLoginInfo(
-      {required String userMail, required String password}) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('userMail', userMail);
-    prefs.setString('password', password);
-  }
-
   Future<String> UserSignin(
       {required String email, required String password}) async {
     String res = 'some error occured';
 
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      saveUserLoginInfo(userMail: email, password: password);
 
       res = 'success';
     } catch (e) {
@@ -148,7 +136,6 @@ class authMethod {
   Future<void> UserSignOut(BuildContext context) async {
     try {
       await _auth.signOut();
-
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => signin()),
@@ -219,24 +206,6 @@ class authMethod {
       res = e.toString();
     }
     return res;
-  }
-
-  Future<String> autoLogin() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? userMail = prefs.getString('userMail');
-    final String? password = prefs.getString('password');
-    print(userMail);
-    print(password);
-
-    if (userMail != null && password != null) {
-      try {
-        return await UserSignin(email: userMail, password: password);
-        // User logged in
-      } catch (e) {
-        print('Error auto logging in: $e');
-      }
-    }
-    return "";
   }
 
   //deleting carts
