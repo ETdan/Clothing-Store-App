@@ -9,15 +9,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class first extends StatefulWidget {
-  const first({super.key});
+  int page;
+  first({super.key, this.page = 0});
 
   @override
   State<first> createState() => _firstState();
 }
 
 class _firstState extends State<first> {
-  int page = 0;
-
   final pages = [
     HomeScreen(),
     SearchScreen(),
@@ -27,16 +26,17 @@ class _firstState extends State<first> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[page],
+      body: pages[widget.page],
       bottomNavigationBar: GNav(
         onTabChange: (value) {
           setState(() {
-            page = value;
+            widget.page = value;
           });
         },
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         //tabBackgroundColor: Colors.grey,
         activeColor: Colors.purple,
+        selectedIndex: widget.page,
         color: Colors.grey,
         tabBorderRadius: 14,
         gap: 8,

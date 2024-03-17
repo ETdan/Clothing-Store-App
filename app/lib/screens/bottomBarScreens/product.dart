@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shega_cloth_store_app/database/auth.dart';
+import 'package:shega_cloth_store_app/screens/first-page.dart';
 import 'package:shega_cloth_store_app/screens/otherScreens/checkout.dart';
 import 'package:shega_cloth_store_app/utils/snackBar.dart';
 import 'package:shega_cloth_store_app/utils/summeryProduct.dart';
@@ -138,6 +139,14 @@ class _productScreenState extends State<productScreen> {
                                               snapshot.data!.docs[index]
                                                   ['userId'],
                                             );
+
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => first(
+                                                          page: 2,
+                                                        )));
+
                                             showSnack('Deleted!', context);
                                           },
                                           icon: Icon(
