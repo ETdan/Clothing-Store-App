@@ -229,7 +229,9 @@ String getCategory(String gender, String color, String brand) {
                               ],
                             ),
                             SizedBox(height: 20),
+
                             // Upload New Product Button
+                            
                             Padding(
                               padding: const EdgeInsets.only(left: 30, right: 30),
                              

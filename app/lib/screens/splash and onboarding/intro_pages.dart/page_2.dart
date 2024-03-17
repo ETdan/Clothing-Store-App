@@ -13,8 +13,8 @@ class Page_2 extends StatelessWidget {
             begin: Alignment.topRight,
             end: Alignment.bottomRight,
             colors: [
-              Color.fromARGB(255, 180, 71, 239),
-              Color.fromARGB(255, 146, 46, 148),
+               Color(0xffB81736),
+                Color(0xff281537),
             ],
           ),
         ),

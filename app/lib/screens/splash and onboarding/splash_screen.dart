@@ -42,8 +42,8 @@ class _SplashState extends State<Splash> {
             begin: Alignment.topRight,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFFFF800B),
-              Color(0xFFCE1010),
+          Color(0xffB81736),
+                Color(0xff281537),
             ],
           ),
         ),
