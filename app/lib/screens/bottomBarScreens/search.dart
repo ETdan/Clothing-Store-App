@@ -50,247 +50,272 @@ class _searchScreenState extends State<SearchScreen> {
     }
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: ListView(
-          children: [
-            Column(
+backgroundColor:     Color(0xffB81736),
+      body: SafeArea(
+        child: Container(
+           height: double.infinity,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xffB81736),
+                Color(0xff281537),
+              ]
+              ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListView(
               children: [
-                Row(
+                Column(
                   children: [
-                    Expanded(
-                      child: TextField(
-                        controller: searchController,
-                        onChanged: (value) {
-                          setState(() {
-                            isShowData = true;
-                            print(arguments["color"]);
-                            print(arguments["gender"]);
-                          });
-                        },
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.grey[400],
-                            ),
-                          ),
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              searchController.clear();
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: searchController,
+                            onChanged: (value) {
+                              setState(() {
+                                isShowData = true;
+                                print(arguments["color"]);
+                                print(arguments["gender"]);
+                              });
                             },
-                            icon: const Icon(
-                              Icons.clear,
-                            ),
-                          ),
-                          hintText: 'search here',
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Results for\" ${searchController.text}\"',
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/filter',
-                              arguments: searchController.text);
-                        },
-                        child: Text(
-                          'Filter',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 99, 96, 169),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                searchController.text != ''
-                    ? FutureBuilder(
-                        future: arguments["gender"] != null ||
-                                arguments["color"] != null
-                            ? performSearchAndFilter(
-                                searchController.text,
-                                arguments["color"] as String,
-                                arguments['gender'] as String)
-                            : performSearchAndFilter(searchController.text),
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return SizedBox(
-                              height: MediaQuery.of(context).size.height,
-                              child: GridView.count(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 5,
-                                crossAxisSpacing: 5,
-                                children: List.generate(
-                                  7,
-                                  (index) => const shimmer(),
+                            decoration: InputDecoration(
+                            
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              prefixIcon: Padding(
+                                padding: const EdgeInsets.only(left: 20, right: 20),
+                                child: Icon(
+                                  Icons.search,
+                                  color: const Color.fromARGB(255, 255, 255, 255),
                                 ),
                               ),
-                            );
-                          }
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 10, top: 10),
-                            child: SizedBox(
-                              height: MediaQuery.of(context).size.height,
-                              child: GridView.count(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 40,
-                                crossAxisSpacing: 5,
-                                children: List.generate(
-                                    snapshot.data!.docs.length, (index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) => showDetails(
-                                            indexs: index,
-                                            title: snapshot.data!.docs[index]
-                                                ['title'],
-                                            price: snapshot.data!.docs[index]
-                                                ['price'],
-                                            images: snapshot.data!.docs[index]
-                                                ['photourl'],
-                                            discription: snapshot.data!
-                                                .docs[index]['description'],
-                                            like: snapshot.data!.docs[index],
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  searchController.clear();
+                                },
+                                icon: const Icon(
+                                  Icons.clear,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              hintText: 'search here', hintStyle: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Results for\" ${searchController.text}\"',style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                          ),
+                              Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xffB81736),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        padding: EdgeInsets.all(2),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/filter',
+                                    arguments: searchController.text);
+                              },
+                              child: Text(
+                                'Filter',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16, 
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    searchController.text != ''
+                        ? FutureBuilder(
+                            future: arguments["gender"] != null ||
+                                    arguments["color"] != null
+                                ? performSearchAndFilter(
+                                    searchController.text,
+                                    arguments["color"] as String,
+                                    arguments['gender'] as String)
+                                : performSearchAndFilter(searchController.text),
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) {
+                                return SizedBox(
+                                  height: MediaQuery.of(context).size.height,
+                                  child: GridView.count(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 5,
+                                    crossAxisSpacing: 5,
+                                    children: List.generate(
+                                      7,
+                                      (index) => const shimmer(),
+                                    ),
+                                  ),
+                                );
+                              }
+                              return Padding(
+                                padding: const EdgeInsets.only(left: 10, top: 10),
+                                child: SizedBox(
+                                  height: MediaQuery.of(context).size.height,
+                                  child: GridView.count(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 40,
+                                    crossAxisSpacing: 5,
+                                    children: List.generate(
+                                        snapshot.data!.docs.length, (index) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) => showDetails(
+                                                indexs: index,
+                                                title: snapshot.data!.docs[index]
+                                                    ['title'],
+                                                price: snapshot.data!.docs[index]
+                                                    ['price'],
+                                                images: snapshot.data!.docs[index]
+                                                    ['photourl'],
+                                                discription: snapshot.data!
+                                                    .docs[index]['description'],
+                                                like: snapshot.data!.docs[index],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.all(7),
+                                          height: 80,
+                                          width: 90,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[200],
+                                            borderRadius: BorderRadius.circular(15),
                                           ),
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.all(7),
-                                      height: 80,
-                                      width: 90,
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Stack(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              Container(
-                                                height: 110,
-                                                width: 200,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  image: DecorationImage(
-                                                    image: NetworkImage(
-                                                      snapshot.data!.docs[index]
-                                                          ['photourl'],
-                                                    ),
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                right: 5,
-                                                child: likeAnimation(
-                                                  product: snapshot
-                                                      .data!.docs[index],
-                                                  snap: FirebaseAuth
-                                                      .instance.currentUser!,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 10),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    Text(
-                                                      snapshot.data!.docs[index]
-                                                          ['title'],
-                                                      style: const TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.black87,
+                                              Stack(
+                                                children: [
+                                                  Container(
+                                                    height: 110,
+                                                    width: 200,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(15),
+                                                      image: DecorationImage(
+                                                        image: NetworkImage(
+                                                          snapshot.data!.docs[index]
+                                                              ['photourl'],
+                                                        ),
+                                                        fit: BoxFit.fill,
                                                       ),
                                                     ),
-                                                    Text(
-                                                      '\$ ${snapshot.data!.docs[index]['price']} ',
-                                                      style: const TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.black87,
+                                                  ),
+                                                  Positioned(
+                                                    right: 5,
+                                                    child: likeAnimation(
+                                                      product: snapshot
+                                                          .data!.docs[index],
+                                                      snap: FirebaseAuth
+                                                          .instance.currentUser!,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 10),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        Text(
+                                                          snapshot.data!.docs[index]
+                                                              ['title'],
+                                                          style: const TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.black87,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          '\$ ${snapshot.data!.docs[index]['price']} ',
+                                                          style: const TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.black87,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    ClipOval(
+                                                      clipBehavior: Clip.antiAlias,
+                                                      child: Material(
+                                                        color: const Color.fromARGB(
+                                                            214, 117, 73, 220),
+                                                        child: IconButton(
+                                                          onPressed: () {},
+                                                          icon: const Center(
+                                                            child: Icon(
+                                                              Icons.add,
+                                                              //color: Colors.purple,
+                                                            ),
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
                                                 ),
-                                                ClipOval(
-                                                  clipBehavior: Clip.antiAlias,
-                                                  child: Material(
-                                                    color: const Color.fromARGB(
-                                                        214, 117, 73, 220),
-                                                    child: IconButton(
-                                                      onPressed: () {},
-                                                      icon: const Center(
-                                                        child: Icon(
-                                                          Icons.add,
-                                                          //color: Colors.purple,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                }),
+                                        ),
+                                      );
+                                    }),
+                                  ),
+                                ),
+                              );
+                            },
+                          )
+                        : SizedBox(
+                            height: MediaQuery.of(context).size.height,
+                            child: GridView.count(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 5,
+                              crossAxisSpacing: 5,
+                              children: List.generate(
+                                7,
+                                (index) => const shimmer(),
                               ),
                             ),
-                          );
-                        },
-                      )
-                    : SizedBox(
-                        height: MediaQuery.of(context).size.height,
-                        child: GridView.count(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 5,
-                          crossAxisSpacing: 5,
-                          children: List.generate(
-                            7,
-                            (index) => const shimmer(),
                           ),
-                        ),
-                      ),
+                  ],
+                ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

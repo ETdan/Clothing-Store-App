@@ -1,9 +1,11 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:flutter/services.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 import 'package:shega_cloth_store_app/screens/bottomBarScreens/product.dart';
 import 'package:shega_cloth_store_app/screens/bottomBarScreens/search.dart';
 import 'package:shega_cloth_store_app/screens/otherScreens/filter.dart';
 import 'package:shega_cloth_store_app/screens/otherScreens/orderPage.dart';
+import 'package:shega_cloth_store_app/screens/splash%20and%20onboarding/splash_screen.dart';
 
 import '/firebase_options.dart';
 import '/prefs/loginPreference.dart';
@@ -14,6 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -46,7 +50,7 @@ class MyApp extends StatelessWidget {
               '/notification': (context) => productScreen(),
             },
             debugShowCheckedModeBanner: false,
-            home: (value.islogin && value.isUser) ? first() : welcome(),
+            home: Splash(isUserLoggedIn: value.islogin && value.isUser),
           );
         },
       ),

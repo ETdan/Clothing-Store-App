@@ -9,348 +9,309 @@ class filter extends StatefulWidget {
 
 class _filterState extends State<filter> {
   String gender = '';
+  List<Button> genders = [
+    Button(name: 'All', isClicked: false),
+    Button(name: 'Men', isClicked: false),
+    Button(name: 'Women', isClicked: false)
+  ];
+  List<Button> brand = [
+    Button(name: 'Adidas', isClicked: false),
+    Button(name: 'Puma', isClicked: false),
+    Button(name: 'CR7', isClicked: false),
+    Button(name: 'Nike', isClicked: false),
+    Button(name: 'Yeezy', isClicked: false),
+    Button(name: 'Supreme', isClicked: false),
+  ];
+  List<Button> colors = [
+    Button(name: 'White', isClicked: false),
+    Button(name: 'Black', isClicked: false),
+    Button(name: 'Grey', isClicked: false),
+    Button(name: 'Yellow', isClicked: false),
+    Button(name: 'Red', isClicked: false),
+    Button(name: 'Green', isClicked: false),
+  ];
+
   String color = '';
   double current_slidder = 20;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color(0xffB81736),
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xffB81736),
           leading: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               size: 30,
-              color: Colors.black54,
+              color: Color.fromARGB(137, 255, 255, 255),
             ),
           ),
-          title: Center(
+          title: const Center(
             child: Text(
               'Filter',
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.black87,
+                color: Color.fromARGB(221, 255, 255, 255),
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Gender',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+        body: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Gender',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(221, 255, 255, 255),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                  height: 60,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: genders.length,
+                    itemBuilder: (context, index) {
+                      return Row(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: genders[index].isClicked
+                                  ? Colors.blue
+                                  : const Color.fromARGB(255, 245, 222, 226),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.all(2),
+                            child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  gender = genders[index].name;
+                                  genders[index].clicked();
+                                });
+                              },
+                              child: Text(
+                                genders[index].name,
+                                style: const TextStyle(
+                                  color: Color(0xffB81736),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 50,
+                          )
+                        ],
+                      );
+                    },
+                  )),
+              const Text(
+                'Brand',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(221, 255, 255, 255),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Wrap(
+                  spacing: 100,
+                  runSpacing: 30,
+                  children: List.generate(
+                      brand.length,
+                      (index) => Container(
+                            decoration: BoxDecoration(
+                              color: brand[index].isClicked
+                                  ? Colors.blue
+                                  : const Color.fromARGB(255, 245, 222, 226),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.all(2),
+                            child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  brand[index].clicked();
+                                });
+                              },
+                              child: Text(
+                                brand[index].name,
+                                style: const TextStyle(
+                                  color: Color(0xffB81736),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ))),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Price Range',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(221, 255, 255, 255),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '\$ ${current_slidder}',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    MaterialButton(
-                      height: 60,
-                      minWidth: 90,
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      color: Colors.grey[100],
-                      onPressed: () {
-                        setState(() {
-                          gender = '';
-                        });
-                      },
-                      child: Center(
-                        child: Text(
-                          'All',
-                        ),
-                      ),
+                  Text(
+                    '\$ 543',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
                     ),
-                    MaterialButton(
-                      height: 60,
-                      minWidth: 90,
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      color: Colors.grey[100],
-                      onPressed: () {
-                        setState(() {
-                          gender = 'male';
-                          print(gender);
-                        });
-                      },
-                      child: Center(
-                        child: Text(
-                          'Men',
-                        ),
-                      ),
-                    ),
-                    MaterialButton(
-                      height: 60,
-                      minWidth: 90,
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      color: Colors.grey[100],
-                      onPressed: () {
-                        setState(() {
-                          gender = 'female';
-                          print(gender);
-                        });
-                      },
-                      child: Center(
-                        child: Text(
-                          'Women',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Brand',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
                   ),
+                ],
+              ),
+              Slider(
+                value: current_slidder,
+                max: 500,
+                //divisions: 5,
+                label: current_slidder.round().toString(),
+                onChanged: (value) {
+                  setState(() {
+                    current_slidder = value;
+                  });
+                },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                'Color',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(221, 255, 255, 255),
                 ),
-                SizedBox(
-                  height: 10,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Wrap(
+                  spacing: 100,
+                  runSpacing: 30,
+                  children: List.generate(
+                      colors.length,
+                      (index) => Container(
+                            decoration: BoxDecoration(
+                              color: colors[index].isClicked
+                                  ? Colors.blue
+                                  : const Color.fromARGB(255, 245, 222, 226),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.all(2),
+                            child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  colors[index].clicked();
+                                  color = colors[index].name;
+                                });
+                              },
+                              child: Text(
+                                colors[index].name,
+                                style: const TextStyle(
+                                  color: Color(0xffB81736),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ))),
+              SizedBox(
+                height: 10,
+              ),
+              Card(
+                color: Color.fromARGB(255, 239, 207, 207),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    smallButton(
-                      text: 'Adidas',
-                    ),
-                    smallButton(
-                      text: 'Puma',
-                    ),
-                    smallButton(
-                      text: 'CR7',
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    smallButton(
-                      text: 'Nike',
-                    ),
-                    smallButton(
-                      text: 'Yeezy',
-                    ),
-                    smallButton(
-                      text: 'Supreme',
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Price Range',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      '\$ ${current_slidder}',
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        'Another options',
+                        style: TextStyle(
+                          color: Color(0xffB81736),
+                        ),
+                      ),
                     ),
-                    Text(
-                      '\$ 543',
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 15,
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Color(0xffB81736),
                       ),
                     ),
                   ],
                 ),
-                Slider(
-                  value: current_slidder,
-                  max: 500,
-                  //divisions: 5,
-                  label: current_slidder.round().toString(),
-                  onChanged: (value) {
-                    setState(() {
-                      current_slidder = value;
-                    });
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Center(
+                child: MaterialButton(
+                  height: 70,
+                  minWidth: 400,
+                  shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/search',
+                        arguments: {'gender': gender, 'color': color});
                   },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Color',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    MaterialButton(
-                      height: 60,
-                      minWidth: 90,
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      color: Colors.grey[100],
-                      onPressed: () {
-                        setState(() {
-                          color = 'white';
-                        });
-                      },
-                      child: Center(
-                        child: Text(
-                          'white',
-                        ),
-                      ),
-                    ),
-                    MaterialButton(
-                      height: 60,
-                      minWidth: 90,
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      color: Colors.grey[100],
-                      onPressed: () {
-                        setState(() {
-                          color = 'black';
-                        });
-                      },
-                      child: Center(
-                        child: Text(
-                          'black',
-                        ),
-                      ),
-                    ),
-                    smallButton(
-                      text: 'Grey',
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    smallButton(
-                      text: 'Yellow',
-                    ),
-                    smallButton(
-                      text: 'Red',
-                    ),
-                    smallButton(
-                      text: 'Green',
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Card(
-                  color: Colors.grey[100],
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          'Another options',
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.arrow_forward_ios,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Center(
-                  child: MaterialButton(
-                    height: 70,
-                    minWidth: 400,
-                    shape: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/search',
-                          arguments: {'gender': gender, 'color': color});
-                    },
-                    color: Colors.purple[300],
-                    child: Text(
-                      'Apply Filter',
-                      style: TextStyle(
-                        fontSize: 15,
-                      ),
+                  color: Color.fromARGB(255, 255, 224, 224),
+                  child: Text(
+                    'Apply Filter',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Color(0xffB81736),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ));
   }
 }
 
-class smallButton extends StatelessWidget {
-  final String text;
-  const smallButton({super.key, required this.text});
+class Button {
+  String name;
+  bool isClicked;
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialButton(
-      height: 60,
-      minWidth: 90,
-      shape: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      color: Colors.grey[100],
-      onPressed: () {},
-      child: Center(
-        child: Text(
-          text,
-        ),
-      ),
-    );
+  Button({required this.name, required this.isClicked});
+
+  void clicked() {
+    isClicked = !isClicked;
   }
 }

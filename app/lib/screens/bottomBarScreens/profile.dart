@@ -33,8 +33,20 @@ class _ProfilePageState extends State<ProfilePage> {
         'https://images.mubicdn.net/images/cast_member/286407/cache-139299-1463178721/image-w856.jpg?size=256x';
 
     return Scaffold(
+      backgroundColor:  Color(0xffB81736),
       body: SafeArea(
-        child: SingleChildScrollView(
+   
+        child: Container(
+           height: double.infinity,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xffB81736),
+                Color(0xff281537),
+              ]
+              ),
+          ),
           child: Column(
             children: [
               SizedBox(height: 60),
@@ -53,14 +65,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     Text(
                       name,
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                   ]),
                   SizedBox(height: 8),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Text(
                       email,
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                      style: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 255, 255, 255)),
                     ),
                   ]),
                   GestureDetector(
@@ -82,11 +94,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 40,
                         child: const Row(
                           children: [
-                            Icon(Icons.person),
+                            Icon(Icons.person,color: Color.fromARGB(255, 147, 0, 0) ,),
                             SizedBox(width: 7),
-                            Text('Profiel'),
+                            Text('Profiel', style: TextStyle(color:  Color.fromARGB(255, 96, 0, 0),),),
                             Spacer(),
-                            Icon(Icons.arrow_forward_ios)
+                            Icon(Icons.arrow_forward_ios, color: Colors.red,)
                           ],
                         ),
                       ),
@@ -111,11 +123,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 40,
                         child: const Row(
                           children: [
-                            Icon(Icons.settings),
+                            Icon(Icons.settings,color: Color.fromARGB(255, 147, 0, 0) ,),
                             SizedBox(width: 7),
-                            Text('Setting'),
+                            Text('Settings', style: TextStyle(color:  Color.fromARGB(255, 96, 0, 0),),),
                             Spacer(),
-                            Icon(Icons.arrow_forward_ios)
+                            Icon(Icons.arrow_forward_ios, color: Colors.red,)
                           ],
                         ),
                       ),
@@ -139,11 +151,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 40,
                         child: const Row(
                           children: [
-                            Icon(Icons.mail),
+                             Icon(Icons.mail,color: Color.fromARGB(255, 147, 0, 0) ,),
                             SizedBox(width: 7),
-                            Text('contact'),
+                            Text('Contact', style: TextStyle(color:  Color.fromARGB(255, 96, 0, 0),),),
                             Spacer(),
-                            Icon(Icons.arrow_forward_ios)
+                            Icon(Icons.arrow_forward_ios, color: Colors.red,)
                           ],
                         ),
                       ),
@@ -167,11 +179,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 40,
                         child: const Row(
                           children: [
-                            Icon(Icons.share),
+                            Icon(Icons.share,color: Color.fromARGB(255, 147, 0, 0) ,),
                             SizedBox(width: 7),
-                            Text('Share App'),
+                            Text('Share App ', style: TextStyle(color:  Color.fromARGB(255, 96, 0, 0),),),
                             Spacer(),
-                            Icon(Icons.arrow_forward_ios)
+                            Icon(Icons.arrow_forward_ios, color: Colors.red,)
                           ],
                         ),
                       ),
@@ -194,11 +206,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 40,
                         child: const Row(
                           children: [
-                            Icon(Icons.help),
+                            Icon(Icons.help,color: Color.fromARGB(255, 147, 0, 0) ,),
                             SizedBox(width: 7),
-                            Text('Help'),
+                            Text('Help', style: TextStyle(color:  Color.fromARGB(255, 96, 0, 0),),),
                             Spacer(),
-                            Icon(Icons.arrow_forward_ios)
+                            Icon(Icons.arrow_forward_ios, color: Colors.red,)
                           ],
                         ),
                       ),
@@ -212,7 +224,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   await authMethod().UserSignOut(context);
                   ;
                 },
-                child: Text('Log Out'),
+                child: Text('Log Out', style: TextStyle(color: Colors.red[900]),),
               )
             ],
           ),

@@ -1,3 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/widgets.dart';
+import 'package:shega_cloth_store_app/screens/splash%20and%20onboarding/intro_pages.dart/page_1.dart';
+import 'package:shega_cloth_store_app/screens/splash%20and%20onboarding/intro_pages.dart/page_2.dart';
+import 'package:shega_cloth_store_app/screens/splash%20and%20onboarding/intro_pages.dart/page_3.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 import '/screens/bottomBarScreens/Home.dart';
 import '/screens/login.dart';
 import '/utils/collections.dart';
@@ -12,8 +19,9 @@ class welcome extends StatefulWidget {
 }
 
 class _welcomeState extends State<welcome> {
-  int active_index = 0;
+  PageController _controller = PageController();
 
+  bool onLastPage = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -42,6 +42,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
+      
   final images = [
     'assets/sh11.jpg',
     'assets/sh2.jpg',
@@ -94,8 +95,19 @@ class _HomeScreenState extends State<HomeScreen>
     String avatarUrl = userData['profileImageUrl'] ??
         'https://images.mubicdn.net/images/cast_member/286407/cache-139299-1463178721/image-w856.jpg?size=256x';
     return Scaffold(
+      backgroundColor:  Color(0xffB81736),
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Container(
+         height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xffB81736),
+              Color(0xff281537),
+            ]
+            ),
+        ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -117,221 +129,284 @@ class _HomeScreenState extends State<HomeScreen>
                       Text(
                         "Hello !",
                         style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold),
+                            fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                       Text(
                         name,
                         style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.bold),
+                            fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                     ],
                   ),
                   Spacer(),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/order');
-                    },
-                    icon: Icon(
-                      Icons.shopping_bag,
+                  Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xffB81736),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                       
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/order');
+                      },
+                      icon: Icon(
+                        Icons.shopping_bag, color: Colors.white,
+                      ),
                     ),
                   ),
                   SizedBox(
                     width: 10,
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.notifications,
+                   Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xffB81736),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.notifications, color: Colors.white,
+                      ),
                     ),
                   ),
                   SizedBox(width: 20),
                 ],
               ),
-              SizedBox(
-                width: 380,
-                child: textFields(
-                  controller: userSearchController,
-                  hint: 'search here',
-                  prefix: Icon(
-                    Icons.search,
-                  ),
-                  maxLines: 1,
-                ),
-              ),
+              SizedBox(height: 20,),
+              Container(
+  width: 338,
+  height: 50,
+  decoration: BoxDecoration(
+    color: Color.fromARGB(255, 230, 141, 159),
+    borderRadius: BorderRadius.circular(12),
+  ),
+  padding: EdgeInsets.all(12),
+  child: Row(
+    children: [
+      Icon(
+        Icons.search,
+        color: Colors.white,
+      ),
+      SizedBox(
+        width: 10,
+      ),
+      SizedBox(
+        width: 270, // Adjusted width to accommodate the text field
+        child: TextField(
+          controller: userSearchController,
+          decoration: InputDecoration(
+            hintText: 'Search here',
+            hintStyle: TextStyle(color: Colors.white),
+            border: InputBorder.none,
+          ),
+          style: TextStyle(color: Colors.white),
+          maxLines: 1,
+        ),
+      ),
+    ],
+  ),
+)
+,
+
+SizedBox(height: 20,),
+             
               SizedBox(
                 height: 180,
                 width: 450,
+                
                 child: ClipRRect(
+                
                   borderRadius: BorderRadius.circular(20),
-                  child: CarouselSlider.builder(
-                    itemCount: images.length,
-                    itemBuilder: (context, index, realIndex) {
-                      return BuildImages(imagee: images[index]);
-                    },
-                    options: CarouselOptions(
-                      enlargeCenterPage: true,
-                      viewportFraction: 1.0,
-                      autoPlayAnimationDuration: Duration(microseconds: 50),
-                      autoPlay: false,
-                      reverse: true,
-                      height: 200,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          active_index = index;
-                        });
+                  child: Container(
+                    color: Colors.red,
+                    child: CarouselSlider.builder(
+                      
+                      itemCount: images.length,
+                      itemBuilder: (context, index, realIndex) {
+                        return BuildImages(imagee: images[index]);
                       },
+                      options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        viewportFraction: 1.0,
+                        autoPlayAnimationDuration: Duration(microseconds: 50),
+                        autoPlay: false,
+                        reverse: true,
+                        height: 200,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            active_index = index;
+                          });
+                        },
+                      ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 8,
-              ),
-              indicator(index: images.length),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Text(
-                      'Featured',
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => Pro(),
+              
+               indicator(index: images.length),
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only( topLeft: Radius.circular(16),
+    topRight: Radius.circular(16),),
+                  child: Container(
+                      
+                    color: const Color.fromARGB(255, 206, 204, 204),
+                   
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                         
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(30.0),
+                                child: Text(
+                                  'Featured',
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => Pro(),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    'see all',
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        );
-                      },
-                      child: Text(
-                        'see all',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection('products')
-                    .snapshots(),
-                builder: (
-                  context,
-                  AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
-                ) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.green,
-                      ),
-                    );
-                  }
-                  return SizedBox(
-                    height: 150,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        return buildAdvertise(
-                          image: snapshot.data!.docs[index]['photourl'],
-                          title: snapshot.data!.docs[index]['title'],
-                          price: snapshot.data!.docs[index]['price'],
-                          discription: snapshot.data!.docs[index]
-                              ['description'],
-                          like: snapshot.data!.docs[index],
-                          index: index,
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        SizedBox(width: 15),
-                        Text(
-                          'Most Popular',
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                          SizedBox(
+                            height: 10,
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => Pro(),
+                          StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection('products')
+                                .snapshots(),
+                            builder: (
+                              context,
+                              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
+                            ) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.green,
+                                  ),
+                                );
+                              }
+                              return SizedBox(
+                                height: 150,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: snapshot.data!.docs.length,
+                                  itemBuilder: (context, index) {
+                                    return buildAdvertise(
+                                      image: snapshot.data!.docs[index]['photourl'],
+                                      title: snapshot.data!.docs[index]['title'],
+                                      price: snapshot.data!.docs[index]['price'],
+                                      discription: snapshot.data!.docs[index]
+                                          ['description'],
+                                      like: snapshot.data!.docs[index],
+                                      index: index,
+                                    );
+                                  },
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                      child: Text(
-                        'see all',
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  children: [
+                                    SizedBox(width: 15),
+                                    Text(
+                                      'Most Popular',
+                                      style: TextStyle(
+                                        color: Colors.black87,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => Pro(),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    'see all',
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection('products')
+                                .snapshots(),
+                            builder: (
+                              context,
+                              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
+                            ) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.green,
+                                  ),
+                                );
+                              }
+                              return SizedBox(
+                                height: 150,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: snapshot.data!.docs.length,
+                                  itemBuilder: (context, index) {
+                                    return buildAdvertise(
+                                      image: snapshot.data!.docs[index]['photourl'],
+                                      title: snapshot.data!.docs[index]['title'],
+                                      price: snapshot.data!.docs[index]['price'],
+                                      discription: snapshot.data!.docs[index]
+                                          ['description'],
+                                      like: snapshot.data!.docs[index],
+                                      index: index,
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                ],
-              ),
-              StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection('products')
-                    .snapshots(),
-                builder: (
-                  context,
-                  AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
-                ) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.green,
-                      ),
-                    );
-                  }
-                  return SizedBox(
-                    height: 150,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        return buildAdvertise(
-                          image: snapshot.data!.docs[index]['photourl'],
-                          title: snapshot.data!.docs[index]['title'],
-                          price: snapshot.data!.docs[index]['price'],
-                          discription: snapshot.data!.docs[index]
-                              ['description'],
-                          like: snapshot.data!.docs[index],
-                          index: index,
-                        );
-                      },
-                    ),
-                  );
-                },
+                ),
               ),
             ],
           ),
@@ -386,7 +461,7 @@ class _buildAdvertiseState extends State<buildAdvertise> {
           height: 100,
           width: 150,
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 244, 243, 243),
+            color: Color.fromARGB(255, 242, 227, 230),
             borderRadius: BorderRadius.circular(20),
           ),
           child: ListView(
@@ -489,6 +564,6 @@ class indicator extends StatelessWidget {
     return AnimatedSmoothIndicator(
         activeIndex: active_index,
         count: index,
-        effect: JumpingDotEffect(activeDotColor: Colors.blue));
+        effect: JumpingDotEffect(activeDotColor: Color.fromARGB(255, 255, 255, 255)));
   }
 }

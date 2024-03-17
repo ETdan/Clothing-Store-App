@@ -1,8 +1,9 @@
-import 'package:app/adminSide/adminScreen/order/orders.dart';
-import 'package:app/screens/login.dart';
-import 'package:app/screens/otherScreens/orders.dart';
-import 'package:app/utils/summeryProduct.dart';
+import '/adminSide/adminScreen/order/orders.dart';
+import '/screens/login.dart';
+import '/screens/otherScreens/orders.dart';
+import '/utils/summeryProduct.dart';
 import 'package:flutter/material.dart';
+import '/screens/otherScreens/orders.dart';
 
 class checkOut extends StatefulWidget {
   const checkOut({super.key});
@@ -12,6 +13,32 @@ class checkOut extends StatefulWidget {
 }
 
 class _checkOutState extends State<checkOut> {
+  
+  Widget summery() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Summary',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        // Add your summary content here
+      ],
+    );
+  }
+
+  void navigateToOrdersUser() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ordersuser(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,13 +188,7 @@ class _checkOutState extends State<checkOut> {
               child: MaterialButton(
                 height: 60,
                 minWidth: 400,
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ordersuser(),
-                    ),
-                  );
-                },
+                onPressed: navigateToOrdersUser,
                 color: Color.fromARGB(255, 135, 121, 170),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),

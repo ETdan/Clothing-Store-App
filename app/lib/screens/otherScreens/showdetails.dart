@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:shega_cloth_store_app/database/auth.dart';
 import 'package:shega_cloth_store_app/utils/snackBar.dart';
 
@@ -79,9 +81,11 @@ class _showDetailsState extends State<showDetails> {
                             ClipOval(
                               child: Material(
                                 color: Colors.grey[300],
-                                child: likeAnimation(
-                                  product: widget.like,
-                                  snap: FirebaseAuth.instance.currentUser!,
+                                child: GestureDetector(
+                                  child: likeAnimation(
+                                    product: widget.like,
+                                    snap: FirebaseAuth.instance.currentUser!,
+                                  ),
                                 ),
                               ),
                             ),
@@ -137,7 +141,7 @@ class _showDetailsState extends State<showDetails> {
                       right: 20,
                     ),
                     child: Text(
-                      '${widget.price}',
+                      '\$ ${widget.price}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 105, 94, 231),
