@@ -24,9 +24,8 @@ class _ProState extends State<Pro> {
     return Scaffold(
       backgroundColor: Color(0xffB81736),
       appBar: AppBar(
-
         elevation: 0.0,
-        backgroundColor:Color(0xffB81736),
+        backgroundColor: Color(0xffB81736),
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
@@ -48,19 +47,18 @@ class _ProState extends State<Pro> {
         ),
       ),
       body: SafeArea(
-        child:  Container(
-           height: double.infinity,
+        child: Container(
+          height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xffB81736),
-                Color(0xff281537),
-              ]
-              ),
+            gradient: LinearGradient(colors: [
+              Color(0xffB81736),
+              Color(0xff281537),
+            ]),
           ),
           child: StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('products').snapshots(),
+            stream:
+                FirebaseFirestore.instance.collection('products').snapshots(),
             builder: (
               context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
@@ -80,7 +78,8 @@ class _ProState extends State<Pro> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 5,
                     crossAxisSpacing: 5,
-                    children: List.generate(snapshot.data!.docs.length, (index) {
+                    children:
+                        List.generate(snapshot.data!.docs.length, (index) {
                       return Container(
                         height: 100,
                         width: 100,
@@ -118,7 +117,8 @@ class _ProState extends State<Pro> {
                             Padding(
                               padding: const EdgeInsets.only(right: 10),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     children: [
@@ -149,7 +149,8 @@ class _ProState extends State<Pro> {
                                           setState(() {
                                             isfinished = false;
                                           });
-                                          String res = await authMethod().toCart(
+                                          String res =
+                                              await authMethod().toCart(
                                             imageurl: snapshot.data!.docs[index]
                                                 ['photourl'],
                                             title: snapshot.data!.docs[index]

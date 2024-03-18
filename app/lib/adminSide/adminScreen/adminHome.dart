@@ -15,10 +15,8 @@ class adminHome extends StatefulWidget {
 }
 
 class _adminHomeState extends State<adminHome> {
-  @override
-    int _selectedIndex = 0; // Track the selected index
-  
-  // List of destinations
+  int _selectedIndex = 0;
+
   final List<Widget> _destinations = [
     dashBoard(),
     Categories(),
@@ -27,14 +25,12 @@ class _adminHomeState extends State<adminHome> {
     Setting(),
   ];
 
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        selectedItemColor:  Color(0xffB81736),
+        selectedItemColor: Color(0xffB81736),
         unselectedItemColor: const Color.fromARGB(255, 137, 136, 136),
         onTap: (int index) {
           setState(() {
@@ -64,12 +60,10 @@ class _adminHomeState extends State<adminHome> {
           ),
         ],
       ),
-      body: Stack(
-        children:[
-          
-           _destinations[_selectedIndex],
-         ] // Display the selected destination
-      ),
+      body: Stack(children: [
+        _destinations[_selectedIndex],
+      ] // Display the selected destination
+          ),
     );
   }
 }

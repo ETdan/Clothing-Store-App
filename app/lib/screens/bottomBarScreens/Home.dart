@@ -42,7 +42,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-      
   final images = [
     'assets/sh11.jpg',
     'assets/sh2.jpg',
@@ -95,19 +94,17 @@ class _HomeScreenState extends State<HomeScreen>
     String avatarUrl = userData['profileImageUrl'] ??
         'https://images.mubicdn.net/images/cast_member/286407/cache-139299-1463178721/image-w856.jpg?size=256x';
     return Scaffold(
-      backgroundColor:  Color(0xffB81736),
+      backgroundColor: Color(0xffB81736),
       body: SafeArea(
         child: Container(
-         height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
+          height: double.infinity,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
               Color(0xffB81736),
               Color(0xff281537),
-            ]
-            ),
-        ),
+            ]),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -129,99 +126,102 @@ class _HomeScreenState extends State<HomeScreen>
                       Text(
                         "Hello !",
                         style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                       Text(
                         name,
                         style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                     ],
                   ),
                   Spacer(),
                   Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xffB81736),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                       
+                    decoration: BoxDecoration(
+                      color: Color(0xffB81736),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     child: IconButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/order');
                       },
                       icon: Icon(
-                        Icons.shopping_bag, color: Colors.white,
+                        Icons.shopping_bag,
+                        color: Colors.white,
                       ),
                     ),
                   ),
                   SizedBox(
                     width: 10,
                   ),
-                   Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xffB81736),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xffB81736),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     child: IconButton(
                       onPressed: () {},
                       icon: Icon(
-                        Icons.notifications, color: Colors.white,
+                        Icons.notifications,
+                        color: Colors.white,
                       ),
                     ),
                   ),
                   SizedBox(width: 20),
                 ],
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Container(
-  width: 338,
-  height: 50,
-  decoration: BoxDecoration(
-    color: Color.fromARGB(255, 230, 141, 159),
-    borderRadius: BorderRadius.circular(12),
-  ),
-  padding: EdgeInsets.all(12),
-  child: Row(
-    children: [
-      Icon(
-        Icons.search,
-        color: Colors.white,
-      ),
-      SizedBox(
-        width: 10,
-      ),
-      SizedBox(
-        width: 270, // Adjusted width to accommodate the text field
-        child: TextField(
-          controller: userSearchController,
-          decoration: InputDecoration(
-            hintText: 'Search here',
-            hintStyle: TextStyle(color: Colors.white),
-            border: InputBorder.none,
-          ),
-          style: TextStyle(color: Colors.white),
-          maxLines: 1,
-        ),
-      ),
-    ],
-  ),
-)
-,
-
-SizedBox(height: 20,),
-             
+                width: 338,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 230, 141, 159),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                padding: EdgeInsets.all(12),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    SizedBox(
+                      width:
+                          270, // Adjusted width to accommodate the text field
+                      child: TextField(
+                        controller: userSearchController,
+                        decoration: InputDecoration(
+                          hintText: 'Search here',
+                          hintStyle: TextStyle(color: Colors.white),
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(color: Colors.white),
+                        maxLines: 1,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
               SizedBox(
                 height: 180,
                 width: 450,
-                
                 child: ClipRRect(
-                
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
                     color: Colors.red,
                     child: CarouselSlider.builder(
-                      
                       itemCount: images.length,
                       itemBuilder: (context, index, realIndex) {
                         return BuildImages(imagee: images[index]);
@@ -243,20 +243,18 @@ SizedBox(height: 20,),
                   ),
                 ),
               ),
-              
-               indicator(index: images.length),
+              indicator(index: images.length),
               Expanded(
                 child: ClipRRect(
-                  borderRadius: BorderRadius.only( topLeft: Radius.circular(16),
-    topRight: Radius.circular(16),),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
                   child: Container(
-                      
                     color: const Color.fromARGB(255, 206, 204, 204),
-                   
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                         
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -297,9 +295,11 @@ SizedBox(height: 20,),
                                 .snapshots(),
                             builder: (
                               context,
-                              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
+                              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                                  snapshot,
                             ) {
-                              if (snapshot.connectionState == ConnectionState.waiting) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
                                 return Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.green,
@@ -314,9 +314,12 @@ SizedBox(height: 20,),
                                   itemCount: snapshot.data!.docs.length,
                                   itemBuilder: (context, index) {
                                     return buildAdvertise(
-                                      image: snapshot.data!.docs[index]['photourl'],
-                                      title: snapshot.data!.docs[index]['title'],
-                                      price: snapshot.data!.docs[index]['price'],
+                                      image: snapshot.data!.docs[index]
+                                          ['photourl'],
+                                      title: snapshot.data!.docs[index]
+                                          ['title'],
+                                      price: snapshot.data!.docs[index]
+                                          ['price'],
                                       discription: snapshot.data!.docs[index]
                                           ['description'],
                                       like: snapshot.data!.docs[index],
@@ -372,9 +375,11 @@ SizedBox(height: 20,),
                                 .snapshots(),
                             builder: (
                               context,
-                              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot,
+                              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                                  snapshot,
                             ) {
-                              if (snapshot.connectionState == ConnectionState.waiting) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
                                 return Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.green,
@@ -389,9 +394,12 @@ SizedBox(height: 20,),
                                   itemCount: snapshot.data!.docs.length,
                                   itemBuilder: (context, index) {
                                     return buildAdvertise(
-                                      image: snapshot.data!.docs[index]['photourl'],
-                                      title: snapshot.data!.docs[index]['title'],
-                                      price: snapshot.data!.docs[index]['price'],
+                                      image: snapshot.data!.docs[index]
+                                          ['photourl'],
+                                      title: snapshot.data!.docs[index]
+                                          ['title'],
+                                      price: snapshot.data!.docs[index]
+                                          ['price'],
                                       discription: snapshot.data!.docs[index]
                                           ['description'],
                                       like: snapshot.data!.docs[index],
@@ -564,6 +572,7 @@ class indicator extends StatelessWidget {
     return AnimatedSmoothIndicator(
         activeIndex: active_index,
         count: index,
-        effect: JumpingDotEffect(activeDotColor: Color.fromARGB(255, 255, 255, 255)));
+        effect: JumpingDotEffect(
+            activeDotColor: Color.fromARGB(255, 255, 255, 255)));
   }
 }

@@ -67,86 +67,87 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Profile", style: TextStyle(color: Colors.white),),
-         backgroundColor:  Color(0xffB81736),
+        title: Text(
+          "Edit Profile",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Color(0xffB81736),
       ),
-      body: Stack(
-          children:[
-             Container( 
-
-
+      body: Stack(children: [
+        Container(
           height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xffB81736),
-                Color(0xff281537),
-              ]
-              ),
+            gradient: LinearGradient(colors: [
+              Color(0xffB81736),
+              Color(0xff281537),
+            ]),
           ),
-            child: Padding(
-              padding: EdgeInsets.only(left: 20, right: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                    Row(
+          child: Padding(
+            padding: EdgeInsets.only(left: 20, right: 20),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Stack(
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-            GestureDetector(
-              onTap: () async {
-                pickImage();
-              },
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(avatarUrl),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: GestureDetector(
-                onTap: () async {
-                  pickImage(); // Call pickImage function when the edit icon is tapped
-                },
-                child: CircleAvatar(
-                  backgroundColor: Color.fromARGB(255, 161, 139, 169),
-                  radius: 20,
-                  child: Icon(
-                    Icons.photo_camera,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-                  ],
-                ),
-            
-              ],
-            ),
-            
-                      SizedBox(height: 16),
-                      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                        Text(
-                          name,
-                          style:
-                              TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Stack(
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                pickImage();
+                              },
+                              child: CircleAvatar(
+                                radius: 50,
+                                backgroundImage: NetworkImage(avatarUrl),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: GestureDetector(
+                                onTap: () async {
+                                  pickImage(); // Call pickImage function when the edit icon is tapped
+                                },
+                                child: CircleAvatar(
+                                  backgroundColor:
+                                      Color.fromARGB(255, 161, 139, 169),
+                                  radius: 20,
+                                  child: Icon(
+                                    Icons.photo_camera,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ]),
-                      SizedBox(height: 8),
-                      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                        Text(
-                          email,
-                          style: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 255, 255, 255)),
-                        ),
-                      ]),
-               /*  Row(
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Text(
+                        name,
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ]),
+                    SizedBox(height: 8),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Text(
+                        email,
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: const Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                    ]),
+                    /*  Row(
               children: [
                  Padding(
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -188,66 +189,63 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ],
             ),
             */
-                      textFields(
-                        controller: adminNameController,
-                        hint: 'User Name Change',
-                        prefix: Icon(
-                          Icons.person_2_outlined,
-                          color: Colors.white
-                        ),
-                        maxLines: 1,
+                    textFields(
+                      controller: adminNameController,
+                      hint: 'User Name Change',
+                      prefix:
+                          Icon(Icons.person_2_outlined, color: Colors.white),
+                      maxLines: 1,
+                    ),
+                    MaterialButton(
+                      height: 60,
+                      minWidth: 200,
+                      color: Color.fromARGB(255, 243, 175, 174),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                      MaterialButton(
-                        height: 60,
-                        minWidth: 200,
-                        color: Color.fromARGB(255, 243, 175, 174),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        onPressed: () async {
-                          FirebaseFirestore.instance
-                              .collection('admins')
-                              .doc(userData['uid'])
-                              .update({
-                            'profileImageUrl': avatarUrl,
-                          });
-                          Provider.of<UserProvider>(context, listen: false)
-                              .updateAdminName(adminNameController.text.trim());
-                          FirebaseFirestore.instance
-                              .collection('admins')
-                              .doc(userData["uid"])
-                              .update(userData);
-            
-                                Navigator.pop(context);
-                        },
-                        child: Container(
-                          width: 200,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                'Save Changes',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                      onPressed: () async {
+                        FirebaseFirestore.instance
+                            .collection('admins')
+                            .doc(userData['uid'])
+                            .update({
+                          'profileImageUrl': avatarUrl,
+                        });
+                        Provider.of<UserProvider>(context, listen: false)
+                            .updateAdminName(adminNameController.text.trim());
+                        FirebaseFirestore.instance
+                            .collection('admins')
+                            .doc(userData["uid"])
+                            .update(userData);
+
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        width: 200,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              'Save Changes',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Icon(
-                                Icons.login_outlined,
-                              ),
-                            ],
-                          ),
+                            ),
+                            Icon(
+                              Icons.login_outlined,
+                            ),
+                          ],
                         ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
-          )
-          ]
-      ),
+          ),
+        )
+      ]),
     );
   }
 }
