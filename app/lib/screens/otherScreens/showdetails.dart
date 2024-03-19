@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 import 'package:shega_cloth_store_app/database/auth.dart';
 import 'package:shega_cloth_store_app/utils/snackBar.dart';
 
@@ -34,6 +35,7 @@ class _showDetailsState extends State<showDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ThemeUI.darker,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -107,7 +109,7 @@ class _showDetailsState extends State<showDetails> {
                           widget.title,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.black87,
+                            color: ThemeUI.texto,
                             fontSize: 25,
                           ),
                         ),
@@ -129,6 +131,7 @@ class _showDetailsState extends State<showDetails> {
                             ),
                             Text(
                               '${widget.like['like'].length}',
+                              style: TextStyle(color: ThemeUI.texto),
                             ),
                           ],
                         ),
@@ -144,7 +147,7 @@ class _showDetailsState extends State<showDetails> {
                       '\$ ${widget.price}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 105, 94, 231),
+                        color: ThemeUI.primary,
                         fontSize: 20,
                       ),
                     ),
@@ -160,7 +163,7 @@ class _showDetailsState extends State<showDetails> {
                   'Description',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: ThemeUI.texto,
                     fontSize: 20,
                   ),
                 ),
@@ -172,9 +175,7 @@ class _showDetailsState extends State<showDetails> {
                 padding: const EdgeInsets.only(left: 10),
                 child: Text(
                   widget.discription,
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
+                  style: TextStyle(fontSize: 15, color: ThemeUI.texto),
                 ),
               ),
               Padding(
@@ -182,9 +183,9 @@ class _showDetailsState extends State<showDetails> {
                 child: Text(
                   'Size',
                   style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: ThemeUI.texto),
                 ),
               ),
               Padding(
@@ -194,13 +195,14 @@ class _showDetailsState extends State<showDetails> {
                     MaterialButton(
                       shape: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.black54,
+                          color: ThemeUI.texto,
                         ),
                       ),
                       onPressed: () {},
                       height: 50,
                       minWidth: 50,
                       child: Text(
+                        style: TextStyle(color: ThemeUI.texto),
                         '8',
                       ),
                     ),
@@ -210,13 +212,14 @@ class _showDetailsState extends State<showDetails> {
                     MaterialButton(
                       shape: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.black54,
+                          color: ThemeUI.texto,
                         ),
                       ),
                       onPressed: () {},
                       height: 50,
                       minWidth: 50,
                       child: Text(
+                        style: TextStyle(color: ThemeUI.texto),
                         '10',
                       ),
                     ),
@@ -226,13 +229,14 @@ class _showDetailsState extends State<showDetails> {
                     MaterialButton(
                       shape: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.black54,
+                          color: ThemeUI.texto,
                         ),
                       ),
                       onPressed: () {},
                       height: 50,
                       minWidth: 50,
                       child: Text(
+                        style: TextStyle(color: ThemeUI.texto),
                         '38',
                       ),
                     ),
@@ -249,12 +253,10 @@ class _showDetailsState extends State<showDetails> {
                   MaterialButton(
                     height: 50,
                     minWidth: 300,
-                    color: Color.fromARGB(255, 144, 106, 213),
+                    color: ThemeUI.primary,
                     shape: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(
-                          color: Color.fromARGB(255, 144, 106,
-                              213)), // Same color as button color
+                      // Same color as button color
                     ),
                     onPressed: () async {
                       setState(() {
@@ -281,6 +283,7 @@ class _showDetailsState extends State<showDetails> {
                     child: isfinish
                         ? Center(
                             child: Text(
+                              style: TextStyle(color: Colors.white),
                               'Buy Now',
                             ),
                           )
@@ -293,21 +296,23 @@ class _showDetailsState extends State<showDetails> {
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: MaterialButton(
+                      color: ThemeUI.lighter,
                       height: 50,
                       minWidth: 50,
                       shape: CircleBorder(
                           eccentricity: BorderSide.strokeAlignOutside),
                       onPressed: () {},
                       child: Center(
-                        child: Icon(
-                          Icons.shopping_bag_rounded,
-                          color: Colors.grey,
-                        ),
+                        child: Icon(Icons.shopping_bag_rounded,
+                            color: ThemeUI.light),
                       ),
                     ),
                   ),
                 ],
               ),
+              SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),

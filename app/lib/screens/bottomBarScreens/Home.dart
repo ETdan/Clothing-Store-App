@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 import '/screens/otherScreens/pro.dart';
 import '/screens/otherScreens/showdetails.dart';
@@ -85,6 +86,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.sizeOf(context);
     TextEditingController userpasswordController = TextEditingController();
     TextEditingController userNameController = TextEditingController();
     Map<String, dynamic> userData =
@@ -94,17 +96,12 @@ class _HomeScreenState extends State<HomeScreen>
     String avatarUrl = userData['profileImageUrl'] ??
         'https://images.mubicdn.net/images/cast_member/286407/cache-139299-1463178721/image-w856.jpg?size=256x';
     return Scaffold(
-      backgroundColor: Color(0xffB81736),
+      backgroundColor: ThemeUI.darker,
       body: SafeArea(
         child: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xffB81736),
-              Color(0xff281537),
-            ]),
-          ),
+          decoration: BoxDecoration(color: ThemeUI.darker),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -128,21 +125,21 @@ class _HomeScreenState extends State<HomeScreen>
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                            color: ThemeUI.texto),
                       ),
                       Text(
                         name,
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                            color: ThemeUI.texto),
                       ),
                     ],
                   ),
                   Spacer(),
                   Container(
                     decoration: BoxDecoration(
-                      color: Color(0xffB81736),
+                      color: ThemeUI.primary,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: IconButton(
@@ -160,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: Color(0xffB81736),
+                      color: ThemeUI.primary,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: IconButton(
@@ -178,36 +175,37 @@ class _HomeScreenState extends State<HomeScreen>
                 height: 20,
               ),
               Container(
-                width: 338,
+                width: size.width * 0.90,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 230, 141, 159),
+                  color: ThemeUI.light,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                padding: EdgeInsets.all(12),
+                padding: EdgeInsets.only(top: 7, bottom: 3, left: 10),
                 child: Row(
                   children: [
                     Icon(
                       Icons.search,
-                      color: Colors.white,
+                      color: ThemeUI.textogr,
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     SizedBox(
-                      width:
-                          270, // Adjusted width to accommodate the text field
-                      child: TextField(
-                        controller: userSearchController,
-                        decoration: InputDecoration(
-                          hintText: 'Search here',
-                          hintStyle: TextStyle(color: Colors.white),
-                          border: InputBorder.none,
-                        ),
-                        style: TextStyle(color: Colors.white),
-                        maxLines: 1,
-                      ),
-                    ),
+                        width:
+                            280, // Adjusted width to accommodate the text field
+                        child: Align(
+                          child: TextField(
+                            controller: userSearchController,
+                            decoration: InputDecoration(
+                              hintText: 'Search here',
+                              hintStyle: TextStyle(color: ThemeUI.textogr),
+                              border: InputBorder.none,
+                            ),
+                            style: TextStyle(color: ThemeUI.textogr),
+                            maxLines: 1,
+                          ),
+                        )),
                   ],
                 ),
               ),
@@ -216,23 +214,26 @@ class _HomeScreenState extends State<HomeScreen>
               ),
               SizedBox(
                 height: 180,
-                width: 450,
+                width: size.width * 0.90,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
-                    color: Colors.red,
+                    color: ThemeUI.light,
                     child: CarouselSlider.builder(
                       itemCount: images.length,
                       itemBuilder: (context, index, realIndex) {
                         return BuildImages(imagee: images[index]);
                       },
                       options: CarouselOptions(
-                        enlargeCenterPage: true,
-                        viewportFraction: 1.0,
+                        enlargeCenterPage: false,
+                        viewportFraction: 1.1,
+                        enlargeStrategy: CenterPageEnlargeStrategy.scale,
                         autoPlayAnimationDuration: Duration(microseconds: 50),
-                        autoPlay: false,
+                        autoPlay: true,
                         reverse: true,
-                        height: 200,
+                        autoPlayInterval: Duration(seconds: 5),
+                        autoPlayCurve: Curves.decelerate,
+                        height: 180,
                         onPageChanged: (index, reason) {
                           setState(() {
                             active_index = index;
@@ -243,7 +244,13 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
               indicator(index: images.length),
+              SizedBox(
+                height: 10,
+              ),
               Expanded(
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
@@ -251,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen>
                     topRight: Radius.circular(16),
                   ),
                   child: Container(
-                    color: const Color.fromARGB(255, 206, 204, 204),
+                    color: Colors.white,
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
@@ -280,14 +287,15 @@ class _HomeScreenState extends State<HomeScreen>
                                     );
                                   },
                                   child: Text(
-                                    'see all',
+                                    'See All',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: ThemeUI.primary,
+                                        fontWeight: FontWeight.w400),
                                   ),
                                 ),
                               ),
                             ],
-                          ),
-                          SizedBox(
-                            height: 10,
                           ),
                           StreamBuilder(
                             stream: FirebaseFirestore.instance
@@ -302,7 +310,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   ConnectionState.waiting) {
                                 return Center(
                                   child: CircularProgressIndicator(
-                                    color: Colors.green,
+                                    color: ThemeUI.primary,
                                   ),
                                 );
                               }
@@ -331,7 +339,7 @@ class _HomeScreenState extends State<HomeScreen>
                             },
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 18,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -363,11 +371,18 @@ class _HomeScreenState extends State<HomeScreen>
                                     );
                                   },
                                   child: Text(
-                                    'see all',
+                                    'See All',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: ThemeUI.primary,
+                                        fontWeight: FontWeight.w400),
                                   ),
                                 ),
                               ),
                             ],
+                          ),
+                          SizedBox(
+                            height: 12,
                           ),
                           StreamBuilder(
                             stream: FirebaseFirestore.instance
@@ -410,6 +425,9 @@ class _HomeScreenState extends State<HomeScreen>
                               );
                             },
                           ),
+                          SizedBox(
+                            height: 20,
+                          )
                         ],
                       ),
                     ),
@@ -469,7 +487,7 @@ class _buildAdvertiseState extends State<buildAdvertise> {
           height: 100,
           width: 150,
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 242, 227, 230),
+            color: ThemeUI.lighter,
             borderRadius: BorderRadius.circular(20),
           ),
           child: ListView(
@@ -483,7 +501,9 @@ class _buildAdvertiseState extends State<buildAdvertise> {
                         height: 90,
                         width: 150,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10)),
                             image: DecorationImage(
                               image: NetworkImage(
                                 widget.image,
@@ -492,7 +512,7 @@ class _buildAdvertiseState extends State<buildAdvertise> {
                             )),
                       ),
                       Positioned(
-                        left: 120,
+                        right: 0,
                         child: likeAnimation(
                           product: widget.like,
                           snap: FirebaseAuth.instance.currentUser!,
@@ -512,7 +532,7 @@ class _buildAdvertiseState extends State<buildAdvertise> {
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black87,
+                              color: ThemeUI.texto,
                             ),
                           ),
                         ],
@@ -523,11 +543,11 @@ class _buildAdvertiseState extends State<buildAdvertise> {
                             width: 5,
                           ),
                           Text(
-                            '\$ ${widget.price}',
+                            '\$${widget.price}',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black87,
+                              color: ThemeUI.primary,
                             ),
                           ),
                         ],
@@ -555,9 +575,8 @@ class BuildImages extends StatelessWidget {
       margin: EdgeInsets.symmetric(
         horizontal: 5,
       ),
-      child: Image(
-        image: AssetImage(imagee),
-        fit: BoxFit.fill,
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(imagee), fit: BoxFit.cover),
       ),
     );
   }
@@ -573,6 +592,6 @@ class indicator extends StatelessWidget {
         activeIndex: active_index,
         count: index,
         effect: JumpingDotEffect(
-            activeDotColor: Color.fromARGB(255, 255, 255, 255)));
+            activeDotColor: ThemeUI.primary, dotColor: ThemeUI.light));
   }
 }

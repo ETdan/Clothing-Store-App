@@ -30,8 +30,8 @@ class _adminHomeState extends State<adminHome> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xffB81736),
-        unselectedItemColor: const Color.fromARGB(255, 137, 136, 136),
+        selectedItemColor: Color(0xff0F6BAE),
+        unselectedItemColor: Color(0xffC6CDFF),
         onTap: (int index) {
           setState(() {
             _selectedIndex = index; // Update the selected index

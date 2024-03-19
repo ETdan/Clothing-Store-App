@@ -1,3 +1,4 @@
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 import 'package:shega_cloth_store_app/database/auth.dart';
 import 'package:shega_cloth_store_app/utils/snackBar.dart';
 
@@ -54,17 +55,12 @@ class _searchScreenState extends State<SearchScreen> {
     }
 
     return Scaffold(
-      backgroundColor: Color(0xffB81736),
+      backgroundColor: ThemeUI.darker,
       body: SafeArea(
         child: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xffB81736),
-              Color(0xff281537),
-            ]),
-          ),
+          decoration: BoxDecoration(color: ThemeUI.darker),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: ListView(
@@ -83,30 +79,30 @@ class _searchScreenState extends State<SearchScreen> {
                                 print(arguments["gender"]);
                               });
                             },
+                            style: TextStyle(color: ThemeUI.texto),
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
+                              focusColor: ThemeUI.texto,
+                              fillColor: ThemeUI.texto,
+                              border: InputBorder.none,
                               prefixIcon: Padding(
                                 padding:
                                     const EdgeInsets.only(left: 20, right: 20),
                                 child: Icon(
                                   Icons.search,
-                                  color:
-                                      const Color.fromARGB(255, 255, 255, 255),
+                                  color: ThemeUI.texto,
                                 ),
                               ),
                               suffixIcon: IconButton(
                                 onPressed: () {
                                   searchController.clear();
                                 },
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.clear,
-                                  color: Colors.white,
+                                  color: ThemeUI.texto,
                                 ),
                               ),
                               hintText: 'search here',
-                              hintStyle: TextStyle(color: Colors.white),
+                              hintStyle: TextStyle(color: ThemeUI.textogr),
                             ),
                           ),
                         )
@@ -125,11 +121,11 @@ class _searchScreenState extends State<SearchScreen> {
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                color: ThemeUI.textogr),
                           ),
                           Container(
                             decoration: BoxDecoration(
-                              color: Color(0xffB81736),
+                              color: ThemeUI.primary,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             padding: EdgeInsets.all(2),
@@ -259,7 +255,7 @@ class _searchScreenState extends State<SearchScreen> {
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
-                                                          .spaceBetween,
+                                                          .spaceAround,
                                                   children: [
                                                     Column(
                                                       children: [
@@ -277,14 +273,13 @@ class _searchScreenState extends State<SearchScreen> {
                                                           ),
                                                         ),
                                                         Text(
-                                                          '\$ ${snapshot.data!.docs[index]['price']} ',
-                                                          style:
-                                                              const TextStyle(
+                                                          '\$${snapshot.data!.docs[index]['price']} ',
+                                                          style: TextStyle(
                                                             fontSize: 20,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             color:
-                                                                Colors.black87,
+                                                                ThemeUI.primary,
                                                           ),
                                                         ),
                                                       ],
@@ -293,8 +288,7 @@ class _searchScreenState extends State<SearchScreen> {
                                                       clipBehavior:
                                                           Clip.antiAlias,
                                                       child: Material(
-                                                        color: Color.fromARGB(
-                                                            214, 117, 73, 220),
+                                                        color: ThemeUI.primary,
                                                         child: IconButton(
                                                           onPressed: () async {
                                                             setState(() {
@@ -340,7 +334,8 @@ class _searchScreenState extends State<SearchScreen> {
                                                           icon: Center(
                                                             child: Icon(
                                                               Icons.add,
-                                                              //color: Colors.purple,
+                                                              color:
+                                                                  Colors.white,
                                                             ),
                                                           ),
                                                         ),

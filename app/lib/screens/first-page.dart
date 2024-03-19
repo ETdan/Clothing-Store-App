@@ -1,3 +1,5 @@
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
+
 import '/screens/bottomBarScreens/Home.dart';
 import '/screens/bottomBarScreens/product.dart';
 import '/screens/bottomBarScreens/profile.dart';
@@ -35,9 +37,10 @@ class _firstState extends State<first> {
         },
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         //tabBackgroundColor: Colors.grey,
-        activeColor: Color(0xffB81736),
+        activeColor: ThemeUI.primary,
         selectedIndex: widget.page,
-        color: Colors.grey,
+        color: ThemeUI.light,
+        backgroundColor: ThemeUI.lighter,
         tabBorderRadius: 14,
         gap: 8,
         tabs: [

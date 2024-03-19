@@ -1,3 +1,4 @@
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 import 'package:shega_cloth_store_app/database/auth.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 
@@ -33,20 +34,12 @@ class _ProfilePageState extends State<ProfilePage> {
         'https://images.mubicdn.net/images/cast_member/286407/cache-139299-1463178721/image-w856.jpg?size=256x';
 
     return Scaffold(
-      backgroundColor:  Color(0xffB81736),
+      backgroundColor: ThemeUI.darker,
       body: SafeArea(
-   
         child: Container(
-           height: double.infinity,
+          height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xffB81736),
-                Color(0xff281537),
-              ]
-              ),
-          ),
+          decoration: BoxDecoration(color: ThemeUI.darker),
           child: Column(
             children: [
               SizedBox(height: 60),
@@ -64,17 +57,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Text(
                       name,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: ThemeUI.texto),
                     ),
                   ]),
                   SizedBox(height: 8),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Text(
                       email,
-                      style: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 255, 255, 255)),
+                      style: TextStyle(fontSize: 16, color: ThemeUI.textogr),
                     ),
                   ]),
+                  SizedBox(height: 8),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -92,13 +88,20 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         width: 350,
                         height: 40,
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(Icons.person,color: Color.fromARGB(255, 147, 0, 0) ,),
+                            Icon(
+                              Icons.person,
+                              color: ThemeUI.secondary,
+                            ),
                             SizedBox(width: 7),
-                            Text('Profiel', style: TextStyle(color:  Color.fromARGB(255, 96, 0, 0),),),
+                            Text(
+                              'Profiel',
+                              style: TextStyle(color: ThemeUI.primary),
+                            ),
                             Spacer(),
-                            Icon(Icons.arrow_forward_ios, color: Colors.red,)
+                            Icon(Icons.arrow_forward_ios,
+                                color: ThemeUI.primary)
                           ],
                         ),
                       ),
@@ -121,13 +124,18 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         width: 350,
                         height: 40,
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(Icons.settings,color: Color.fromARGB(255, 147, 0, 0) ,),
+                            Icon(
+                              Icons.settings,
+                              color: ThemeUI.primary,
+                            ),
                             SizedBox(width: 7),
-                            Text('Settings', style: TextStyle(color:  Color.fromARGB(255, 96, 0, 0),),),
+                            Text('Settings',
+                                style: TextStyle(color: ThemeUI.primary)),
                             Spacer(),
-                            Icon(Icons.arrow_forward_ios, color: Colors.red,)
+                            Icon(Icons.arrow_forward_ios,
+                                color: ThemeUI.primary)
                           ],
                         ),
                       ),
@@ -149,13 +157,22 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         width: 350,
                         height: 40,
-                        child: const Row(
+                        child: Row(
                           children: [
-                             Icon(Icons.mail,color: Color.fromARGB(255, 147, 0, 0) ,),
+                            Icon(
+                              Icons.mail,
+                              color: ThemeUI.primary,
+                            ),
                             SizedBox(width: 7),
-                            Text('Contact', style: TextStyle(color:  Color.fromARGB(255, 96, 0, 0),),),
+                            Text(
+                              'Contact',
+                              style: TextStyle(
+                                color: ThemeUI.primary,
+                              ),
+                            ),
                             Spacer(),
-                            Icon(Icons.arrow_forward_ios, color: Colors.red,)
+                            Icon(Icons.arrow_forward_ios,
+                                color: ThemeUI.primary)
                           ],
                         ),
                       ),
@@ -177,13 +194,22 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         width: 350,
                         height: 40,
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(Icons.share,color: Color.fromARGB(255, 147, 0, 0) ,),
+                            Icon(
+                              Icons.share,
+                              color: ThemeUI.primary,
+                            ),
                             SizedBox(width: 7),
-                            Text('Share App ', style: TextStyle(color:  Color.fromARGB(255, 96, 0, 0),),),
+                            Text(
+                              'Share App ',
+                              style: TextStyle(
+                                color: ThemeUI.primary,
+                              ),
+                            ),
                             Spacer(),
-                            Icon(Icons.arrow_forward_ios, color: Colors.red,)
+                            Icon(Icons.arrow_forward_ios,
+                                color: ThemeUI.primary)
                           ],
                         ),
                       ),
@@ -204,13 +230,20 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         width: 350,
                         height: 40,
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(Icons.help,color: Color.fromARGB(255, 147, 0, 0) ,),
+                            Icon(
+                              Icons.help,
+                              color: ThemeUI.primary,
+                            ),
                             SizedBox(width: 7),
-                            Text('Help', style: TextStyle(color:  Color.fromARGB(255, 96, 0, 0),),),
+                            Text(
+                              'Help',
+                              style: TextStyle(color: ThemeUI.primary),
+                            ),
                             Spacer(),
-                            Icon(Icons.arrow_forward_ios, color: Colors.red,)
+                            Icon(Icons.arrow_forward_ios,
+                                color: ThemeUI.primary)
                           ],
                         ),
                       ),
@@ -224,7 +257,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   await authMethod().UserSignOut(context);
                   ;
                 },
-                child: Text('Log Out', style: TextStyle(color: Colors.red[900]),),
+                child: Text(
+                  'Log Out',
+                  style: TextStyle(color: Colors.red[900]),
+                ),
               )
             ],
           ),

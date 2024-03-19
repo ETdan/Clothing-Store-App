@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 import 'package:shega_cloth_store_app/database/auth.dart';
 import 'package:shega_cloth_store_app/screens/first-page.dart';
 import 'package:shega_cloth_store_app/screens/otherScreens/checkout.dart';
@@ -27,7 +28,7 @@ class _productScreenState extends State<productScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xffB81736),
+        backgroundColor: ThemeUI.darker,
         automaticallyImplyLeading: false,
         title: Row(
           children: [
@@ -39,7 +40,7 @@ class _productScreenState extends State<productScreen> {
                   },
                   icon: Icon(
                     Icons.arrow_back,
-                    color: Colors.white,
+                    color: ThemeUI.textogr,
                   ), // Assuming 'icon' is already defined elsewhere
                 ),
                 SizedBox(
@@ -49,7 +50,7 @@ class _productScreenState extends State<productScreen> {
                   child: Text(
                     'Cart',
                     style: TextStyle(
-                      color: const Color.fromARGB(221, 255, 255, 255),
+                      color: ThemeUI.texto,
                     ),
                   ),
                 ),
@@ -63,7 +64,7 @@ class _productScreenState extends State<productScreen> {
             icon: Icon(
               Icons.more_vert,
               size: 30,
-              color: const Color.fromARGB(221, 255, 255, 255),
+              color: ThemeUI.texto,
             ),
           ),
         ],
@@ -72,12 +73,7 @@ class _productScreenState extends State<productScreen> {
         child: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xffB81736),
-              Color(0xff281537),
-            ]),
-          ),
+          decoration: BoxDecoration(color: ThemeUI.darker),
           child: Column(
             children: [
               Padding(
@@ -90,7 +86,7 @@ class _productScreenState extends State<productScreen> {
                   borderRadius: BorderRadius.circular(16),
                   child: Container(
                     height: 370,
-                    color: Color.fromARGB(255, 252, 228, 228),
+                    color: ThemeUI.lighter,
                     child: ListView(
                       children: [
                         StreamBuilder(
@@ -104,7 +100,7 @@ class _productScreenState extends State<productScreen> {
                                 ConnectionState.waiting) {
                               return Center(
                                 child: CircularProgressIndicator(
-                                  color: Color(0xffB81736),
+                                  color: ThemeUI.primary,
                                 ),
                               );
                             }
@@ -163,7 +159,9 @@ class _productScreenState extends State<productScreen> {
                                                     Text(
                                                       "\$${snapshot.data!.docs[index]['price']}",
                                                       style: TextStyle(
-                                                        color: Colors.black54,
+                                                        color: ThemeUI.primary,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     )
                                                   ],
@@ -269,7 +267,7 @@ class _productScreenState extends State<productScreen> {
                       ),
                     );
                   },
-                  color: Color.fromARGB(255, 235, 151, 168),
+                  color: ThemeUI.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -279,7 +277,7 @@ class _productScreenState extends State<productScreen> {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 126, 0, 0),
+                        color: ThemeUI.darker,
                       ),
                     ),
                   ),

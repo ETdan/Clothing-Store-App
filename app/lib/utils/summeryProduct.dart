@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 
 class summery extends StatefulWidget {
   const summery({super.key});
@@ -78,9 +79,9 @@ class _summeryState extends State<summery> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Order summary',
+            'Order Summary',
             style: TextStyle(
-              color: const Color.fromARGB(221, 255, 254, 254),
+              color: ThemeUI.texto,
               fontSize: 14,
             ),
           ),
@@ -90,13 +91,13 @@ class _summeryState extends State<summery> {
               Text(
                 'Items',
                 style: TextStyle(
-                  color: const Color.fromARGB(221, 255, 254, 254),
+                  color: ThemeUI.texto,
                   fontSize: 14,
                 ),
               ),
               Text('${count}',
                   style: TextStyle(
-                    color: const Color.fromARGB(221, 255, 254, 254),
+                    color: ThemeUI.texto,
                     fontSize: 14,
                   )),
             ],
@@ -107,14 +108,14 @@ class _summeryState extends State<summery> {
               Text(
                 'Subtotal',
                 style: TextStyle(
-                  color: const Color.fromARGB(221, 255, 254, 254),
+                  color: ThemeUI.texto,
                   fontSize: 14,
                 ),
               ),
               Text(
                 '\$${price}',
                 style: TextStyle(
-                  color: const Color.fromARGB(221, 255, 254, 254),
+                  color: ThemeUI.texto,
                   fontSize: 14,
                 ),
               ),
@@ -126,14 +127,14 @@ class _summeryState extends State<summery> {
               Text(
                 'Discount',
                 style: TextStyle(
-                  color: const Color.fromARGB(221, 255, 254, 254),
+                  color: ThemeUI.texto,
                   fontSize: 14,
                 ),
               ),
               Text(
                 '\$${discount}',
                 style: TextStyle(
-                  color: const Color.fromARGB(221, 255, 254, 254),
+                  color: ThemeUI.texto,
                   fontSize: 14,
                 ),
               ),
@@ -145,14 +146,14 @@ class _summeryState extends State<summery> {
               Text(
                 'Delivery Charges',
                 style: TextStyle(
-                  color: const Color.fromARGB(221, 255, 254, 254),
+                  color: ThemeUI.texto,
                   fontSize: 14,
                 ),
               ),
               Text(
                 '\$${delivery}',
                 style: TextStyle(
-                  color: const Color.fromARGB(221, 255, 254, 254),
+                  color: ThemeUI.texto,
                   fontSize: 14,
                 ),
               ),
@@ -172,14 +173,14 @@ class _summeryState extends State<summery> {
               Text(
                 ' Total',
                 style: TextStyle(
-                  color: const Color.fromARGB(221, 255, 254, 254),
+                  color: ThemeUI.texto,
                   fontSize: 14,
                 ),
               ),
               Text(
                 '\$${price + delivery - discount}',
                 style: TextStyle(
-                  color: const Color.fromARGB(221, 255, 254, 254),
+                  color: ThemeUI.texto,
                   fontSize: 14,
                 ),
               ),
