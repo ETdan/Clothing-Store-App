@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 import 'package:shega_cloth_store_app/database/auth.dart';
 import 'package:shega_cloth_store_app/utils/snackBar.dart';
 
@@ -22,17 +24,16 @@ class _ProState extends State<Pro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffB81736),
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Color(0xffB81736),
+        backgroundColor: ThemeUI.darker,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: Icon(
             Icons.arrow_back,
-            color: const Color.fromARGB(221, 255, 255, 255),
+            color: ThemeUI.textogr,
             size: 30,
           ),
         ),
@@ -40,7 +41,8 @@ class _ProState extends State<Pro> {
           child: Text(
             'Products',
             style: TextStyle(
-              color: const Color.fromARGB(221, 255, 255, 255),
+              color: ThemeUI.texto,
+              fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
           ),
@@ -50,12 +52,7 @@ class _ProState extends State<Pro> {
         child: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xffB81736),
-              Color(0xff281537),
-            ]),
-          ),
+          decoration: BoxDecoration(color: ThemeUI.light),
           child: StreamBuilder(
             stream:
                 FirebaseFirestore.instance.collection('products').snapshots(),
@@ -93,7 +90,7 @@ class _ProState extends State<Pro> {
                             Stack(
                               children: [
                                 Container(
-                                  height: 145,
+                                  height: 130,
                                   width: 200,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
@@ -118,32 +115,42 @@ class _ProState extends State<Pro> {
                               padding: const EdgeInsets.only(right: 10),
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Text(
-                                        snapshot.data!.docs[index]['title'],
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: Text(
+                                          snapshot.data!.docs[index]['title'],
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: ThemeUI.texto,
+                                          ),
                                         ),
                                       ),
-                                      Text(
-                                        '\$ ${snapshot.data!.docs[index]['price']} ',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: Text(
+                                          '\$${snapshot.data!.docs[index]['price']} ',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: ThemeUI.primary,
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   ClipOval(
                                     clipBehavior: Clip.antiAlias,
                                     child: Material(
-                                      color: Color.fromARGB(214, 117, 73, 220),
+                                      color: ThemeUI.primary,
                                       child: IconButton(
                                         onPressed: () async {
                                           setState(() {
@@ -175,6 +182,7 @@ class _ProState extends State<Pro> {
                                         icon: Center(
                                           child: Icon(
                                             Icons.add,
+                                            color: ThemeUI.lighter,
                                             //color: Colors.purple,
                                           ),
                                         ),

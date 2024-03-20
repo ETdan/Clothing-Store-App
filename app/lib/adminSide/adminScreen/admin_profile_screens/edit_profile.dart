@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shega_cloth_store_app/adminSide/adminScreen/settings.dart';
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 import 'package:shega_cloth_store_app/utils/textfield.dart';
 import '/database/auth.dart';
@@ -71,18 +73,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           "Edit Profile",
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Color(0xffB81736),
+        backgroundColor: ThemeUI.darker,
       ),
       body: Stack(children: [
         Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xffB81736),
-              Color(0xff281537),
-            ]),
-          ),
+          decoration: BoxDecoration(color: ThemeUI.darker),
           child: Padding(
             padding: EdgeInsets.only(left: 20, right: 20),
             child: Column(
@@ -135,16 +132,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                            color: ThemeUI.texto),
                       ),
                     ]),
                     SizedBox(height: 8),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Text(
                         email,
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: const Color.fromARGB(255, 255, 255, 255)),
+                        style: TextStyle(fontSize: 16, color: ThemeUI.textogr),
                       ),
                     ]),
                     /*  Row(
@@ -199,7 +194,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     MaterialButton(
                       height: 60,
                       minWidth: 200,
-                      color: Color.fromARGB(255, 243, 175, 174),
+                      color: ThemeUI.light,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),

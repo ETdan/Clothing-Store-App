@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shega_cloth_store_app/database/models/admin.dart';
 import 'package:shega_cloth_store_app/database/models/user.dart';
 
 class UserProvider extends ChangeNotifier {
-  Map<String, dynamic> userModel = {
-    'username': "n/a",
-    'password': "n/a",
-    'email': "n/a",
-    'uid': "n/a",
-    'profileImageUrl': null,
-  };
+  Map<String, dynamic> userModel = {};
 
   void userSignIn(Users user) {
     userModel = user.tojson();
@@ -25,15 +20,9 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Map<String, dynamic> adminModel = {
-    'adminname': "n/a",
-    'adminpassword': "n/a",
-    'adminemail': "n/a",
-    'aid': "n/a",
-    'aprofileImageUrl': null,
-  };
+  Map<String, dynamic> adminModel = {};
 
-  void adminSignIn(Users admin) {
+  void adminSignIn(Admins admin) {
     adminModel = admin.tojson();
     notifyListeners();
   }
@@ -50,7 +39,7 @@ class UserProvider extends ChangeNotifier {
 
   // Method to update admin name
   void updateAdminName(String newName) {
-    adminModel['adminName'] = newName;
+    adminModel['username'] = newName;
     notifyListeners();
   }
 

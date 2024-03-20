@@ -1,3 +1,4 @@
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 import 'package:shega_cloth_store_app/screens/login.dart';
 
@@ -32,16 +33,21 @@ class _signupState extends State<signup> {
     FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     return Scaffold(
+      backgroundColor: ThemeUI.darker,
       body: SingleChildScrollView(
         child: Stack(children: [
           Container(
             height: height,
             width: width,
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Color(0xffB81736),
-                Color(0xff281537),
-              ]),
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomRight,
+                colors: [
+                  ThemeUI.secondary,
+                  ThemeUI.light,
+                ],
+              ),
             ),
             child: Padding(
               padding: EdgeInsets.only(top: 60, left: 22),
@@ -82,7 +88,7 @@ class _signupState extends State<signup> {
                             "Gmail",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xffB81736),
+                              color: ThemeUI.secondary,
                             ),
                           )),
                     ),
@@ -97,7 +103,7 @@ class _signupState extends State<signup> {
                             "User name",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xffB81736),
+                              color: ThemeUI.secondary,
                             ),
                           )),
                     ),
@@ -112,7 +118,7 @@ class _signupState extends State<signup> {
                             "Password",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xffB81736),
+                              color: ThemeUI.secondary,
                             ),
                           )),
                     ),
@@ -148,12 +154,8 @@ class _signupState extends State<signup> {
                       height: 55,
                       width: 300,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        gradient: LinearGradient(colors: [
-                          Color(0xffB81736),
-                          Color(0xff281537),
-                        ]),
-                      ),
+                          borderRadius: BorderRadius.circular(30),
+                          color: ThemeUI.primary),
                       child: Consumer<defaultt>(
                         builder: (context, value, child) {
                           return MaterialButton(

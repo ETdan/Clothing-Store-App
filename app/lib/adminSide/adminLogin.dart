@@ -1,4 +1,5 @@
 import 'package:shega_cloth_store_app/adminSide/adminScreen/adminHome.dart';
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 import 'package:shega_cloth_store_app/screens/login.dart';
 
@@ -39,10 +40,14 @@ class _AdminLoginState extends State<AdminLogin> {
           height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xffB81736),
-              Color(0xff281537),
-            ]),
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [
+                ThemeUI.secondary,
+                ThemeUI.light,
+              ],
+            ),
           ),
           child: Padding(
             padding: EdgeInsets.only(top: 60, left: 22),
@@ -82,7 +87,7 @@ class _AdminLoginState extends State<AdminLogin> {
                           "Gmail",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Color(0xffB81736),
+                            color: ThemeUI.primary,
                           ),
                         )),
                   ),
@@ -97,7 +102,7 @@ class _AdminLoginState extends State<AdminLogin> {
                           "Password",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Color(0xffB81736),
+                            color: ThemeUI.primary,
                           ),
                         )),
                   ),
@@ -120,24 +125,14 @@ class _AdminLoginState extends State<AdminLogin> {
                     height: 55,
                     width: 300,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      gradient: LinearGradient(colors: [
-                        Color(0xffB81736),
-                        Color(0xff281537),
-                      ]),
-                    ),
+                        borderRadius: BorderRadius.circular(30),
+                        color: ThemeUI.primary),
                     child: Consumer<defaultt>(
                       builder: (context, value, child) {
                         return Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xffB81736),
-                                Color(0xff281537),
-                              ],
-                            ),
-                          ),
+                              borderRadius: BorderRadius.circular(30),
+                              color: ThemeUI.primary),
                           child: MaterialButton(
                               height: 60,
                               minWidth: width * 0.8,
@@ -167,6 +162,7 @@ class _AdminLoginState extends State<AdminLogin> {
                                   Provider.of<UserProvider>(context,
                                           listen: false)
                                       .adminSignInMap(userData);
+                                  print(userData);
                                   showSnack(
                                     'Welcome back!',
                                     context,
@@ -216,10 +212,10 @@ class _AdminLoginState extends State<AdminLogin> {
                     ),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 10,
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 10,
                   ),
                   Align(
                     alignment: Alignment.bottomLeft,
@@ -229,12 +225,8 @@ class _AdminLoginState extends State<AdminLogin> {
                           height: 55,
                           width: 150,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            gradient: LinearGradient(colors: [
-                              Color(0xffB81736),
-                              Color(0xff281537),
-                            ]),
-                          ),
+                              borderRadius: BorderRadius.circular(30),
+                              color: ThemeUI.primary),
                           child: TextButton(
                             onPressed: () {
                               Navigator.of(context).push(

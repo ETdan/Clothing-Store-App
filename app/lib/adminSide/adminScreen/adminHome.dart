@@ -1,3 +1,4 @@
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 import 'package:shega_cloth_store_app/database/models/product.dart';
 
 import '/adminSide/adminScreen/catagories/catagories.dart';
@@ -20,7 +21,9 @@ class _adminHomeState extends State<adminHome> {
   final List<Widget> _destinations = [
     dashBoard(),
     Categories(),
-    products(),
+    products(
+      title: "Products",
+    ),
     orders(),
     Setting(),
   ];
@@ -30,8 +33,9 @@ class _adminHomeState extends State<adminHome> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xff0F6BAE),
-        unselectedItemColor: Color(0xffC6CDFF),
+        selectedItemColor: ThemeUI.primary,
+        unselectedItemColor: ThemeUI.light,
+        backgroundColor: ThemeUI.lighter,
         onTap: (int index) {
           setState(() {
             _selectedIndex = index; // Update the selected index

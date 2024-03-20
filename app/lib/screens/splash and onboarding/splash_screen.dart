@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 import 'package:shega_cloth_store_app/main.dart';
 import 'package:shega_cloth_store_app/screens/first-page.dart';
 import 'package:shega_cloth_store_app/screens/login.dart';
@@ -42,8 +43,8 @@ class _SplashState extends State<Splash> {
             begin: Alignment.topRight,
             end: Alignment.bottomRight,
             colors: [
-          Color(0xffB81736),
-                Color(0xff281537),
+              ThemeUI.secondary,
+              ThemeUI.light,
             ],
           ),
         ),
@@ -63,12 +64,14 @@ class _SplashState extends State<Splash> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
-                    color: Colors.white,
+                    color: ThemeUI.textogr,
                   ),
                 ),
               ],
             ),
-            CircularProgressIndicator(),
+            CircularProgressIndicator(
+              color: ThemeUI.primary,
+            ),
           ],
         ),
       ),

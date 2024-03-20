@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 import 'package:shega_cloth_store_app/screens/splash%20and%20onboarding/intro_pages.dart/page_1.dart';
 import 'package:shega_cloth_store_app/screens/splash%20and%20onboarding/intro_pages.dart/page_2.dart';
 import 'package:shega_cloth_store_app/screens/splash%20and%20onboarding/intro_pages.dart/page_3.dart';
@@ -52,9 +53,9 @@ class _welcomeState extends State<welcome> {
                     _controller.jumpToPage(2);
                   },
                   child: Text(
-                    'skip',
+                    'Skip',
                     style: TextStyle(
-                        color: Colors.white,
+                        color: ThemeUI.darker,
                         fontSize: 18,
                         fontWeight: FontWeight.bold),
                   )),
@@ -72,9 +73,9 @@ class _welcomeState extends State<welcome> {
                         }));
                       },
                       child: Text(
-                        'done',
+                        'Done',
                         style: TextStyle(
-                            color: Colors.white,
+                            color: ThemeUI.darker,
                             fontSize: 18,
                             fontWeight: FontWeight.bold),
                       ))

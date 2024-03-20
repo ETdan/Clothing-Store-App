@@ -1,3 +1,4 @@
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 import 'package:shega_cloth_store_app/database/googleauth.dart';
 import 'package:shega_cloth_store_app/database/provider.dart';
 import 'package:shega_cloth_store_app/screens/resetpassword.dart';
@@ -41,10 +42,14 @@ class _signinState extends State<signin> {
             height: height,
             width: width,
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Color(0xffB81736),
-                Color(0xff281537),
-              ]),
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomRight,
+                colors: [
+                  ThemeUI.secondary,
+                  ThemeUI.light,
+                ],
+              ),
             ),
             child: Padding(
               padding: EdgeInsets.only(top: 60, left: 22),
@@ -85,7 +90,7 @@ class _signinState extends State<signin> {
                             "Gmail",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xffB81736),
+                              color: ThemeUI.secondary,
                             ),
                           )),
                     ),
@@ -100,7 +105,7 @@ class _signinState extends State<signin> {
                             "Password",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xffB81736),
+                              color: ThemeUI.secondary,
                             ),
                           )),
                     ),
@@ -119,7 +124,7 @@ class _signinState extends State<signin> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 17,
-                              color: Color(0xff281537),
+                              color: ThemeUI.textogr,
                             ),
                           ),
                         )),
@@ -130,24 +135,14 @@ class _signinState extends State<signin> {
                       height: 55,
                       width: 300,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        gradient: LinearGradient(colors: [
-                          Color(0xffB81736),
-                          Color(0xff281537),
-                        ]),
-                      ),
+                          borderRadius: BorderRadius.circular(30),
+                          color: ThemeUI.primary),
                       child: Consumer<defaultt>(
                         builder: (context, value, child) {
                           return Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color(0xffB81736),
-                                  Color(0xff281537),
-                                ],
-                              ),
-                            ),
+                                borderRadius: BorderRadius.circular(30),
+                                color: ThemeUI.primary),
                             child: MaterialButton(
                                 height: 60,
                                 minWidth: 400,
@@ -224,7 +219,7 @@ class _signinState extends State<signin> {
                       ),
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -246,12 +241,8 @@ class _signinState extends State<signin> {
                             height: 55,
                             width: 150,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              gradient: LinearGradient(colors: [
-                                Color(0xffB81736),
-                                Color(0xff281537),
-                              ]),
-                            ),
+                                borderRadius: BorderRadius.circular(30),
+                                color: ThemeUI.primary),
                             child: TextButton(
                               onPressed: () {
                                 Navigator.of(context).pushReplacement(
