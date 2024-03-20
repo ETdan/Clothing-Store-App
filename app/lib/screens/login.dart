@@ -177,6 +177,11 @@ class _signinState extends State<signin> {
                                       value.toggle();
                                       value.isUserLogin();
                                     });
+                                  } else if (result == 'verify') {
+                                    showSnack(
+                                      'Please, verify your email first!',
+                                      context,
+                                    );
                                   } else {
                                     showSnack(
                                       'please,enter correct information or register first!',

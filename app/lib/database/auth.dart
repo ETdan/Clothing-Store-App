@@ -42,6 +42,9 @@ class authMethod {
           )
           .set(user.tojson());
 
+      User? usero = _auth.currentUser;
+      await usero!.sendEmailVerification();
+
       res = 'success';
     } catch (e) {
       res = e.toString();
@@ -65,7 +68,11 @@ class authMethod {
         password: password,
       );
 
-      res = 'success';
+      if (!_auth.currentUser!.emailVerified) {
+        res = "verify";
+      } else {
+        res = 'success';
+      }
     } catch (e) {
       res = e.toString();
     }

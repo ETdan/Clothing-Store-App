@@ -177,26 +177,14 @@ class _signupState extends State<signup> {
                                 isFinishedLogin = false;
                               });
                               if (result == 'success') {
-                                userData = await _firestore
-                                    .collection('users')
-                                    .doc(
-                                      FirebaseAuth.instance.currentUser!.uid,
-                                    )
-                                    .get();
-
-                                print(userData.data());
-                                Provider.of<UserProvider>(context,
-                                        listen: false)
-                                    .userSignInMap(userData.data()!);
+                                showSnack(
+                                    'The e-mail verification has been sent to your email, verify before login',
+                                    context);
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => first(),
+                                    builder: (context) => signin(),
                                   ),
                                 );
-                                setState(() {
-                                  value.toggle();
-                                  value.isUserLogin();
-                                });
                               } else {
                                 showSnack(
                                   'please,enter correct information or register first!',

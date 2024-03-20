@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shega_cloth_store_app/adminSide/tool.dart';
 
 class filter extends StatefulWidget {
   const filter({super.key});
@@ -10,9 +11,9 @@ class filter extends StatefulWidget {
 class _filterState extends State<filter> {
   String gender = '';
   List<Button> genders = [
-    Button(name: 'All', isClicked: false),
-    Button(name: 'Men', isClicked: false),
-    Button(name: 'Women', isClicked: false)
+    Button(name: 'All', id: '', isClicked: false),
+    Button(name: 'Men', id: 'male', isClicked: false),
+    Button(name: 'Women', id: 'female', isClicked: false)
   ];
   List<Button> brand = [
     Button(name: 'Adidas', isClicked: false),
@@ -36,18 +37,18 @@ class _filterState extends State<filter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffB81736),
+        backgroundColor: ThemeUI.darker,
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Color(0xffB81736),
+          backgroundColor: ThemeUI.darker,
           leading: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back,
               size: 30,
-              color: Color.fromARGB(137, 255, 255, 255),
+              color: ThemeUI.texto,
             ),
           ),
           title: SingleChildScrollView(
@@ -56,252 +57,254 @@ class _filterState extends State<filter> {
                 'Filter',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Color.fromARGB(221, 255, 255, 255),
+                  color: ThemeUI.texto,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Gender',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(221, 255, 255, 255),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                  height: 60,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: genders.length,
-                    itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: genders[index].isClicked
-                                  ? Colors.blue
-                                  : const Color.fromARGB(255, 245, 222, 226),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: const EdgeInsets.all(2),
-                            child: TextButton(
-                              onPressed: () {
-                                setState(() {
-                                  gender = genders[index].name;
-                                  genders[index].clicked();
-                                });
-                              },
-                              child: Text(
-                                genders[index].name,
-                                style: const TextStyle(
-                                  color: Color(0xffB81736),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 50,
-                          )
-                        ],
-                      );
-                    },
-                  )),
-              const Text(
-                'Brand',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(221, 255, 255, 255),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Wrap(
-                  spacing: 100,
-                  runSpacing: 30,
-                  children: List.generate(
-                      brand.length,
-                      (index) => Container(
-                            decoration: BoxDecoration(
-                              color: brand[index].isClicked
-                                  ? Colors.blue
-                                  : const Color.fromARGB(255, 245, 222, 226),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: const EdgeInsets.all(2),
-                            child: TextButton(
-                              onPressed: () {
-                                setState(() {
-                                  brand[index].clicked();
-                                });
-                              },
-                              child: Text(
-                                brand[index].name,
-                                style: const TextStyle(
-                                  color: Color(0xffB81736),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ))),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Price Range',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(221, 255, 255, 255),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '\$ ${current_slidder}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                    ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Gender',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: ThemeUI.texto,
                   ),
-                  Text(
-                    '\$ 543',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
-              ),
-              Slider(
-                value: current_slidder,
-                max: 500,
-                //divisions: 5,
-                label: current_slidder.round().toString(),
-                onChanged: (value) {
-                  setState(() {
-                    current_slidder = value;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                'Color',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(221, 255, 255, 255),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Wrap(
-                  spacing: 100,
-                  runSpacing: 30,
-                  children: List.generate(
-                      colors.length,
-                      (index) => Container(
-                            decoration: BoxDecoration(
-                              color: colors[index].isClicked
-                                  ? Colors.blue
-                                  : const Color.fromARGB(255, 245, 222, 226),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: const EdgeInsets.all(2),
-                            child: TextButton(
-                              onPressed: () {
-                                setState(() {
-                                  colors[index].clicked();
-                                  color = colors[index].name;
-                                });
-                              },
-                              child: Text(
-                                colors[index].name,
-                                style: const TextStyle(
-                                  color: Color(0xffB81736),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                    height: 60,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: genders.length,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: genders[index].isClicked
+                                    ? Colors.blue
+                                    : ThemeUI.light,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              padding: const EdgeInsets.all(2),
+                              child: TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    gender = genders[index].name;
+                                    genders[index].clicked();
+                                  });
+                                },
+                                child: Text(
+                                  genders[index].name,
+                                  style: TextStyle(
+                                    color: ThemeUI.primary,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                             ),
-                          ))),
-              SizedBox(
-                height: 10,
-              ),
-              Card(
-                color: Color.fromARGB(255, 239, 207, 207),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                            const SizedBox(
+                              width: 50,
+                            )
+                          ],
+                        );
+                      },
+                    )),
+                Text(
+                  'Brand',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: ThemeUI.texto,
+                  ),
                 ),
-                child: Row(
+                const SizedBox(
+                  height: 10,
+                ),
+                Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: List.generate(
+                        brand.length,
+                        (index) => Container(
+                              decoration: BoxDecoration(
+                                color: brand[index].isClicked
+                                    ? Colors.blue
+                                    : ThemeUI.light,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              padding: const EdgeInsets.all(2),
+                              child: TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    brand[index].clicked();
+                                  });
+                                },
+                                child: Text(
+                                  brand[index].name,
+                                  style: TextStyle(
+                                    color: ThemeUI.primary,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ))),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Price Range',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: ThemeUI.texto,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Text(
-                        'Another options',
-                        style: TextStyle(
-                          color: Color(0xffB81736),
-                        ),
+                    Text(
+                      '\$ ${current_slidder}',
+                      style: TextStyle(
+                        color: ThemeUI.texto,
+                        fontSize: 15,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        color: Color(0xffB81736),
+                    Text(
+                      '\$ 543',
+                      style: TextStyle(
+                        color: ThemeUI.texto,
+                        fontSize: 15,
                       ),
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Center(
-                child: MaterialButton(
-                  height: 70,
-                  minWidth: 400,
-                  shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/search',
-                        arguments: {'gender': gender, 'color': color});
+                Slider(
+                  value: current_slidder,
+                  max: 500,
+                  //divisions: 5,
+                  label: current_slidder.round().toString(),
+                  onChanged: (value) {
+                    setState(() {
+                      current_slidder = value;
+                    });
                   },
-                  color: Color.fromARGB(255, 255, 224, 224),
-                  child: Text(
-                    'Apply Filter',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Color(0xffB81736),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Color',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: ThemeUI.texto,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: List.generate(
+                        colors.length,
+                        (index) => Container(
+                              decoration: BoxDecoration(
+                                color: colors[index].isClicked
+                                    ? Colors.blue
+                                    : ThemeUI.light,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              padding: const EdgeInsets.all(2),
+                              child: TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    colors[index].clicked();
+                                    color = colors[index].name;
+                                  });
+                                },
+                                child: Text(
+                                  colors[index].name,
+                                  style: TextStyle(
+                                    color: ThemeUI.primary,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ))),
+                SizedBox(
+                  height: 10,
+                ),
+                Card(
+                  color: Color.fromARGB(255, 239, 207, 207),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          'Another options',
+                          style: TextStyle(
+                            color: Color(0xffB81736),
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.arrow_forward_ios,
+                          color: Color(0xffB81736),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Center(
+                  child: MaterialButton(
+                    height: 70,
+                    minWidth: 400,
+                    shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/search',
+                          arguments: {'gender': gender, 'color': color});
+                    },
+                    color: ThemeUI.primary,
+                    child: Text(
+                      'Apply Filter',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: ThemeUI.darker,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ));
   }
@@ -310,8 +313,9 @@ class _filterState extends State<filter> {
 class Button {
   String name;
   bool isClicked;
+  var id;
 
-  Button({required this.name, required this.isClicked});
+  Button({required this.name, required this.isClicked, this.id});
 
   void clicked() {
     isClicked = !isClicked;
